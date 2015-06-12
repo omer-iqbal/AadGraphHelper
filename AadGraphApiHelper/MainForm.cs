@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
 
 namespace AadGraphApiHelper
@@ -124,25 +123,6 @@ namespace AadGraphApiHelper
         private void getAppTokenButton_Click(object sender, EventArgs e)
         {
             this.GetToken(Token.GetApplicationToken);
-
-            //AadEnvironment environment = AadEnvironment.Production;
-            //TokenRequestInfo tokenInfo = new TokenRequestInfo
-            //{
-            //    ClientId = @"9ef24086-e4cd-43ba-8c48-23debcde6252",
-            //    ClientKey = @"P8pXsM438zszbHpC2DMOlJ5CqWYnnfZBgGJiVS0F2/c=",
-            //    Tenant = "cpimprototype.onmicrosoft.com"
-            //};
-
-            //TenantCredential tenantCredential = new TenantCredential(
-            //    AadEnvironment.Production,
-            //    @"cpimtest.onmicrosoft.com",
-            //    @"ce7071e3-9b8f-4a0f-a62f-3e9ea941ea0b");
-            //tenantCredential.EncryptAndSetKey(@"XTzN8ryNwTVts1j8oEFVmd4eipKVFTzAiEbms9XP0/k=");
-        }
-
-        private void getUserTokenButton_Click(object sender, EventArgs e)
-        {
-            this.GetToken(Token.GetUserToken);
         }
 
         private void GetToken(Func<TenantCredential, string> getTokenFunc)

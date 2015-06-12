@@ -60,7 +60,6 @@ namespace AadGraphApiHelper
             this.copyobjectIdToIRequestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyobjectIdToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resourceSecondComboBox = new System.Windows.Forms.ComboBox();
-            this.getUserTokenButton = new System.Windows.Forms.Button();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,7 +78,7 @@ namespace AadGraphApiHelper
             // tenantLabel
             // 
             this.tenantLabel.AutoSize = true;
-            this.tenantLabel.Location = new System.Drawing.Point(383, 32);
+            this.tenantLabel.Location = new System.Drawing.Point(404, 31);
             this.tenantLabel.Name = "tenantLabel";
             this.tenantLabel.Size = new System.Drawing.Size(121, 19);
             this.tenantLabel.TabIndex = 4;
@@ -89,21 +88,21 @@ namespace AadGraphApiHelper
             // 
             this.TenantCredentialComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TenantCredentialComboBox.FormattingEnabled = true;
-            this.TenantCredentialComboBox.Location = new System.Drawing.Point(510, 28);
+            this.TenantCredentialComboBox.Location = new System.Drawing.Point(531, 28);
             this.TenantCredentialComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TenantCredentialComboBox.MaxDropDownItems = 20;
             this.TenantCredentialComboBox.Name = "TenantCredentialComboBox";
-            this.TenantCredentialComboBox.Size = new System.Drawing.Size(395, 25);
+            this.TenantCredentialComboBox.Size = new System.Drawing.Size(435, 25);
             this.TenantCredentialComboBox.TabIndex = 5;
             this.TenantCredentialComboBox.SelectedIndexChanged += new System.EventHandler(this.TenantCredentialComboBox_SelectedIndexChanged);
             // 
             // getAppTokenButton
             // 
             this.getAppTokenButton.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.getAppTokenButton.Location = new System.Drawing.Point(911, 27);
+            this.getAppTokenButton.Location = new System.Drawing.Point(1031, 27);
             this.getAppTokenButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.getAppTokenButton.Name = "getAppTokenButton";
-            this.getAppTokenButton.Size = new System.Drawing.Size(120, 27);
+            this.getAppTokenButton.Size = new System.Drawing.Size(125, 27);
             this.getAppTokenButton.TabIndex = 7;
             this.getAppTokenButton.Text = "Get &app. token";
             this.getAppTokenButton.UseVisualStyleBackColor = true;
@@ -213,14 +212,14 @@ namespace AadGraphApiHelper
             this.apiVersionComboBox.Location = new System.Drawing.Point(1031, 100);
             this.apiVersionComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.apiVersionComboBox.Name = "apiVersionComboBox";
-            this.apiVersionComboBox.Size = new System.Drawing.Size(126, 25);
+            this.apiVersionComboBox.Size = new System.Drawing.Size(125, 25);
             this.apiVersionComboBox.Sorted = true;
             this.apiVersionComboBox.TabIndex = 52;
             this.apiVersionComboBox.SelectedIndexChanged += new System.EventHandler(this.apiVersionComboBox_SelectedIndexChanged);
             // 
             // executeButton
             // 
-            this.executeButton.Location = new System.Drawing.Point(1070, 135);
+            this.executeButton.Location = new System.Drawing.Point(1069, 135);
             this.executeButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.executeButton.Name = "executeButton";
             this.executeButton.Size = new System.Drawing.Size(87, 27);
@@ -381,18 +380,6 @@ namespace AadGraphApiHelper
             this.resourceSecondComboBox.TabIndex = 45;
             this.resourceSecondComboBox.SelectedIndexChanged += new System.EventHandler(this.resourceSecondComboBox_SelectedIndexChanged);
             // 
-            // getUserTokenButton
-            // 
-            this.getUserTokenButton.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.getUserTokenButton.Location = new System.Drawing.Point(1037, 27);
-            this.getUserTokenButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.getUserTokenButton.Name = "getUserTokenButton";
-            this.getUserTokenButton.Size = new System.Drawing.Size(120, 27);
-            this.getUserTokenButton.TabIndex = 8;
-            this.getUserTokenButton.Text = "Get &user token";
-            this.getUserTokenButton.UseVisualStyleBackColor = true;
-            this.getUserTokenButton.Click += new System.EventHandler(this.getUserTokenButton_Click);
-            // 
             // mainMenuStrip
             // 
             this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -447,7 +434,6 @@ namespace AadGraphApiHelper
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1174, 835);
-            this.Controls.Add(this.getUserTokenButton);
             this.Controls.Add(this.resourceSecondComboBox);
             this.Controls.Add(this.executeButton);
             this.Controls.Add(this.tabControl);
@@ -523,7 +509,6 @@ namespace AadGraphApiHelper
         private TabPage responseTableTabPage;
         private DataGridView responseDataGridView;
         private ComboBox resourceSecondComboBox;
-        private Button getUserTokenButton;
         private MenuStrip mainMenuStrip;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem openTemplateToolStripMenuItem;
