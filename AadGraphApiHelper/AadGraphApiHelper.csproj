@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AadEnvironment.cs" />
+    <Compile Include="ApplicationType.cs" />
     <Compile Include="Names.cs" />
     <Compile Include="TenantCredentialSet.cs" />
     <Compile Include="AadEnvironmentSet.cs">

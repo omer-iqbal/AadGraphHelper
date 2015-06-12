@@ -17,6 +17,10 @@ namespace AadGraphApiHelper
 
         private const string EncryptedKeyKey = @"EncryptedKey";
 
+        private const string ApplicationTypeKey = @"ApplicationType";
+
+        private const string ReplyUrlKey = @"ReplyUrl";
+
         public void Store(AadEnvironment environment)
         {
             string environmentPath = GetEnvironmentPath(environment);
@@ -92,6 +96,15 @@ namespace AadGraphApiHelper
                 }
 
                 credentialKey.SetValue(EncryptedKeyKey, tenantCredential.EncryptedKey);
+
+                if (tenantCredential.ApplicationType == ApplicationType.Native)
+                {
+                    credentialKey.SetValue(ReplyUrlKey, tenantCredential.ReplyUrl);
+                }
+                else
+                {
+                    credentialKey.SetValue(ApplicationTypeKey, tenantCredential.ApplicationType.ToString());
+                }
             }
         }
 
@@ -123,34 +136,62 @@ namespace AadGraphApiHelper
                         {
                             using (RegistryKey clientIdKey = tenantKey.OpenSubKey(clientId))
                             {
+                                if (String.IsNullOrWhiteSpace(clientId))
+                                {
+                                    continue;
+                                }
+
                                 if (clientIdKey == null)
                                 {
                                     continue;
                                 }
 
-                                byte[] encryptedKey = clientIdKey.GetValue(EncryptedKeyKey) as byte[];
-                                if (String.IsNullOrWhiteSpace(clientId) || encryptedKey == null || encryptedKey.Length < 16)
+                                string applicationTypeString = clientIdKey.GetValue(ApplicationTypeKey) as string;
+                                ApplicationType applicationType;
+                                if (!Enum.TryParse(applicationTypeString, true, out applicationType))
                                 {
                                     continue;
                                 }
 
+                                TenantCredential credential;
                                 try
                                 {
-                                    TenantCredential credential = new TenantCredential(
-                                        environment,
-                                        tenant,
-                                        false)
-                                    {
-                                        ClientId = clientId,
-                                        EncryptedKey = encryptedKey
-                                    };
-
-                                    tenantCredentials.Add(credential);
+                                    credential = new TenantCredential(environment, tenant, clientId, applicationType);
                                 }
                                 catch (Exception)
                                 {
                                     // Bad key, can't decrypt :-(
+                                    continue;
                                 }
+
+                                switch (applicationType)
+                                {
+                                    case ApplicationType.Native:
+                                        string replyUrl = clientIdKey.GetValue(ReplyUrlKey) as string;
+                                        if (string.IsNullOrWhiteSpace(replyUrl))
+                                        {
+                                            continue;
+                                        }
+
+                                        credential.ReplyUrl = new Uri(replyUrl);
+                                        break;
+
+                                    case ApplicationType.Web:
+                                        byte[] encryptedKey = clientIdKey.GetValue(EncryptedKeyKey) as byte[];
+                                        if (encryptedKey == null || encryptedKey.Length < 16)
+                                        {
+                                            continue;
+                                        }
+
+                                        credential.EncryptedKey = encryptedKey;
+                                        break;
+                                        
+                                    default:
+                                        // unknown application type :-(
+                                        continue;
+                                }
+
+                                tenantCredentials.Add(credential);
                             }
                         }
                     }

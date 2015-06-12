@@ -21,7 +21,7 @@ namespace AadGraphApiHelper
             AuthenticationResult authenticationResult = ac.AcquireToken(
                 tenantCredential.Environment.GraphResourceUrl,
                 tenantCredential.ClientId,
-                new Uri("https://www.graphbuddy.com"),
+                tenantCredential.ReplyUrl,
                 PromptBehavior.Always);
             return authenticationResult.CreateAuthorizationHeader();
         }

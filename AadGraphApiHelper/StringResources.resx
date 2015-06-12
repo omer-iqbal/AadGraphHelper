@@ -117,17 +117,47 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ClientIdCannotBeNullOrWhiteSpace" xml:space="preserve">
+    <value>The client id cannot be null or only white space.</value>
+  </data>
+  <data name="ClientIdMustBeAGuid" xml:space="preserve">
+    <value>The client id value must be a guid.</value>
+  </data>
+  <data name="ClientKeyLabel" xml:space="preserve">
+    <value>Key:</value>
+  </data>
+  <data name="ClientReplyUrlLabel" xml:space="preserve">
+    <value>Reply Url:</value>
+  </data>
   <data name="ComplexValue" xml:space="preserve">
     <value>(complex object not shown)</value>
   </data>
   <data name="EmptyCollectionValue" xml:space="preserve">
     <value>(none)</value>
   </data>
+  <data name="EnvironmentCannotBeNull" xml:space="preserve">
+    <value>The environment parameter cannot be null.</value>
+  </data>
+  <data name="GetAppTokenText" xml:space="preserve">
+    <value>Get app. &amp;token</value>
+  </data>
+  <data name="GetUserTokenText" xml:space="preserve">
+    <value>Get user &amp;token</value>
+  </data>
+  <data name="KeyCannotBeSet" xml:space="preserve">
+    <value>Key can only be set for a web application.</value>
+  </data>
   <data name="ManageItem" xml:space="preserve">
     <value>&lt;Add...&gt;</value>
   </data>
   <data name="NullValue" xml:space="preserve">
     <value>(null)</value>
+  </data>
+  <data name="ReplyUrlCannotBeSet" xml:space="preserve">
+    <value>Reply URL can only be set for a native client application.</value>
+  </data>
+  <data name="TenantCannotBeNullOrWhiteSpace" xml:space="preserve">
+    <value>The tenant cannot be null or only white space.</value>
   </data>
   <data name="TokenErrorTitle" xml:space="preserve">
     <value>Error returned by token endpoint</value>

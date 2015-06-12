@@ -30,64 +30,73 @@
         {
             this.clientIdLabel = new System.Windows.Forms.Label();
             this.clientIdTextBox = new System.Windows.Forms.TextBox();
-            this.clientKeyLabel = new System.Windows.Forms.Label();
-            this.clientKeyTextBox = new System.Windows.Forms.TextBox();
+            this.keyOrReplyUrlLabel = new System.Windows.Forms.Label();
+            this.keyOrReplyUrlTextBox = new System.Windows.Forms.TextBox();
             this.tenantLabel = new System.Windows.Forms.Label();
             this.addButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.tenantTextBox = new System.Windows.Forms.TextBox();
             this.saveCredentialCheckBox = new System.Windows.Forms.CheckBox();
+            this.webAppRadioButton = new System.Windows.Forms.RadioButton();
+            this.nativeAppRadioButton = new System.Windows.Forms.RadioButton();
+            this.authenticationTypeGroupBox = new System.Windows.Forms.GroupBox();
+            this.authenticationTypeGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // clientIdLabel
             // 
             this.clientIdLabel.AutoSize = true;
-            this.clientIdLabel.Location = new System.Drawing.Point(12, 44);
+            this.clientIdLabel.Location = new System.Drawing.Point(14, 58);
             this.clientIdLabel.Name = "clientIdLabel";
-            this.clientIdLabel.Size = new System.Drawing.Size(50, 13);
+            this.clientIdLabel.Size = new System.Drawing.Size(65, 19);
             this.clientIdLabel.TabIndex = 10;
             this.clientIdLabel.Text = "Client &ID:";
             // 
             // clientIdTextBox
             // 
-            this.clientIdTextBox.Location = new System.Drawing.Point(68, 41);
+            this.clientIdTextBox.Location = new System.Drawing.Point(79, 54);
+            this.clientIdTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.clientIdTextBox.Name = "clientIdTextBox";
-            this.clientIdTextBox.Size = new System.Drawing.Size(451, 20);
+            this.clientIdTextBox.Size = new System.Drawing.Size(557, 25);
             this.clientIdTextBox.TabIndex = 11;
             this.clientIdTextBox.TextChanged += new System.EventHandler(this.clientIdTextBox_TextChanged);
             // 
-            // clientKeyLabel
+            // keyOrReplyUrlLabel
             // 
-            this.clientKeyLabel.AutoSize = true;
-            this.clientKeyLabel.Location = new System.Drawing.Point(10, 71);
-            this.clientKeyLabel.Name = "clientKeyLabel";
-            this.clientKeyLabel.Size = new System.Drawing.Size(28, 13);
-            this.clientKeyLabel.TabIndex = 20;
-            this.clientKeyLabel.Text = "&Key:";
+            this.keyOrReplyUrlLabel.AutoSize = true;
+            this.keyOrReplyUrlLabel.Enabled = false;
+            this.keyOrReplyUrlLabel.Location = new System.Drawing.Point(14, 218);
+            this.keyOrReplyUrlLabel.Name = "keyOrReplyUrlLabel";
+            this.keyOrReplyUrlLabel.Size = new System.Drawing.Size(34, 19);
+            this.keyOrReplyUrlLabel.TabIndex = 20;
+            this.keyOrReplyUrlLabel.Text = "&Key:";
             // 
-            // clientKeyTextBox
+            // keyOrReplyUrlTextBox
             // 
-            this.clientKeyTextBox.Location = new System.Drawing.Point(68, 68);
-            this.clientKeyTextBox.Name = "clientKeyTextBox";
-            this.clientKeyTextBox.Size = new System.Drawing.Size(451, 20);
-            this.clientKeyTextBox.TabIndex = 21;
-            this.clientKeyTextBox.TextChanged += new System.EventHandler(this.clientKeyTextBox_TextChanged);
+            this.keyOrReplyUrlTextBox.Enabled = false;
+            this.keyOrReplyUrlTextBox.Location = new System.Drawing.Point(90, 214);
+            this.keyOrReplyUrlTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.keyOrReplyUrlTextBox.Name = "keyOrReplyUrlTextBox";
+            this.keyOrReplyUrlTextBox.Size = new System.Drawing.Size(546, 25);
+            this.keyOrReplyUrlTextBox.TabIndex = 21;
+            this.keyOrReplyUrlTextBox.TextChanged += new System.EventHandler(this.clientKeyTextBox_TextChanged);
             // 
             // tenantLabel
             // 
             this.tenantLabel.AutoSize = true;
-            this.tenantLabel.Location = new System.Drawing.Point(12, 16);
+            this.tenantLabel.Location = new System.Drawing.Point(14, 21);
             this.tenantLabel.Name = "tenantLabel";
-            this.tenantLabel.Size = new System.Drawing.Size(44, 13);
+            this.tenantLabel.Size = new System.Drawing.Size(54, 19);
             this.tenantLabel.TabIndex = 0;
             this.tenantLabel.Text = "&Tenant:";
             // 
             // addButton
             // 
             this.addButton.Enabled = false;
-            this.addButton.Location = new System.Drawing.Point(363, 100);
+            this.addButton.Location = new System.Drawing.Point(456, 248);
+            this.addButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(75, 23);
+            this.addButton.Size = new System.Drawing.Size(87, 30);
             this.addButton.TabIndex = 30;
             this.addButton.Text = "&Add";
             this.addButton.UseVisualStyleBackColor = true;
@@ -96,9 +105,10 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(444, 100);
+            this.cancelButton.Location = new System.Drawing.Point(549, 248);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.Size = new System.Drawing.Size(87, 30);
             this.cancelButton.TabIndex = 31;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -106,9 +116,10 @@
             // 
             // tenantTextBox
             // 
-            this.tenantTextBox.Location = new System.Drawing.Point(68, 13);
+            this.tenantTextBox.Location = new System.Drawing.Point(79, 17);
+            this.tenantTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tenantTextBox.Name = "tenantTextBox";
-            this.tenantTextBox.Size = new System.Drawing.Size(451, 20);
+            this.tenantTextBox.Size = new System.Drawing.Size(557, 25);
             this.tenantTextBox.TabIndex = 1;
             this.tenantTextBox.TextChanged += new System.EventHandler(this.tenantTextBox_TextChanged);
             // 
@@ -117,37 +128,83 @@
             this.saveCredentialCheckBox.AutoSize = true;
             this.saveCredentialCheckBox.Checked = true;
             this.saveCredentialCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.saveCredentialCheckBox.Location = new System.Drawing.Point(68, 104);
+            this.saveCredentialCheckBox.Enabled = false;
+            this.saveCredentialCheckBox.Location = new System.Drawing.Point(90, 253);
+            this.saveCredentialCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.saveCredentialCheckBox.Name = "saveCredentialCheckBox";
-            this.saveCredentialCheckBox.Size = new System.Drawing.Size(267, 17);
+            this.saveCredentialCheckBox.Size = new System.Drawing.Size(342, 23);
             this.saveCredentialCheckBox.TabIndex = 28;
             this.saveCredentialCheckBox.Text = "&Save Credential (Key is stored encrypted in registry)";
             this.saveCredentialCheckBox.UseVisualStyleBackColor = true;
             // 
+            // webAppRadioButton
+            // 
+            this.webAppRadioButton.AutoSize = true;
+            this.webAppRadioButton.Location = new System.Drawing.Point(7, 25);
+            this.webAppRadioButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.webAppRadioButton.Name = "webAppRadioButton";
+            this.webAppRadioButton.Size = new System.Drawing.Size(372, 23);
+            this.webAppRadioButton.TabIndex = 32;
+            this.webAppRadioButton.TabStop = true;
+            this.webAppRadioButton.Text = "Application authentication (uses web application in AAD)";
+            this.webAppRadioButton.UseVisualStyleBackColor = true;
+            this.webAppRadioButton.CheckedChanged += new System.EventHandler(this.webAppRadioButton_CheckedChanged);
+            // 
+            // nativeAppRadioButton
+            // 
+            this.nativeAppRadioButton.AutoSize = true;
+            this.nativeAppRadioButton.Location = new System.Drawing.Point(7, 55);
+            this.nativeAppRadioButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.nativeAppRadioButton.Name = "nativeAppRadioButton";
+            this.nativeAppRadioButton.Size = new System.Drawing.Size(380, 23);
+            this.nativeAppRadioButton.TabIndex = 33;
+            this.nativeAppRadioButton.TabStop = true;
+            this.nativeAppRadioButton.Text = "User authentication (uses native client application in AAD)";
+            this.nativeAppRadioButton.UseVisualStyleBackColor = true;
+            this.nativeAppRadioButton.CheckedChanged += new System.EventHandler(this.nativeAppRadioButton_CheckedChanged);
+            // 
+            // authenticationTypeGroupBox
+            // 
+            this.authenticationTypeGroupBox.Controls.Add(this.nativeAppRadioButton);
+            this.authenticationTypeGroupBox.Controls.Add(this.webAppRadioButton);
+            this.authenticationTypeGroupBox.Location = new System.Drawing.Point(17, 101);
+            this.authenticationTypeGroupBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.authenticationTypeGroupBox.Name = "authenticationTypeGroupBox";
+            this.authenticationTypeGroupBox.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.authenticationTypeGroupBox.Size = new System.Drawing.Size(619, 92);
+            this.authenticationTypeGroupBox.TabIndex = 34;
+            this.authenticationTypeGroupBox.TabStop = false;
+            this.authenticationTypeGroupBox.Text = "Type of authentication";
+            // 
             // AddTenantCredentialForm
             // 
             this.AcceptButton = this.addButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(531, 135);
+            this.ClientSize = new System.Drawing.Size(648, 294);
             this.ControlBox = false;
+            this.Controls.Add(this.authenticationTypeGroupBox);
             this.Controls.Add(this.saveCredentialCheckBox);
             this.Controls.Add(this.tenantTextBox);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.addButton);
-            this.Controls.Add(this.clientKeyTextBox);
-            this.Controls.Add(this.clientKeyLabel);
+            this.Controls.Add(this.keyOrReplyUrlTextBox);
+            this.Controls.Add(this.keyOrReplyUrlLabel);
             this.Controls.Add(this.clientIdTextBox);
             this.Controls.Add(this.clientIdLabel);
             this.Controls.Add(this.tenantLabel);
+            this.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "AddTenantCredentialForm";
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Tenant Credential";
+            this.authenticationTypeGroupBox.ResumeLayout(false);
+            this.authenticationTypeGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -157,12 +214,15 @@
 
         private System.Windows.Forms.Label clientIdLabel;
         private System.Windows.Forms.TextBox clientIdTextBox;
-        private System.Windows.Forms.Label clientKeyLabel;
-        private System.Windows.Forms.TextBox clientKeyTextBox;
+        private System.Windows.Forms.Label keyOrReplyUrlLabel;
+        private System.Windows.Forms.TextBox keyOrReplyUrlTextBox;
         private System.Windows.Forms.Label tenantLabel;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.TextBox tenantTextBox;
         private System.Windows.Forms.CheckBox saveCredentialCheckBox;
+        private System.Windows.Forms.RadioButton webAppRadioButton;
+        private System.Windows.Forms.RadioButton nativeAppRadioButton;
+        private System.Windows.Forms.GroupBox authenticationTypeGroupBox;
     }
 }

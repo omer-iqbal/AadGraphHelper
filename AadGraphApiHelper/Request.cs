@@ -17,7 +17,7 @@ namespace AadGraphApiHelper
             this.AccessToken = accessToken;
         }
 
-        internal string Send(string method, string url, string body = null)
+        internal HttpStatusCode Send(string method, string url, string body, out string response)
         {
             WebRequest request = WebRequest.Create(url);
             request.Headers.Add("Authorization", this.AccessToken);
@@ -34,24 +34,24 @@ namespace AadGraphApiHelper
 
             try
             {
-                using (WebResponse response = request.GetResponse())
+                using (WebResponse webResponse = request.GetResponse())
                 {
-                    HttpWebResponse httpWebResponse = response as HttpWebResponse;
+                    HttpWebResponse httpWebResponse = webResponse as HttpWebResponse;
 
                     if (httpWebResponse == null)
                     {
-                        return "The response is not an http web response.";
+                        throw new InvalidOperationException("Web response is not an http response.");
                     }
 
-                    Console.WriteLine("Status code: {0}/{1}", (int)httpWebResponse.StatusCode, httpWebResponse.StatusCode);
-
-                    using (Stream stream = response.GetResponseStream())
+                    using (Stream stream = webResponse.GetResponseStream())
                     {
                         using (StreamReader streamReader = new StreamReader(stream, Encoding.UTF8))
                         {
-                            return streamReader.ReadToEnd();
+                            response = streamReader.ReadToEnd();
                         }
                     }
+
+                    return httpWebResponse.StatusCode;
                 }
             }
             catch (WebException exception)
@@ -60,12 +60,11 @@ namespace AadGraphApiHelper
                 string errorResponseText;
                 using (StreamReader reader = new StreamReader(stream))
                 {
-                    errorResponseText = reader.ReadToEnd();
+                    response = reader.ReadToEnd();
                 }
 
-                //HttpWebResponse response = (HttpWebResponse)exception.Response;
-                //return "Error: " + exception.Status + ", " + (int)response.StatusCode + "/" + response.StatusCode + ": " + Environment.NewLine + errorResponseText;
-                return errorResponseText;
+                HttpWebResponse httpWebResponse = (HttpWebResponse)exception.Response;
+                return httpWebResponse.StatusCode;
             }
         }
     }

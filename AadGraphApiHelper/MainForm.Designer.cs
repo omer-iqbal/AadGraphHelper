@@ -66,6 +66,8 @@ namespace AadGraphApiHelper
             this.saveTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
+            this.mainStatusStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl.SuspendLayout();
             this.bodyTabPage.SuspendLayout();
             this.responseTabPage.SuspendLayout();
@@ -73,6 +75,7 @@ namespace AadGraphApiHelper
             ((System.ComponentModel.ISupportInitialize)(this.responseDataGridView)).BeginInit();
             this.responseGridContextMenuStrip.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
+            this.mainStatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tenantLabel
@@ -429,11 +432,27 @@ namespace AadGraphApiHelper
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // mainStatusStrip
+            // 
+            this.mainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mainStatusStripStatusLabel});
+            this.mainStatusStrip.Location = new System.Drawing.Point(0, 831);
+            this.mainStatusStrip.Name = "mainStatusStrip";
+            this.mainStatusStrip.Size = new System.Drawing.Size(1174, 22);
+            this.mainStatusStrip.TabIndex = 93;
+            // 
+            // mainStatusStripStatusLabel
+            // 
+            this.mainStatusStripStatusLabel.Name = "mainStatusStripStatusLabel";
+            this.mainStatusStripStatusLabel.Size = new System.Drawing.Size(60, 17);
+            this.mainStatusStripStatusLabel.Text = "Welcome!";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1174, 835);
+            this.ClientSize = new System.Drawing.Size(1174, 853);
+            this.Controls.Add(this.mainStatusStrip);
             this.Controls.Add(this.resourceSecondComboBox);
             this.Controls.Add(this.executeButton);
             this.Controls.Add(this.tabControl);
@@ -476,6 +495,8 @@ namespace AadGraphApiHelper
             this.responseGridContextMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
+            this.mainStatusStrip.ResumeLayout(false);
+            this.mainStatusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -518,6 +539,8 @@ namespace AadGraphApiHelper
         private ContextMenuStrip responseGridContextMenuStrip;
         private ToolStripMenuItem copyobjectIdToClipboardToolStripMenuItem;
         private ToolStripMenuItem copyobjectIdToIRequestToolStripMenuItem;
+        private StatusStrip mainStatusStrip;
+        private ToolStripStatusLabel mainStatusStripStatusLabel;
     }
 }
 

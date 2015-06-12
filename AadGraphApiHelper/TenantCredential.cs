@@ -1,46 +1,74 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using System.Linq;
 
 namespace AadGraphApiHelper
 {
     internal class TenantCredential : IEquatable<TenantCredential>, IComparable<TenantCredential>
     {
-        private string clientId;
+        private Uri replyUrl;
 
-        public TenantCredential(AadEnvironment environment, string tenant, bool useUserAuthorization)
+        public TenantCredential(AadEnvironment environment, string tenant, string clientId, ApplicationType applicationType)
         {
+            if (environment == null)
+            {
+                throw new ArgumentException(StringResources.EnvironmentCannotBeNull);
+            }
+
+            if (String.IsNullOrEmpty(tenant))
+            {
+                throw new ArgumentException(StringResources.TenantCannotBeNullOrWhiteSpace);
+            }
+
+            if (String.IsNullOrWhiteSpace(clientId))
+            {
+                throw new ArgumentException(StringResources.ClientIdCannotBeNullOrWhiteSpace);
+            }
+
+            Guid ignored;
+            if (!Guid.TryParse(clientId, out ignored))
+            {
+                throw new ArgumentException(StringResources.ClientIdMustBeAGuid);
+            }
+
             this.Environment = environment;
             this.Tenant = tenant;
-            this.UseUserAuthorization = useUserAuthorization;
+            this.ClientId = clientId;
+            this.ApplicationType = applicationType;
         }
 
         public AadEnvironment Environment { get; private set; }
 
         public string Tenant { get; private set; }
 
-        public bool UseUserAuthorization { get; private set; }
+        public ApplicationType ApplicationType { get; private set; }
 
-        public string ClientId
+        public byte[] EncryptedKey { get; set; }
+
+        public string ClientId { get; set; }
+
+        public Uri ReplyUrl 
         {
             get
             {
-                return this.clientId;
+                return this.replyUrl;
             }
 
             set
             {
-                if (this.UseUserAuthorization)
+                if (value == null)
                 {
-                    throw new ArgumentException("ClientId cannot be provided when UseUserAuthorization is set to true.");
+                    this.replyUrl = null;
+                    return;
                 }
 
-                if (String.IsNullOrWhiteSpace(value))
+                if (this.ApplicationType != ApplicationType.Native)
                 {
-                    throw new ArgumentException("ClientId cannot be null or whitespace.");
+                    throw new ArgumentException(StringResources.ReplyUrlCannotBeSet);
                 }
 
-                this.clientId = value.Trim().ToLowerInvariant();
+                this.replyUrl = value;
             }
         }
 
@@ -52,11 +80,20 @@ namespace AadGraphApiHelper
 
         public void EncryptAndSetKey(string key)
         {
+            if (key == null)
+            {
+                this.EncryptedKey = null;
+                return;
+            }
+
+            if (this.ApplicationType != ApplicationType.Web)
+            {
+                throw new ArgumentException(StringResources.KeyCannotBeSet);
+            }
+
             byte[] plainBytes = Encoding.UTF8.GetBytes(key);
             this.EncryptedKey = ProtectedData.Protect(plainBytes, null, DataProtectionScope.CurrentUser);
         }
-
-        public byte[] EncryptedKey { get; set; }
 
         /// <summary>
         /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
@@ -90,14 +127,31 @@ namespace AadGraphApiHelper
             }
 
             bool areEqual = this.Tenant.Equals(other.Tenant, StringComparison.OrdinalIgnoreCase) &&
-                            this.UseUserAuthorization == other.UseUserAuthorization;
+                            this.ClientId.Equals(other.ClientId, StringComparison.OrdinalIgnoreCase) &&
+                            this.ApplicationType == other.ApplicationType;
 
-            if (this.UseUserAuthorization == false && this.ClientId != null)
+            if (!areEqual)
             {
-                areEqual = areEqual && this.ClientId.Equals(other.ClientId, StringComparison.OrdinalIgnoreCase);
+                return false;
             }
 
-            return areEqual;
+            if (this.ApplicationType == ApplicationType.Native)
+            {
+                return this.ReplyUrl.Equals(other.ReplyUrl);
+            }
+
+            if ((this.EncryptedKey == null && other.EncryptedKey != null) ||
+                (this.EncryptedKey != null && other.EncryptedKey == null))
+            {
+                return false;
+            }
+
+            if (this.EncryptedKey == null || other.EncryptedKey == null)
+            {
+                return true;
+            }
+
+            return this.EncryptedKey.SequenceEqual(other.EncryptedKey);
         }
 
         /// <summary>
@@ -108,14 +162,14 @@ namespace AadGraphApiHelper
         /// </returns>
         public override int GetHashCode()
         {
-            string hashCodeString = this.Tenant + ':' + this.UseUserAuthorization;
+            int hashCode = (this.Tenant + "::" + this.ClientId).GetHashCode() ^ this.ApplicationType.GetHashCode();
 
-            if (this.UseUserAuthorization == false && this.ClientId != null)
+            if (this.ApplicationType == ApplicationType.Native)
             {
-                hashCodeString += ':' + this.ClientId;
+                return hashCode ^ this.ReplyUrl.GetHashCode();
             }
 
-            return hashCodeString.GetHashCode();
+            return hashCode ^ this.EncryptedKey.GetHashCode();
         }
 
         /// <summary>
@@ -135,24 +189,9 @@ namespace AadGraphApiHelper
                 return 1;
             }
 
-            int compareValue = this.Tenant.ToUpperInvariant().CompareTo(other.Tenant.ToUpperInvariant());
-
-            if (compareValue == 0)
-            {
-                compareValue = this.UseUserAuthorization.CompareTo(other.UseUserAuthorization);
-            }
-
-            if (compareValue == 0 && this.UseUserAuthorization == false)
-            {
-                if (this.ClientId == null && other.ClientId != null)
-                {
-                    return -1;
-                }
-
-                // ClientId is already normalized using ToLowerInvariant() in the setter.
-                compareValue = this.ClientId.CompareTo(other.ClientId);
-            }
-
+            // Compare value is used primarily for sorting purposes, and by using ToString(), we ensure that if representation is 
+            // changed in the future, CompareTo will be reflective of it.
+            int compareValue = this.ToString().ToUpperInvariant().CompareTo(other.ToString().ToUpperInvariant());
             return compareValue;
         }
 

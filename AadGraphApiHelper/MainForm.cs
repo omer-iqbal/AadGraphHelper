@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Net;
 using System.Windows.Forms;
 
 namespace AadGraphApiHelper
@@ -93,22 +95,30 @@ namespace AadGraphApiHelper
             {
                 this.Cursor = Cursors.WaitCursor;
                 this.responseTextBox.Text = String.Empty;
+                this.responseTable.Clear();
+                this.mainStatusStripStatusLabel.Text = null;
 
                 string accessToken = this.tokenTextBox.Text;
                 Request request = new Request(accessToken);
-                string response = request.Send(this.methodComboBox.Text, this.requestUrlTextBox.Text, this.bodyTextBox.Text);
+                HttpStatusCode httpStatusCode;
+                string response;
+                httpStatusCode = request.Send(this.methodComboBox.Text, this.requestUrlTextBox.Text, this.bodyTextBox.Text, out response);
+                this.mainStatusStripStatusLabel.Text = (int)httpStatusCode + @": " + httpStatusCode;
 
-                if (this.tabControl.SelectedTab == this.bodyTabPage)
+                if (!String.IsNullOrEmpty(response))
                 {
-                    this.tabControl.SelectedTab = this.responseTabPage;
+                    if (this.tabControl.SelectedTab == this.bodyTabPage)
+                    {
+                        this.tabControl.SelectedTab = this.responseTabPage;
+                    }
+
+                    this.responseTextBox.Text = JsonText.Format(response);
+                    this.responseTextBox.SelectionLength = 0;
+
+                    this.responseTable.SetJsonText(response);
+                    this.responseTable.CreateResponseTable();
                 }
 
-                this.responseTextBox.Text = JsonText.Format(response);
-                this.responseTextBox.SelectionLength = 0;
-
-                this.responseTable.SetJsonText(response);
-                this.responseTable.CreateResponseTable();
-                
                 this.Cursor = Cursors.Default;
             }
             catch (Exception ex)
@@ -122,15 +132,22 @@ namespace AadGraphApiHelper
 
         private void getAppTokenButton_Click(object sender, EventArgs e)
         {
-            this.GetToken(Token.GetApplicationToken);
-        }
+            TenantCredential tenantCredential = this.TenantCredentialComboBox.SelectedItem as TenantCredential;
+            if (tenantCredential == null)
+            {
+                return;
+            }
 
-        private void GetToken(Func<TenantCredential, string> getTokenFunc)
-        {
+            Func<TenantCredential, string> getTokenFunc = Token.GetApplicationToken;
+            if (tenantCredential.ApplicationType == ApplicationType.Native)
+            {
+                getTokenFunc = Token.GetUserToken;
+            }
+
             this.Cursor = Cursors.WaitCursor;
             try
             {
-                this.tokenTextBox.Text = getTokenFunc((TenantCredential)this.TenantCredentialComboBox.SelectedItem);
+                this.tokenTextBox.Text = getTokenFunc(tenantCredential);
                 this.Cursor = Cursors.Default;
             }
             catch (Exception exception)
@@ -262,11 +279,19 @@ namespace AadGraphApiHelper
                 this.getAppTokenButton.Enabled = false;
                 new AddTenantCredentialForm(this).ShowDialog();
             }
-            else
+
+            TenantCredential tenantCredential = this.TenantCredentialComboBox.SelectedItem as TenantCredential;
+            if (tenantCredential == null)
             {
-                this.getAppTokenButton.Enabled = true;
-                this.UpdateRequestUrl();
+                this.getAppTokenButton.Enabled = false;
+                return;
             }
+
+            this.getAppTokenButton.Text = tenantCredential.ApplicationType == ApplicationType.Web
+                                              ? StringResources.GetAppTokenText
+                                              : StringResources.GetUserTokenText;
+            this.getAppTokenButton.Enabled = true;
+            this.UpdateRequestUrl();
         }
 
         private void idTextBox_TextChanged(object sender, EventArgs e)

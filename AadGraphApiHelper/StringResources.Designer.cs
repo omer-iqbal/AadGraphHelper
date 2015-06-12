@@ -61,6 +61,42 @@ namespace AadGraphApiHelper {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The client id cannot be null or only white space..
+        /// </summary>
+        internal static string ClientIdCannotBeNullOrWhiteSpace {
+            get {
+                return ResourceManager.GetString("ClientIdCannotBeNullOrWhiteSpace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The client id value must be a guid..
+        /// </summary>
+        internal static string ClientIdMustBeAGuid {
+            get {
+                return ResourceManager.GetString("ClientIdMustBeAGuid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Key:.
+        /// </summary>
+        internal static string ClientKeyLabel {
+            get {
+                return ResourceManager.GetString("ClientKeyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reply Url:.
+        /// </summary>
+        internal static string ClientReplyUrlLabel {
+            get {
+                return ResourceManager.GetString("ClientReplyUrlLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (complex object not shown).
         /// </summary>
         internal static string ComplexValue {
@@ -79,6 +115,42 @@ namespace AadGraphApiHelper {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The environment parameter cannot be null..
+        /// </summary>
+        internal static string EnvironmentCannotBeNull {
+            get {
+                return ResourceManager.GetString("EnvironmentCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get app. &amp;token.
+        /// </summary>
+        internal static string GetAppTokenText {
+            get {
+                return ResourceManager.GetString("GetAppTokenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get user &amp;token.
+        /// </summary>
+        internal static string GetUserTokenText {
+            get {
+                return ResourceManager.GetString("GetUserTokenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Key can only be set for a web application..
+        /// </summary>
+        internal static string KeyCannotBeSet {
+            get {
+                return ResourceManager.GetString("KeyCannotBeSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;Add...&gt;.
         /// </summary>
         internal static string ManageItem {
@@ -93,6 +165,24 @@ namespace AadGraphApiHelper {
         internal static string NullValue {
             get {
                 return ResourceManager.GetString("NullValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reply URL can only be set for a native client application..
+        /// </summary>
+        internal static string ReplyUrlCannotBeSet {
+            get {
+                return ResourceManager.GetString("ReplyUrlCannotBeSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The tenant cannot be null or only white space..
+        /// </summary>
+        internal static string TenantCannotBeNullOrWhiteSpace {
+            get {
+                return ResourceManager.GetString("TenantCannotBeNullOrWhiteSpace", resourceCulture);
             }
         }
         
