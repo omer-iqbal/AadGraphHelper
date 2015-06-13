@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
@@ -205,7 +204,6 @@ namespace AadGraphApiHelper
             }
 
             this.TenantCredentialComboBox.Items.Add(StringResources.ManageItem);
-            this.UpdateRequestUrl();
             this.getAppTokenButton.Enabled = this.TenantCredentialComboBox.SelectedItem != null;
         }
 
@@ -291,7 +289,6 @@ namespace AadGraphApiHelper
                                               ? StringResources.GetAppTokenText
                                               : StringResources.GetUserTokenText;
             this.getAppTokenButton.Enabled = true;
-            this.UpdateRequestUrl();
         }
 
         private void idTextBox_TextChanged(object sender, EventArgs e)
@@ -323,6 +320,7 @@ namespace AadGraphApiHelper
             string resourceFirst = null;
             string id = null;
             string resourceSecond = null;
+            string requestUrl = null;
             string body = null;
 
             using (OpenFileDialog dialog = new OpenFileDialog())
@@ -345,15 +343,15 @@ namespace AadGraphApiHelper
                                 break;
                             }
 
-                            string[] parts = line.Split(new string[] {@"==="}, StringSplitOptions.RemoveEmptyEntries);
+                            string[] parts = line.Split(new[] { @"===" }, StringSplitOptions.RemoveEmptyEntries);
                             if (parts.Length != 2)
                             {
                                 continue;
                             }
 
-                            switch (parts[0].ToUpperInvariant())
+                            switch (parts[0])
                             {
-                                case @"METHOD":
+                                case @"Method":
                                     method = parts[1].Trim();
                                     break;
                                 case @"ResourceFirst":
@@ -365,23 +363,25 @@ namespace AadGraphApiHelper
                                 case @"ResourceSecond":
                                     resourceSecond = parts[1].Trim();
                                     break;
+                                case @"RequestUrl":
+                                    requestUrl = parts[1].Trim();
+                                    break;
                             }
                         }
                     }
                 }
             }
 
-            if (method != null) this.methodComboBox.SelectedItem = method;
-            if (resourceFirst != null) this.resourceFirstComboBox.SelectedItem = resourceFirst;
-            if (resourceSecond != null) this.resourceSecondComboBox.SelectedItem = resourceSecond;
-            if (id != null) this.idTextBox.Text = id;
-            if (body != null)
-            {
-                this.bodyTextBox.Text = body;
-                this.tabControl.SelectedTab = this.bodyTabPage;
-                this.responseTextBox.Text = null;
-                this.responseTable.Clear();
-            }
+            this.methodComboBox.SelectedItem = method;
+            this.resourceFirstComboBox.SelectedItem = resourceFirst;
+            this.resourceSecondComboBox.SelectedItem = resourceSecond;
+            this.idTextBox.Text = id ?? String.Empty;
+            if (requestUrl != null) this.requestUrlTextBox.Text = requestUrl;
+
+            this.bodyTextBox.Text = body;
+            this.tabControl.SelectedTab = this.bodyTabPage;
+            this.responseTextBox.Text = null;
+            this.responseTable.Clear();
         }
 
         private void saveTemplateToolStripMenuItem_Click(object sender, EventArgs e)
@@ -400,6 +400,7 @@ namespace AadGraphApiHelper
                         writer.WriteLine(@"ResourceFirst==={0}", this.resourceFirstComboBox.SelectedItem ?? String.Empty);
                         writer.WriteLine(@"ID==={0}", this.idTextBox.Text ?? String.Empty);
                         writer.WriteLine(@"ResourceSecond==={0}", this.resourceSecondComboBox.SelectedItem ?? String.Empty);
+                        writer.WriteLine(@"RequestUrl==={0}", this.requestUrlTextBox.Text ?? String.Empty);
                         writer.WriteLine(@"===BODY===");
                         writer.WriteLine(this.bodyTextBox.Text);
                     }
