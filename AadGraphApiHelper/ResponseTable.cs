@@ -253,8 +253,7 @@ namespace AadGraphApiHelper
 
         private static bool IncludeProperty(KeyValuePair<string, object> property)
         {
-            if (property.Key.Equals(ODataTypeKey, StringComparison.OrdinalIgnoreCase) ||
-                property.Key.Equals(ObjectType, StringComparison.OrdinalIgnoreCase))
+            if (property.Key.Equals(ODataTypeKey, StringComparison.OrdinalIgnoreCase))
             {
                 return false;
             }
