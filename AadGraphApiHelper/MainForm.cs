@@ -148,6 +148,7 @@ namespace AadGraphApiHelper
             {
                 this.tokenTextBox.Text = getTokenFunc(tenantCredential);
                 this.Cursor = Cursors.Default;
+                this.UpdateRequestUrl();
             }
             catch (Exception exception)
             {
