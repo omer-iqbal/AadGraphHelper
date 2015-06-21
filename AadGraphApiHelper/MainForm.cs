@@ -28,6 +28,8 @@ namespace AadGraphApiHelper
 
         private AadEnvironmentSet aadEnvironments;
 
+        private GraphApiUrlBuilder urlBuilder = new GraphApiUrlBuilder();
+
         private readonly IDictionary<string, ISet<string>> resourcesDictionary = new Dictionary<string, ISet<string>>(StringComparer.OrdinalIgnoreCase)
         {
             { Names.Users, new HashSet<string> { Names.MemberOf, Names.MemberOfLinks, Names.Manager, Names.ManagerLinks, Names.DirectReports, Names.DirectReportsLinks, Names.CheckMemberGroups, Names.GetMemberGroups } },
@@ -90,6 +92,11 @@ namespace AadGraphApiHelper
 
         private void executeButton_Click(object sender, EventArgs e)
         {
+            this.ExecuteRequest();
+        }
+
+        private void ExecuteRequest()
+        {
             try
             {
                 this.Cursor = Cursors.WaitCursor;
@@ -148,6 +155,8 @@ namespace AadGraphApiHelper
             {
                 this.tokenTextBox.Text = getTokenFunc(tenantCredential);
                 this.Cursor = Cursors.Default;
+                this.urlBuilder.Environment = this.EnvironmentComboBox.SelectedItem as AadEnvironment;
+                this.urlBuilder.TenantCredential = this.TenantCredentialComboBox.SelectedItem as TenantCredential;
                 this.UpdateRequestUrl();
             }
             catch (Exception exception)
@@ -188,12 +197,19 @@ namespace AadGraphApiHelper
             }
             else
             {
-                this.PopulateTenantCredentials((AadEnvironment)this.EnvironmentComboBox.SelectedItem);
+                AadEnvironment environment = this.EnvironmentComboBox.SelectedItem as AadEnvironment;
+                this.PopulateTenantCredentials(environment);
+                this.urlBuilder.Environment = environment;
             }
         }
 
         private void PopulateTenantCredentials(AadEnvironment environment, string lastSelectedTenantCredential = null)
         {
+            if (environment == null)
+            {
+                return;
+            }
+
             this.TenantCredentialComboBox.Items.Clear();
             foreach (TenantCredential tenantCredential in this.Store.GetTenantCredentials(environment))
             {
@@ -223,11 +239,13 @@ namespace AadGraphApiHelper
 
         private void methodComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.UpdateRequestUrl();
         }
 
         private void resourceFirstComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.urlBuilder.ResourceFirst = this.resourceFirstComboBox.SelectedItem as string;
+            this.idTextBox.Text = null;
+            this.urlBuilder.FilterComponents.Clear();
             this.PopulateResourcesSecond();
             this.UpdateRequestUrl();
         }
@@ -262,6 +280,7 @@ namespace AadGraphApiHelper
 
         private void apiVersionComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.urlBuilder.ApiVersion = this.apiVersionComboBox.SelectedItem as string;
             this.UpdateRequestUrl();
         }
 
@@ -290,29 +309,25 @@ namespace AadGraphApiHelper
                                               ? StringResources.GetAppTokenText
                                               : StringResources.GetUserTokenText;
             this.getAppTokenButton.Enabled = true;
+            this.urlBuilder.TenantCredential = tenantCredential;
         }
 
         private void idTextBox_TextChanged(object sender, EventArgs e)
         {
+            this.urlBuilder.ResourceId = this.idTextBox.Text;
             this.PopulateResourcesSecond();
             this.UpdateRequestUrl();
         }
 
         private void resourceSecondComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.urlBuilder.ResourceSecond = this.resourceSecondComboBox.SelectedItem as string;
             this.UpdateRequestUrl();
         }
 
         private void UpdateRequestUrl()
         {
-            GraphApiUrlBuilder urlBuilder = new GraphApiUrlBuilder();
-            urlBuilder.Environment = this.EnvironmentComboBox.SelectedItem as AadEnvironment;
-            urlBuilder.TenantCredential = this.TenantCredentialComboBox.SelectedItem as TenantCredential;
-            urlBuilder.ResourceFirst = this.resourceFirstComboBox.SelectedItem as string;
-            urlBuilder.ResourceId = this.idTextBox.Text;
-            urlBuilder.ResourceSecond = this.resourceSecondComboBox.SelectedItem as string;
-            urlBuilder.ApiVersion = this.apiVersionComboBox.SelectedItem as string;
-            this.requestUrlTextBox.Text = urlBuilder.Url;
+            this.requestUrlTextBox.Text = this.urlBuilder.CreateUrl();
         }
 
         private void openTemplateToolStripMenuItem_Click(object sender, EventArgs e)
@@ -437,6 +452,30 @@ namespace AadGraphApiHelper
             {
                 this.idTextBox.Text = objectId;
             }
+        }
+
+        private void createSearchfilterQueryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            QueryBuilderForm queryBuilder = new QueryBuilderForm();
+            queryBuilder.UrlBuilder = this.urlBuilder;
+            DialogResult result = queryBuilder.ShowDialog();
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            this.UpdateRequestUrl();
+
+            if (result == DialogResult.Yes)
+            {
+                this.ExecuteRequest();
+            }
+        }
+
+        private void clearExistingfilterQueryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.urlBuilder.FilterComponents.Clear();
+            this.UpdateRequestUrl();
         }
     }
 }

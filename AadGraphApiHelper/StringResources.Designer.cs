@@ -160,6 +160,15 @@ namespace AadGraphApiHelper {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The name parameter cannot be null or white space..
+        /// </summary>
+        internal static string NameCannotBeNullOrWhiteSpace {
+            get {
+                return ResourceManager.GetString("NameCannotBeNullOrWhiteSpace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (null).
         /// </summary>
         internal static string NullValue {

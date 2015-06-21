@@ -17,8 +17,6 @@ namespace AadGraphApiHelper
 
         private const string ODataTypeKey = @"odata.type";
 
-        private const string ObjectType = @"objectType";
-        
         private readonly DataGridView dataGridView;
 
         private IDictionary<string, object> deserializedObject;

@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
+﻿using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
 namespace AadGraphApiHelper
 {

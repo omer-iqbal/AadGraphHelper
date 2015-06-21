@@ -55,7 +55,16 @@
   <ItemGroup>
     <Compile Include="AadEnvironment.cs" />
     <Compile Include="ApplicationType.cs" />
+    <Compile Include="GraphApiEntityType.cs" />
+    <Compile Include="GraphApiUrlFilterComponent.cs" />
+    <Compile Include="GraphApiProperty.cs" />
     <Compile Include="Names.cs" />
+    <Compile Include="QueryBuilderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QueryBuilderForm.Designer.cs">
+      <DependentUpon>QueryBuilderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TenantCredentialSet.cs" />
     <Compile Include="AadEnvironmentSet.cs">
       <SubType>Code</SubType>
@@ -113,6 +122,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="QueryBuilderForm.resx">
+      <DependentUpon>QueryBuilderForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StringResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>StringResources.Designer.cs</LastGenOutput>
