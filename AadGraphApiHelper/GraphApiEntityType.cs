@@ -39,7 +39,7 @@ namespace AadGraphApiHelper
                     new GraphApiProperty(Names.Mail, typeof(string), true),
                     new GraphApiProperty(Names.MailNickName, typeof(string), true),
                     new GraphApiProperty(Names.Mobile, typeof(string), false),
-                    new GraphApiProperty(Names.ObjectId, typeof(Guid), false), // This is technically filterable, but only with eq operator
+                    new GraphApiProperty(Names.ObjectId, typeof(Guid), true),
                     new GraphApiProperty(Names.ObjectType, typeof(string), false),
                     new GraphApiProperty(Names.OnPremisesSecurityIdentifier, typeof(string), false),
                     new GraphApiProperty(Names.OtherMails, typeof(ICollection<string>), true),

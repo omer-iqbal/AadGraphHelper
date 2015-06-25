@@ -96,7 +96,6 @@
 
         public const string StartsWithOperator = @"startswith";
         public const string EqualToOperator = @"eq";
-        public const string NotEqualToOperator = @"neq";
         public const string GreaterThanOrEqualToOperator = @"ge";
         public const string LessThanOrEqualToOperator = @"le";
         public const string AnyEqualsOperator = @"any (eq)";

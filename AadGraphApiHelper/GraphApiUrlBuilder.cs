@@ -101,7 +101,7 @@ namespace AadGraphApiHelper
             const string AnyEqString = @"{0}/any(p:p {1} '{2}')";
             const string FunctionOperator = @"{0}({1},'{2}')";
             const string OperatorForStrings = @"{0} {1} '{2}'";
-            const string OperatorForGuids = @"{0} {1} guid'{2}'";
+            const string OperatorForGuids = @"{0} {1} '{2}'";
             const string OperatorForOthers = @"{0} {1} {2}";
             StringBuilder filterQueryBuilder = new StringBuilder();
             foreach (GraphApiUrlFilterComponent filterComponent in this.filterComponents)
