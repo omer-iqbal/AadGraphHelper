@@ -57,8 +57,9 @@ namespace AadGraphApiHelper
             this.responseTableTabPage = new System.Windows.Forms.TabPage();
             this.responseDataGridView = new System.Windows.Forms.DataGridView();
             this.responseGridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.copyobjectIdToIRequestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyobjectIdToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyCellValueToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyObjectIdToRequestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyUserPrincipalNameToRequestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resourceSecondComboBox = new System.Windows.Forms.ComboBox();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,9 +69,9 @@ namespace AadGraphApiHelper
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.queryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createSearchfilterQueryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearExistingfilterQueryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.mainStatusStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.clearExistingfilterQueryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.bodyTabPage.SuspendLayout();
             this.responseTabPage.SuspendLayout();
@@ -184,14 +185,13 @@ namespace AadGraphApiHelper
             // 
             // resourceFirstComboBox
             // 
-            this.resourceFirstComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.resourceFirstComboBox.FormattingEnabled = true;
             this.resourceFirstComboBox.Location = new System.Drawing.Point(303, 100);
             this.resourceFirstComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.resourceFirstComboBox.Name = "resourceFirstComboBox";
             this.resourceFirstComboBox.Size = new System.Drawing.Size(144, 25);
             this.resourceFirstComboBox.TabIndex = 32;
-            this.resourceFirstComboBox.SelectedIndexChanged += new System.EventHandler(this.resourceFirstComboBox_SelectedIndexChanged);
+            this.resourceFirstComboBox.TextChanged += new System.EventHandler(this.resourceFirstComboBox_TextChanged);
             // 
             // entitySetLabel
             // 
@@ -213,7 +213,6 @@ namespace AadGraphApiHelper
             // 
             // apiVersionComboBox
             // 
-            this.apiVersionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.apiVersionComboBox.FormattingEnabled = true;
             this.apiVersionComboBox.Location = new System.Drawing.Point(1042, 100);
             this.apiVersionComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -221,7 +220,7 @@ namespace AadGraphApiHelper
             this.apiVersionComboBox.Size = new System.Drawing.Size(114, 25);
             this.apiVersionComboBox.Sorted = true;
             this.apiVersionComboBox.TabIndex = 52;
-            this.apiVersionComboBox.SelectedIndexChanged += new System.EventHandler(this.apiVersionComboBox_SelectedIndexChanged);
+            this.apiVersionComboBox.TextChanged += new System.EventHandler(this.apiVersionComboBox_TextChanged);
             // 
             // executeButton
             // 
@@ -263,7 +262,6 @@ namespace AadGraphApiHelper
             // 
             // methodComboBox
             // 
-            this.methodComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.methodComboBox.FormattingEnabled = true;
             this.methodComboBox.Items.AddRange(new object[] {
             "DELETE",
@@ -355,36 +353,43 @@ namespace AadGraphApiHelper
             // responseGridContextMenuStrip
             // 
             this.responseGridContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyobjectIdToIRequestToolStripMenuItem,
-            this.copyobjectIdToClipboardToolStripMenuItem});
+            this.copyCellValueToClipboardToolStripMenuItem,
+            this.copyObjectIdToRequestToolStripMenuItem,
+            this.copyUserPrincipalNameToRequestToolStripMenuItem});
             this.responseGridContextMenuStrip.Name = "responseGridContextMenuStrip";
-            this.responseGridContextMenuStrip.Size = new System.Drawing.Size(216, 48);
+            this.responseGridContextMenuStrip.Size = new System.Drawing.Size(262, 70);
             this.responseGridContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.responseGridContextMenuStrip_Opening);
             // 
-            // copyobjectIdToIRequestToolStripMenuItem
+            // copyCellValueToClipboardToolStripMenuItem
             // 
-            this.copyobjectIdToIRequestToolStripMenuItem.Name = "copyobjectIdToIRequestToolStripMenuItem";
-            this.copyobjectIdToIRequestToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
-            this.copyobjectIdToIRequestToolStripMenuItem.Text = "Copy objectId to &request";
-            this.copyobjectIdToIRequestToolStripMenuItem.Click += new System.EventHandler(this.copyObjectIdToRequestFieldToolStripMenuItem_Click);
+            this.copyCellValueToClipboardToolStripMenuItem.Name = "copyCellValueToClipboardToolStripMenuItem";
+            this.copyCellValueToClipboardToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
+            this.copyCellValueToClipboardToolStripMenuItem.Text = "&Copy cell value to clipboard";
+            this.copyCellValueToClipboardToolStripMenuItem.Click += new System.EventHandler(this.CopyCellValueToClipboardToolStripMenuItem_Click);
             // 
-            // copyobjectIdToClipboardToolStripMenuItem
+            // copyObjectIdToRequestToolStripMenuItem
             // 
-            this.copyobjectIdToClipboardToolStripMenuItem.Name = "copyobjectIdToClipboardToolStripMenuItem";
-            this.copyobjectIdToClipboardToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
-            this.copyobjectIdToClipboardToolStripMenuItem.Text = "Copy objectId to &clipboard";
-            this.copyobjectIdToClipboardToolStripMenuItem.Click += new System.EventHandler(this.copyobjectIdToClipboardToolStripMenuItem_Click);
+            this.copyObjectIdToRequestToolStripMenuItem.Name = "copyObjectIdToRequestToolStripMenuItem";
+            this.copyObjectIdToRequestToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
+            this.copyObjectIdToRequestToolStripMenuItem.Text = "Copy &objectId to request";
+            this.copyObjectIdToRequestToolStripMenuItem.Click += new System.EventHandler(this.copyObjectIdToRequestToolStripMenuItem_Click);
+            // 
+            // copyUserPrincipalNameToRequestToolStripMenuItem
+            // 
+            this.copyUserPrincipalNameToRequestToolStripMenuItem.Name = "copyUserPrincipalNameToRequestToolStripMenuItem";
+            this.copyUserPrincipalNameToRequestToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
+            this.copyUserPrincipalNameToRequestToolStripMenuItem.Text = "Copy &userPrincipalName to request";
+            this.copyUserPrincipalNameToRequestToolStripMenuItem.Click += new System.EventHandler(this.copyUserPrincipalNameToRequestToolStripMenuItem_Click);
             // 
             // resourceSecondComboBox
             // 
-            this.resourceSecondComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.resourceSecondComboBox.FormattingEnabled = true;
             this.resourceSecondComboBox.Location = new System.Drawing.Point(760, 100);
             this.resourceSecondComboBox.Name = "resourceSecondComboBox";
             this.resourceSecondComboBox.Size = new System.Drawing.Size(166, 25);
             this.resourceSecondComboBox.Sorted = true;
             this.resourceSecondComboBox.TabIndex = 45;
-            this.resourceSecondComboBox.SelectedIndexChanged += new System.EventHandler(this.resourceSecondComboBox_SelectedIndexChanged);
+            this.resourceSecondComboBox.TextChanged += new System.EventHandler(this.resourceSecondComboBox_TextChanged);
             // 
             // mainMenuStrip
             // 
@@ -454,6 +459,13 @@ namespace AadGraphApiHelper
             this.createSearchfilterQueryToolStripMenuItem.Text = "Create search (filter) query...";
             this.createSearchfilterQueryToolStripMenuItem.Click += new System.EventHandler(this.createSearchfilterQueryToolStripMenuItem_Click);
             // 
+            // clearExistingfilterQueryToolStripMenuItem
+            // 
+            this.clearExistingfilterQueryToolStripMenuItem.Name = "clearExistingfilterQueryToolStripMenuItem";
+            this.clearExistingfilterQueryToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.clearExistingfilterQueryToolStripMenuItem.Text = "Clear existing (filter) query";
+            this.clearExistingfilterQueryToolStripMenuItem.Click += new System.EventHandler(this.clearExistingfilterQueryToolStripMenuItem_Click);
+            // 
             // mainStatusStrip
             // 
             this.mainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -468,13 +480,6 @@ namespace AadGraphApiHelper
             this.mainStatusStripStatusLabel.Name = "mainStatusStripStatusLabel";
             this.mainStatusStripStatusLabel.Size = new System.Drawing.Size(60, 17);
             this.mainStatusStripStatusLabel.Text = "Welcome!";
-            // 
-            // clearExistingfilterQueryToolStripMenuItem
-            // 
-            this.clearExistingfilterQueryToolStripMenuItem.Name = "clearExistingfilterQueryToolStripMenuItem";
-            this.clearExistingfilterQueryToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
-            this.clearExistingfilterQueryToolStripMenuItem.Text = "Clear existing (filter) query";
-            this.clearExistingfilterQueryToolStripMenuItem.Click += new System.EventHandler(this.clearExistingfilterQueryToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -566,13 +571,14 @@ namespace AadGraphApiHelper
         private ToolStripMenuItem exitToolStripMenuItem;
         private ToolStripSeparator toolStripMenuItem2;
         private ContextMenuStrip responseGridContextMenuStrip;
-        private ToolStripMenuItem copyobjectIdToClipboardToolStripMenuItem;
-        private ToolStripMenuItem copyobjectIdToIRequestToolStripMenuItem;
+        private ToolStripMenuItem copyCellValueToClipboardToolStripMenuItem;
         private StatusStrip mainStatusStrip;
         private ToolStripStatusLabel mainStatusStripStatusLabel;
         private ToolStripMenuItem queryToolStripMenuItem;
         private ToolStripMenuItem createSearchfilterQueryToolStripMenuItem;
         private ToolStripMenuItem clearExistingfilterQueryToolStripMenuItem;
+        private ToolStripMenuItem copyObjectIdToRequestToolStripMenuItem;
+        private ToolStripMenuItem copyUserPrincipalNameToRequestToolStripMenuItem;
     }
 }
 

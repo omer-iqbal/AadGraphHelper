@@ -30,15 +30,6 @@ namespace AadGraphApiHelper
 
         private GraphApiUrlBuilder urlBuilder = new GraphApiUrlBuilder();
 
-        private readonly IDictionary<string, ISet<string>> resourcesDictionary = new Dictionary<string, ISet<string>>(StringComparer.OrdinalIgnoreCase)
-        {
-            { Names.Users, new HashSet<string> { Names.MemberOf, Names.MemberOfLinks, Names.Manager, Names.ManagerLinks, Names.DirectReports, Names.DirectReportsLinks, Names.CheckMemberGroups, Names.GetMemberGroups } },
-            { Names.Groups, new HashSet<string> {  Names.Members, Names.MembersLinks } },
-            { Names.Applications, new HashSet<string> { Names.ExtensionProperties } },
-            { Names.ServicePrincipals, new HashSet<string>() },
-            { Names.TenantDetails, new HashSet<string>() },
-        };
-
         public MainForm()
         {
             this.InitializeComponent();
@@ -59,7 +50,7 @@ namespace AadGraphApiHelper
             }
 
             this.resourceFirstComboBox.Items.Clear();
-            foreach (string resourceFirst in this.resourcesDictionary.Keys)
+            foreach (string resourceFirst in GraphApiEntityType.NavigationProperties.Keys)
             {
                 this.resourceFirstComboBox.Items.Add(resourceFirst);
             }
@@ -241,46 +232,31 @@ namespace AadGraphApiHelper
         {
         }
 
-        private void resourceFirstComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.urlBuilder.ResourceFirst = this.resourceFirstComboBox.SelectedItem as string;
-            this.idTextBox.Text = null;
-            this.urlBuilder.FilterComponents.Clear();
-            this.PopulateResourcesSecond();
-            this.UpdateRequestUrl();
-        }
-
         private void PopulateResourcesSecond()
         {
-            string selectedResourceFirst = this.resourceFirstComboBox.SelectedItem as string;
+            string selectedResourceFirst = this.resourceFirstComboBox.Text;
             this.resourceSecondComboBox.Items.Clear();
+            this.resourceSecondComboBox.Text = null;
 
-            if (selectedResourceFirst == null || String.IsNullOrWhiteSpace(this.idTextBox.Text))
+            if (String.IsNullOrWhiteSpace(selectedResourceFirst) || String.IsNullOrWhiteSpace(this.idTextBox.Text))
             {
-                this.resourceSecondComboBox.Enabled = false;
                 return;
             }
 
             ISet<string> resourcesSecondSet;
-            if (this.resourcesDictionary.TryGetValue(selectedResourceFirst, out resourcesSecondSet) && resourcesSecondSet.Count > 0)
+            if (GraphApiEntityType.NavigationProperties.TryGetValue(selectedResourceFirst, out resourcesSecondSet) && resourcesSecondSet.Count > 0)
             {
                 this.resourceSecondComboBox.Items.Add(String.Empty);
                 foreach (string resourceSecond in resourcesSecondSet)
                 {
                     this.resourceSecondComboBox.Items.Add(resourceSecond);
                 }
-                
-                this.resourceSecondComboBox.Enabled = this.resourceSecondComboBox.Items.Count > 0;
-            }
-            else
-            {
-                this.resourceSecondComboBox.Enabled = false;
             }
         }
 
-        private void apiVersionComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void apiVersionComboBox_TextChanged(object sender, EventArgs e)
         {
-            this.urlBuilder.ApiVersion = this.apiVersionComboBox.SelectedItem as string;
+            this.urlBuilder.ApiVersion = this.apiVersionComboBox.Text;
             this.UpdateRequestUrl();
         }
 
@@ -319,9 +295,18 @@ namespace AadGraphApiHelper
             this.UpdateRequestUrl();
         }
 
-        private void resourceSecondComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void resourceFirstComboBox_TextChanged(object sender, EventArgs e)
         {
-            this.urlBuilder.ResourceSecond = this.resourceSecondComboBox.SelectedItem as string;
+            this.urlBuilder.ResourceFirst = this.resourceFirstComboBox.Text;
+            this.idTextBox.Text = null;
+            this.urlBuilder.FilterComponents.Clear();
+            this.PopulateResourcesSecond();
+            this.UpdateRequestUrl();
+        }
+
+        private void resourceSecondComboBox_TextChanged(object sender, EventArgs e)
+        {
+            this.urlBuilder.ResourceSecond = this.resourceSecondComboBox.Text;
             this.UpdateRequestUrl();
         }
 
@@ -431,26 +416,57 @@ namespace AadGraphApiHelper
 
         private void responseGridContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            bool hasObjectId = !String.IsNullOrEmpty(this.responseTable.GetCellValueOfSelectedRow(Names.ObjectId));
-            this.copyobjectIdToClipboardToolStripMenuItem.Enabled = hasObjectId;
-            this.copyobjectIdToIRequestToolStripMenuItem.Enabled = hasObjectId;
+            HideAllContextMenuItems(this.responseGridContextMenuStrip);
+            this.MakeContextMenuCopyPropertyItemVisible(Names.ObjectId, this.copyObjectIdToRequestToolStripMenuItem);
+            this.MakeContextMenuCopyPropertyItemVisible(Names.UserPrincipalName, this.copyUserPrincipalNameToRequestToolStripMenuItem);
         }
 
-        private void copyobjectIdToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        private static void HideAllContextMenuItems(ContextMenuStrip menuStrip)
         {
-            string objectId = this.responseTable.GetCellValueOfSelectedRow(Names.ObjectId);
-            if (!String.IsNullOrEmpty(objectId))
+            foreach (ToolStripItem item in menuStrip.Items)
             {
-                Clipboard.SetText(objectId);
+                item.Visible = false;
             }
         }
 
-        private void copyObjectIdToRequestFieldToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MakeContextMenuCopyPropertyItemVisible(string propertyName, ToolStripItem toolStripItem)
         {
-            string objectId = this.responseTable.GetCellValueOfSelectedRow(Names.ObjectId);
-            if (!String.IsNullOrEmpty(objectId))
+            if (!String.IsNullOrEmpty(this.responseTable.GetCellValueFromSelectedRow(propertyName)))
             {
-                this.idTextBox.Text = objectId;
+                toolStripItem.Visible = true;
+            }
+        }
+
+        private void CopyCellValueToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string value = this.responseTable.GetCellValueOfSelectedCell();
+            if (!String.IsNullOrEmpty(value))
+            {
+                Clipboard.SetText(value);
+            }
+        }
+
+        private void copyIdToRequestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.CopyCellValueToClipboard(Names.Id);
+        }
+
+        private void copyObjectIdToRequestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.CopyCellValueToClipboard(Names.ObjectId);
+        }
+
+        private void copyUserPrincipalNameToRequestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.CopyCellValueToClipboard(Names.UserPrincipalName);
+        }
+
+        private void CopyCellValueToClipboard(string columnName)
+        {
+            string value = this.responseTable.GetCellValueFromSelectedRow(columnName);
+            if (!String.IsNullOrEmpty(value))
+            {
+                this.idTextBox.Text = value;
             }
         }
 

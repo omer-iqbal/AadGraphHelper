@@ -104,7 +104,17 @@ namespace AadGraphApiHelper
             this.dataGridView.Show();
         }
 
-        public string GetCellValueOfSelectedRow(string columnName)
+        public string GetCellValueOfSelectedCell()
+        {
+            if (this.dataGridView.SelectedRows.Count != 1 || this.dataGridView.CurrentCell == null)
+            {
+                return null;
+            }
+
+            return this.dataGridView.CurrentCell.Value as string;
+        }
+
+        public string GetCellValueFromSelectedRow(string columnName)
         {
             if (this.dataGridView.SelectedRows.Count != 1)
             {
@@ -113,9 +123,9 @@ namespace AadGraphApiHelper
 
             try
             {
-                return this.dataGridView.SelectedRows[0].Cells[Names.ObjectId].Value as string;
+                return this.dataGridView.SelectedRows[0].Cells[columnName].Value as string;
             }
-            catch (KeyNotFoundException)
+            catch (ArgumentException)
             {
                 return null;
             }
