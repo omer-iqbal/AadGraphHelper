@@ -14,7 +14,7 @@ namespace AadGraphApiHelper
 
         public string LogicalOperator { get; set; }
 
-        public string PropertyName { get; set; }
+        public GraphApiProperty Property { get; set; }
 
         public string ComparisonOperator { get; set; }
 

@@ -95,8 +95,33 @@
         public const string UserType = @"userType";
 
         // Built-in application/servicePrincipal properties
+        public const string AppDisplayName = @"appDisplayName";
+        public const string AppOwnerTenantId = @"appOwnerTenantId";
+        public const string AppRoleAssignmentRequired = @"appRoleAssignmentRequired";
+        public const string OAuth2Permissions = @"oauth2Permissions";
+        public const string PreferredTokenSigningKeyThumbprint = @"preferredTokenSigningKeyThumbprint";
+        public const string PublisherName = @"publisherName";
+        public const string ServicePrincipalNames = @"servicePrincipalNames";
+        public const string Tags = @"tags";
         public const string AppId = @"appId";
         public const string AppRoles = @"appRoles";
+        public const string AvailableToOtherTenants = @"availableToOtherTenants";
+        public const string ErrorUrl = @"errorUrl";
+        public const string GroupMembershipClaims = @"groupMembershipClaims";
+        public const string HomePage = @"homePage";
+        public const string IdentifierUris = @"identifierUris";
+        public const string LogoutUrl = @"logoutUrl";
+        public const string OAuth2AllowImplicitFlow = @"oauth2AllowImplicitFlow";
+        public const string OAuth2AllowUrlPathMatching = @"oauth2AllowUrlPathMatching";
+        public const string OAuth2RequiredResponse = @"oauth2RequiredResponse";
+        public const string PublicClient = @"publicClient";
+        public const string ReplyUrls = @"replyUrls";
+        public const string SamlMetadataUrl = @"samlMetadataUrl";
+
+        // Built-in group/directoryRole propeties
+        public const string Description = @"description";
+        public const string MailEnabled = @"mailEnabled";
+        public const string SecurityEnabled = @"securityEnabled";
 
         // Filter query operators
         public const string AndOperator = @"and";

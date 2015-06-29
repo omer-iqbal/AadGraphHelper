@@ -417,6 +417,7 @@ namespace AadGraphApiHelper
         private void responseGridContextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             HideAllContextMenuItems(this.responseGridContextMenuStrip);
+            this.copyCellValueToClipboardToolStripMenuItem.Visible = true;
             this.MakeContextMenuCopyPropertyItemVisible(Names.ObjectId, this.copyObjectIdToRequestToolStripMenuItem);
             this.MakeContextMenuCopyPropertyItemVisible(Names.UserPrincipalName, this.copyUserPrincipalNameToRequestToolStripMenuItem);
         }

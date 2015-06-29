@@ -17,6 +17,8 @@ namespace AadGraphApiHelper
 
         private readonly int allowedWidth;
 
+        private DataGridViewComboBoxColumn propertyColumn;
+
         public QueryBuilderForm()
         {
             this.InitializeComponent();
@@ -25,30 +27,26 @@ namespace AadGraphApiHelper
 
         internal GraphApiUrlBuilder UrlBuilder { get; set; }
 
-        private void QueryBuilderForm_Load(object sender, EventArgs e)
+        private void QueryBuilderForm_Load(object sender, EventArgs args)
         {
+            this.resourceComboBox.Items.AddRange(GraphApiEntityType.Entities.Select(e => e.Name).ToArray());
             DataGridViewComboBoxColumn andOrColumn = new DataGridViewComboBoxColumn();
             andOrColumn.Name = LogicalOperatorColumnName;
             andOrColumn.FlatStyle = FlatStyle.Flat;
             andOrColumn.Items.AddRange(GraphApiUrlFilterComponent.AllowedLogicalOperators);
             this.queryGridView.Columns.Add(andOrColumn);
 
-            DataGridViewComboBoxColumn propertyColumn = new DataGridViewComboBoxColumn();
-            propertyColumn.Name = PropertyColumnName;
-            propertyColumn.FlatStyle = FlatStyle.Flat;
-            propertyColumn.Width = (this.allowedWidth - andOrColumn.Width) / 4;
+            this.propertyColumn = new DataGridViewComboBoxColumn();
+            this.propertyColumn.Name = PropertyColumnName;
+            this.propertyColumn.FlatStyle = FlatStyle.Flat;
+            this.propertyColumn.Width = (this.allowedWidth - andOrColumn.Width) / 4;
 
-            foreach (GraphApiProperty property in GraphApiEntityType.Users.Properties)
-            {
-                propertyColumn.Items.Add(property.Name);
-            }
-
-            this.queryGridView.Columns.Add(propertyColumn);
+            this.queryGridView.Columns.Add(this.propertyColumn);
 
             DataGridViewComboBoxColumn operatorColumn = new DataGridViewComboBoxColumn();
             operatorColumn.Name = ComparisonOperatorColumnName;
             operatorColumn.FlatStyle = FlatStyle.Flat;
-            operatorColumn.Width = (this.allowedWidth - andOrColumn.Width - propertyColumn.Width) / 4;
+            operatorColumn.Width = (this.allowedWidth - andOrColumn.Width - this.propertyColumn.Width) / 4;
             this.queryGridView.Columns.Add(operatorColumn);
 
             DataGridViewTextBoxColumn valueColumn = new DataGridViewTextBoxColumn();
@@ -81,7 +79,7 @@ namespace AadGraphApiHelper
             if (args.ColumnIndex == this.queryGridView.Columns[PropertyColumnName].Index)
             {
                 DataGridViewRow row = this.queryGridView.Rows[args.RowIndex];
-                AddComparisonOperator(row);
+                this.SetComparisonOperators(row);
             }
         }
 
@@ -122,10 +120,10 @@ namespace AadGraphApiHelper
 
             if (args.Cancel == false)
             {
-                row.Cells[LogicalOperatorColumnName].Style = new DataGridViewCellStyle {BackColor = Color.White};
-                row.Cells[PropertyColumnName].Style = new DataGridViewCellStyle {BackColor = Color.White};
-                row.Cells[ComparisonOperatorColumnName].Style = new DataGridViewCellStyle {BackColor = Color.White};
-                row.Cells[ValueColumnName].Style = new DataGridViewCellStyle {BackColor = Color.White};
+                row.Cells[LogicalOperatorColumnName].Style = new DataGridViewCellStyle { BackColor = Color.White };
+                row.Cells[PropertyColumnName].Style = new DataGridViewCellStyle { BackColor = Color.White };
+                row.Cells[ComparisonOperatorColumnName].Style = new DataGridViewCellStyle { BackColor = Color.White };
+                row.Cells[ValueColumnName].Style = new DataGridViewCellStyle { BackColor = Color.White };
             }
         }
 
@@ -161,10 +159,30 @@ namespace AadGraphApiHelper
                 string propertyName = row.Cells[PropertyColumnName].Value as string;
                 string value = row.Cells[ValueColumnName].Value as string;
 
+                if ((index != 0 && String.IsNullOrWhiteSpace(logicalOperator) ||
+                    String.IsNullOrWhiteSpace(comparisonOperator) ||
+                    String.IsNullOrWhiteSpace(propertyName) ||
+                    String.IsNullOrWhiteSpace(value)))
+                {
+                    return;
+                }
+
+                GraphApiEntityType entity = GetEntityType(this.resourceComboBox.Text);
+                if (entity == null)
+                {
+                    return;
+                }
+
+                GraphApiProperty property = entity.Properties.SingleOrDefault(p => p.Name.Equals(propertyName, StringComparison.OrdinalIgnoreCase));
+                if (property == null)
+                {
+                    return;
+                }
+
                 GraphApiUrlFilterComponent filterComponent = new GraphApiUrlFilterComponent
                 {
                     LogicalOperator = index > 0 ? logicalOperator : null,
-                    PropertyName = propertyName,
+                    Property = property,
                     ComparisonOperator = comparisonOperator,
                     Value = value
                 };
@@ -175,26 +193,69 @@ namespace AadGraphApiHelper
 
         private void PopulateDataGridViewFromUrlBuilder()
         {
+            if (this.resourceComboBox.Items.Contains(this.UrlBuilder.ResourceFirst))
+            {
+                this.resourceComboBox.Text = this.UrlBuilder.ResourceFirst;
+            }
+
+            this.AssignProperties();
+
             foreach (GraphApiUrlFilterComponent filterComponent in this.UrlBuilder.FilterComponents)
             {
                 int rowIndex = this.queryGridView.Rows.Add();
                 DataGridViewRow row = this.queryGridView.Rows[rowIndex];
                 row.Cells[LogicalOperatorColumnName].Value = filterComponent.LogicalOperator;
-                row.Cells[PropertyColumnName].Value = filterComponent.PropertyName;
-                AddComparisonOperator(row);
+                row.Cells[PropertyColumnName].Value = filterComponent.Property.Name;
+                this.SetComparisonOperators(row);
                 row.Cells[ComparisonOperatorColumnName].Value = filterComponent.ComparisonOperator;
                 row.Cells[ValueColumnName].Value = filterComponent.Value;
             }
         }
 
-        private static void AddComparisonOperator(DataGridViewRow row)
+        private void SetComparisonOperators(DataGridViewRow row)
         {
             string propertyName = (string)row.Cells[PropertyColumnName].Value;
 
-            GraphApiProperty property = GraphApiEntityType.Users.Properties.Single(p => p.Name.Equals(propertyName, StringComparison.OrdinalIgnoreCase));
+            GraphApiEntityType entity = GetEntityType(this.resourceComboBox.Text);
+            GraphApiProperty property = entity.Properties.Single(p => p.Name.Equals(propertyName, StringComparison.OrdinalIgnoreCase));
             DataGridViewComboBoxCell operatorCell = (DataGridViewComboBoxCell)row.Cells[ComparisonOperatorColumnName];
+            string operatorValue = operatorCell.Value as string;
             operatorCell.Items.Clear();
-            operatorCell.Items.AddRange(property.GetAllowedComparisonOperators());
+            string[] operators = property.GetAllowedComparisonOperators();
+            operatorCell.Items.AddRange(operators);
+
+            if (!operators.Contains(operatorValue))
+            {
+                operatorCell.Value = null;
+            }
+        }
+
+        private void resourceComboBox_SelectedIndexChanged(object sender, EventArgs args)
+        {
+            this.AssignProperties();
+        }
+
+        private void AssignProperties()
+        {
+            this.propertyColumn.Items.Clear();
+            GraphApiEntityType entity = GetEntityType(this.resourceComboBox.Text);
+
+            if (entity == null)
+            {
+                return;
+            }
+
+            this.propertyColumn.Items.AddRange(entity.Properties.Where(p => p.Filterable).Select(p => p.Name).ToArray());
+        }
+
+        private static GraphApiEntityType GetEntityType(string entityName)
+        {
+            if (String.IsNullOrWhiteSpace(entityName))
+            {
+                return null;
+            }
+
+            return GraphApiEntityType.Entities.SingleOrDefault(e => e.Name.Equals(entityName, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

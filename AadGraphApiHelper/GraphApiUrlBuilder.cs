@@ -108,9 +108,8 @@ namespace AadGraphApiHelper
             {
                 string andOr = filterComponent.LogicalOperator;
                 string op = filterComponent.ComparisonOperator;
-                string propertyName = filterComponent.PropertyName;
+                GraphApiProperty property = filterComponent.Property;
                 string value = filterComponent.Value;
-                GraphApiProperty property = GraphApiEntityType.Users.Properties.Single(p => p.Name.Equals(propertyName, StringComparison.OrdinalIgnoreCase));
 
                 if (filterQueryBuilder.Length > 0)
                 {
@@ -119,23 +118,23 @@ namespace AadGraphApiHelper
 
                 if (op.Equals(Names.StartsWithOperator, StringComparison.OrdinalIgnoreCase))
                 {
-                    filterQueryBuilder.AppendFormat(FunctionOperator, Names.StartsWithOperator, propertyName, value);
+                    filterQueryBuilder.AppendFormat(FunctionOperator, Names.StartsWithOperator, property.Name, value);
                 }
                 else if (op.Equals(Names.AnyEqualsOperator, StringComparison.OrdinalIgnoreCase))
                 {
-                    filterQueryBuilder.AppendFormat(AnyEqString, propertyName, Names.EqualToOperator, value);
+                    filterQueryBuilder.AppendFormat(AnyEqString, property.Name, Names.EqualToOperator, value);
                 }
                 else if (property.Type == typeof(Guid))
                 {
-                    filterQueryBuilder.AppendFormat(OperatorForGuids, propertyName, op, value);
+                    filterQueryBuilder.AppendFormat(OperatorForGuids, property.Name, op, value);
                 }
                 else if (property.Type == typeof(bool) || property.Type == typeof(int))
                 {
-                    filterQueryBuilder.AppendFormat(OperatorForOthers, propertyName, op, value);
+                    filterQueryBuilder.AppendFormat(OperatorForOthers, property.Name, op, value);
                 }
                 else
                 {
-                    filterQueryBuilder.AppendFormat(OperatorForStrings, propertyName, op, value);
+                    filterQueryBuilder.AppendFormat(OperatorForStrings, property.Name, op, value);
                 }
             }
 

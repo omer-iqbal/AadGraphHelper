@@ -80,15 +80,13 @@
             // 
             // resourceComboBox
             // 
-            this.resourceComboBox.Enabled = false;
+            this.resourceComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.resourceComboBox.FormattingEnabled = true;
-            this.resourceComboBox.Items.AddRange(new object[] {
-            "users"});
             this.resourceComboBox.Location = new System.Drawing.Point(101, 10);
             this.resourceComboBox.Name = "resourceComboBox";
             this.resourceComboBox.Size = new System.Drawing.Size(229, 25);
             this.resourceComboBox.TabIndex = 2;
-            this.resourceComboBox.Text = "users";
+            this.resourceComboBox.SelectedIndexChanged += new System.EventHandler(this.resourceComboBox_SelectedIndexChanged);
             // 
             // createAndExecuteButton
             // 
