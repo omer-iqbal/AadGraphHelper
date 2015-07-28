@@ -13,14 +13,15 @@ To get started:
 
   b. If you need to perform those operations, create a native application. You will be required to provide user credentials on every authentication, but it will allow administrator operations.
 
-2. Click on the "Releases" tab, download the latest release.
+2. Click on the "Releases" tab in this GIT repository (at the top), and download the latest release.
 
-3. Open the AadGraphHelper.exe from the downloaded zip file.
+3. Execute the AadGraphHelper.exe from the downloaded zip file.
 
-4. Select environment "Production" and click "Add" in the Tenant/Credential tab.
+4. In the tool, select Environment as "Production" and click "Add" in the Tenant/Credential list.
 
-5. Add the credentials for the app that you created in step 1.
+5. Add the credentials for the application that you created in step 1.
 
 6. Click on the "Get Token" button.
 
 7. Now you can select the method e.g. GET), resource (e.g. users) and click "Execute" button. This will issue the very first request. Once it executes successfully, play around and have fun.
+
