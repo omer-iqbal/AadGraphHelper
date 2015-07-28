@@ -104,9 +104,9 @@ namespace AadGraphApiHelper
 
                 if (!String.IsNullOrEmpty(response))
                 {
-                    if (this.tabControl.SelectedTab == this.bodyTabPage)
+                    if (this.tabControl.SelectedTab != this.responseBodyTabPage && this.tabControl.SelectedTab != this.responseTableTabPage)
                     {
-                        this.tabControl.SelectedTab = this.responseTabPage;
+                        this.tabControl.SelectedTab = this.responseBodyTabPage;
                     }
 
                     this.responseTextBox.Text = JsonText.Format(response);
@@ -120,7 +120,7 @@ namespace AadGraphApiHelper
             }
             catch (Exception ex)
             {
-                this.tabControl.SelectedTab = this.bodyTabPage;
+                this.tabControl.SelectedTab = this.requestBodyTabPage;
                 this.bodyTextBox.SelectionLength = 0;
                 this.Cursor = Cursors.Default;
                 MessageBox.Show(ex.Message, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -380,7 +380,7 @@ namespace AadGraphApiHelper
             if (requestUrl != null) this.requestUrlTextBox.Text = requestUrl;
 
             this.bodyTextBox.Text = body;
-            this.tabControl.SelectedTab = this.bodyTabPage;
+            this.tabControl.SelectedTab = this.requestBodyTabPage;
             this.responseTextBox.Text = null;
             this.responseTable.Clear();
         }
@@ -445,11 +445,6 @@ namespace AadGraphApiHelper
             {
                 Clipboard.SetText(value);
             }
-        }
-
-        private void copyIdToRequestToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.CopyCellValueToClipboard(Names.Id);
         }
 
         private void copyObjectIdToRequestToolStripMenuItem_Click(object sender, EventArgs e)

@@ -106,7 +106,7 @@ namespace AadGraphApiHelper
 
         public string GetCellValueOfSelectedCell()
         {
-            if (this.dataGridView.SelectedRows.Count != 1 || this.dataGridView.CurrentCell == null)
+            if (this.dataGridView.CurrentCell == null)
             {
                 return null;
             }
@@ -116,14 +116,23 @@ namespace AadGraphApiHelper
 
         public string GetCellValueFromSelectedRow(string columnName)
         {
-            if (this.dataGridView.SelectedRows.Count != 1)
+            DataGridViewRow row;
+            if (this.dataGridView.SelectedRows.Count == 1)
+            {
+                row = this.dataGridView.SelectedRows[0];
+            }
+            else if (this.dataGridView.CurrentCell != null)
+            {
+                row = this.dataGridView.CurrentCell.OwningRow;
+            }
+            else
             {
                 return null;
             }
 
             try
             {
-                return this.dataGridView.SelectedRows[0].Cells[columnName].Value as string;
+                return row.Cells[columnName].Value as string;
             }
             catch (ArgumentException)
             {

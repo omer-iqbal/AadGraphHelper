@@ -8,9 +8,8 @@ namespace AadGraphApiHelper
         internal ApiVersionSet() : base(StringComparer.OrdinalIgnoreCase)
         {
             this.Add(@"1.5");
+            this.Add(@"1.6");
             this.Add(@"beta");
-            this.Add(@"1.22-preview");
-            this.Add(@"2013-11-08");
         }
     }
 }

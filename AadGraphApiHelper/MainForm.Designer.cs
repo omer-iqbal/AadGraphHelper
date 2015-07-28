@@ -51,9 +51,11 @@ namespace AadGraphApiHelper
             this.label1 = new System.Windows.Forms.Label();
             this.methodComboBox = new System.Windows.Forms.ComboBox();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.bodyTabPage = new System.Windows.Forms.TabPage();
+            this.requestHeadersTabPage = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.requestBodyTabPage = new System.Windows.Forms.TabPage();
             this.bodyTextBox = new System.Windows.Forms.TextBox();
-            this.responseTabPage = new System.Windows.Forms.TabPage();
+            this.responseBodyTabPage = new System.Windows.Forms.TabPage();
             this.responseTableTabPage = new System.Windows.Forms.TabPage();
             this.responseDataGridView = new System.Windows.Forms.DataGridView();
             this.responseGridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -73,8 +75,10 @@ namespace AadGraphApiHelper
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.mainStatusStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl.SuspendLayout();
-            this.bodyTabPage.SuspendLayout();
-            this.responseTabPage.SuspendLayout();
+            this.requestHeadersTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.requestBodyTabPage.SuspendLayout();
+            this.responseBodyTabPage.SuspendLayout();
             this.responseTableTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.responseDataGridView)).BeginInit();
             this.responseGridContextMenuStrip.SuspendLayout();
@@ -278,8 +282,9 @@ namespace AadGraphApiHelper
             // 
             // tabControl
             // 
-            this.tabControl.Controls.Add(this.bodyTabPage);
-            this.tabControl.Controls.Add(this.responseTabPage);
+            this.tabControl.Controls.Add(this.requestHeadersTabPage);
+            this.tabControl.Controls.Add(this.requestBodyTabPage);
+            this.tabControl.Controls.Add(this.responseBodyTabPage);
             this.tabControl.Controls.Add(this.responseTableTabPage);
             this.tabControl.Location = new System.Drawing.Point(2, 179);
             this.tabControl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -288,17 +293,37 @@ namespace AadGraphApiHelper
             this.tabControl.Size = new System.Drawing.Size(1170, 650);
             this.tabControl.TabIndex = 90;
             // 
-            // bodyTabPage
+            // requestHeadersTabPage
             // 
-            this.bodyTabPage.Controls.Add(this.bodyTextBox);
-            this.bodyTabPage.Location = new System.Drawing.Point(4, 26);
-            this.bodyTabPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.bodyTabPage.Name = "bodyTabPage";
-            this.bodyTabPage.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.bodyTabPage.Size = new System.Drawing.Size(1162, 620);
-            this.bodyTabPage.TabIndex = 0;
-            this.bodyTabPage.Text = "Body";
-            this.bodyTabPage.UseVisualStyleBackColor = true;
+            this.requestHeadersTabPage.Controls.Add(this.dataGridView1);
+            this.requestHeadersTabPage.Location = new System.Drawing.Point(4, 26);
+            this.requestHeadersTabPage.Name = "requestHeadersTabPage";
+            this.requestHeadersTabPage.Size = new System.Drawing.Size(1162, 620);
+            this.requestHeadersTabPage.TabIndex = 3;
+            this.requestHeadersTabPage.Text = "Request Headers";
+            this.requestHeadersTabPage.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(1162, 624);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // requestBodyTabPage
+            // 
+            this.requestBodyTabPage.Controls.Add(this.bodyTextBox);
+            this.requestBodyTabPage.Location = new System.Drawing.Point(4, 26);
+            this.requestBodyTabPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.requestBodyTabPage.Name = "requestBodyTabPage";
+            this.requestBodyTabPage.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.requestBodyTabPage.Size = new System.Drawing.Size(1162, 620);
+            this.requestBodyTabPage.TabIndex = 0;
+            this.requestBodyTabPage.Text = "Request Body";
+            this.requestBodyTabPage.UseVisualStyleBackColor = true;
             // 
             // bodyTextBox
             // 
@@ -312,17 +337,17 @@ namespace AadGraphApiHelper
             this.bodyTextBox.Size = new System.Drawing.Size(1162, 624);
             this.bodyTextBox.TabIndex = 91;
             // 
-            // responseTabPage
+            // responseBodyTabPage
             // 
-            this.responseTabPage.Controls.Add(this.responseTextBox);
-            this.responseTabPage.Location = new System.Drawing.Point(4, 26);
-            this.responseTabPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.responseTabPage.Name = "responseTabPage";
-            this.responseTabPage.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.responseTabPage.Size = new System.Drawing.Size(1162, 620);
-            this.responseTabPage.TabIndex = 1;
-            this.responseTabPage.Text = "Response";
-            this.responseTabPage.UseVisualStyleBackColor = true;
+            this.responseBodyTabPage.Controls.Add(this.responseTextBox);
+            this.responseBodyTabPage.Location = new System.Drawing.Point(4, 26);
+            this.responseBodyTabPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.responseBodyTabPage.Name = "responseBodyTabPage";
+            this.responseBodyTabPage.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.responseBodyTabPage.Size = new System.Drawing.Size(1162, 620);
+            this.responseBodyTabPage.TabIndex = 1;
+            this.responseBodyTabPage.Text = "Response Body";
+            this.responseBodyTabPage.UseVisualStyleBackColor = true;
             // 
             // responseTableTabPage
             // 
@@ -346,7 +371,7 @@ namespace AadGraphApiHelper
             this.responseDataGridView.Location = new System.Drawing.Point(0, 0);
             this.responseDataGridView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.responseDataGridView.Name = "responseDataGridView";
-            this.responseDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.responseDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.responseDataGridView.Size = new System.Drawing.Size(1162, 624);
             this.responseDataGridView.TabIndex = 99;
             // 
@@ -520,10 +545,12 @@ namespace AadGraphApiHelper
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl.ResumeLayout(false);
-            this.bodyTabPage.ResumeLayout(false);
-            this.bodyTabPage.PerformLayout();
-            this.responseTabPage.ResumeLayout(false);
-            this.responseTabPage.PerformLayout();
+            this.requestHeadersTabPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.requestBodyTabPage.ResumeLayout(false);
+            this.requestBodyTabPage.PerformLayout();
+            this.responseBodyTabPage.ResumeLayout(false);
+            this.responseBodyTabPage.PerformLayout();
             this.responseTableTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.responseDataGridView)).EndInit();
             this.responseGridContextMenuStrip.ResumeLayout(false);
@@ -558,8 +585,8 @@ namespace AadGraphApiHelper
         internal System.Windows.Forms.ComboBox EnvironmentComboBox;
         internal System.Windows.Forms.ComboBox TenantCredentialComboBox;
         private TabControl tabControl;
-        private TabPage bodyTabPage;
-        private TabPage responseTabPage;
+        private TabPage requestBodyTabPage;
+        private TabPage responseBodyTabPage;
         private TextBox bodyTextBox;
         private TabPage responseTableTabPage;
         private DataGridView responseDataGridView;
@@ -579,6 +606,8 @@ namespace AadGraphApiHelper
         private ToolStripMenuItem clearExistingfilterQueryToolStripMenuItem;
         private ToolStripMenuItem copyObjectIdToRequestToolStripMenuItem;
         private ToolStripMenuItem copyUserPrincipalNameToRequestToolStripMenuItem;
+        private TabPage requestHeadersTabPage;
+        private DataGridView dataGridView1;
     }
 }
 

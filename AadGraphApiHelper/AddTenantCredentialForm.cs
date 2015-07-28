@@ -45,7 +45,7 @@ namespace AadGraphApiHelper
             this.mainForm.TenantCredentialComboBox.Items.Add(tenantCredential);
             this.mainForm.TenantCredentialComboBox.SelectedItem = tenantCredential;
 
-            if (this.saveCredentialCheckBox.Checked == true)
+            if (this.nativeAppRadioButton.Checked || (this.webAppRadioButton.Checked && this.saveCredentialCheckBox.Checked))
             {
                 this.mainForm.Store.Store(tenantCredential);
             }
@@ -60,24 +60,33 @@ namespace AadGraphApiHelper
 
         private void tenantTextBox_TextChanged(object sender, EventArgs e)
         {
-            this.tenantTextBox.BackColor = String.IsNullOrWhiteSpace(this.tenantTextBox.Text) ? this.errorColor : this.defaultControlColor;
             this.SetAddButtonState();
         }
 
         private void clientIdTextBox_TextChanged(object sender, EventArgs e)
         {
-            this.clientIdTextBox.BackColor = this.IsClientIdValid() ? this.defaultControlColor : this.errorColor;
             this.SetAddButtonState();
         }
 
         private void clientKeyTextBox_TextChanged(object sender, EventArgs e)
         {
-            this.keyOrReplyUrlTextBox.BackColor = this.IsKeyOrReplyUrlValid() ? this.defaultControlColor : this.errorColor;
             this.SetAddButtonState();
         }
 
         private void SetAddButtonState()
         {
+            this.tenantTextBox.BackColor = String.IsNullOrWhiteSpace(this.tenantTextBox.Text) ? this.errorColor : this.defaultControlColor;
+
+            if (!String.IsNullOrEmpty(this.clientIdTextBox.Text))
+            {
+                this.clientIdTextBox.BackColor = this.IsClientIdValid() ? this.defaultControlColor : this.errorColor;
+            }
+
+            if (this.keyOrReplyUrlTextBox.Enabled && !String.IsNullOrEmpty(this.keyOrReplyUrlTextBox.Text))
+            {
+                this.keyOrReplyUrlTextBox.BackColor = this.IsKeyOrReplyUrlValid() ? this.defaultControlColor : this.errorColor;
+            }
+
             if (!String.IsNullOrWhiteSpace(this.tenantTextBox.Text) &&
                 this.IsClientIdValid() &&
                 this.IsKeyOrReplyUrlValid() && 
@@ -95,19 +104,21 @@ namespace AadGraphApiHelper
         {
             this.keyOrReplyUrlLabel.Text = StringResources.ClientKeyLabel;
             this.EnableControls();
+            this.SetAddButtonState();
         }
 
         private void nativeAppRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             this.keyOrReplyUrlLabel.Text = StringResources.ClientReplyUrlLabel;
             this.EnableControls();
+            this.SetAddButtonState();
         }
 
         private void EnableControls()
         {
             this.keyOrReplyUrlLabel.Enabled = true;
             this.keyOrReplyUrlTextBox.Enabled = true;
-            this.saveCredentialCheckBox.Enabled = true;
+            this.saveCredentialCheckBox.Enabled = !this.nativeAppRadioButton.Checked;
         }
 
         private bool IsClientIdValid()
@@ -144,7 +155,8 @@ namespace AadGraphApiHelper
         private bool IsReplyUrlValid()
         {
             Uri uriResult;
-            return Uri.TryCreate(this.keyOrReplyUrlTextBox.Text, UriKind.Absolute, out uriResult) && uriResult.Scheme == Uri.UriSchemeHttp; 
+            return Uri.TryCreate(this.keyOrReplyUrlTextBox.Text, UriKind.Absolute, out uriResult) && uriResult.Scheme == Uri.UriSchemeHttp |
+                   Uri.TryCreate(this.keyOrReplyUrlTextBox.Text, UriKind.Absolute, out uriResult) && uriResult.Scheme == Uri.UriSchemeHttps; 
         }
     }
 }

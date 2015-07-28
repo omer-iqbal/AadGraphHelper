@@ -95,7 +95,7 @@ namespace AadGraphApiHelper
                     return;
                 }
 
-                credentialKey.SetValue(EncryptedKeyKey, tenantCredential.EncryptedKey);
+                credentialKey.SetValue(ApplicationTypeKey, tenantCredential.ApplicationType.ToString());
 
                 if (tenantCredential.ApplicationType == ApplicationType.Native)
                 {
@@ -103,7 +103,7 @@ namespace AadGraphApiHelper
                 }
                 else
                 {
-                    credentialKey.SetValue(ApplicationTypeKey, tenantCredential.ApplicationType.ToString());
+                    credentialKey.SetValue(EncryptedKeyKey, tenantCredential.EncryptedKey);
                 }
             }
         }
