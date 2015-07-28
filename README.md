@@ -7,7 +7,7 @@ compose a search for users, convert it into a filter query string that can be is
 
 To get started:
 
-1. Create an application in Azure Active Directory (https://manage.windowsazure.com).
+1. Create an application in Azure Active Directory (https://manage.windowsazure.com), and give it at least the Directory Read permissions.
 
   a. Create a web application if you want to store the key and authentication to not require manual entry of credentials. Such an application cannot access all properties (e.g. oauth2PermissionGrants), or perform certain operations (e.g. delete a user).
 
