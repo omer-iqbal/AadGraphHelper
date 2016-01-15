@@ -321,7 +321,7 @@ namespace AadGraphApiHelper
             string resourceFirst = null;
             string id = null;
             string resourceSecond = null;
-            string requestUrl = null;
+            string apiVersion = null;
             string body = null;
 
             using (OpenFileDialog dialog = new OpenFileDialog())
@@ -364,20 +364,31 @@ namespace AadGraphApiHelper
                                 case @"ResourceSecond":
                                     resourceSecond = parts[1].Trim();
                                     break;
-                                case @"RequestUrl":
-                                    requestUrl = parts[1].Trim();
+                                case @"ApiVersion":
+                                    apiVersion = parts[1].Trim();
                                     break;
                             }
                         }
                     }
                 }
+                else
+                {
+                    // The user pressed cancel or closed the dialog box, do not do anything, and return.
+                    return;
+                }
             }
 
             this.methodComboBox.SelectedItem = method;
-            this.resourceFirstComboBox.SelectedItem = resourceFirst;
-            this.resourceSecondComboBox.SelectedItem = resourceSecond;
+            this.resourceFirstComboBox.Text = resourceFirst;
             this.idTextBox.Text = id ?? String.Empty;
-            if (requestUrl != null) this.requestUrlTextBox.Text = requestUrl;
+            this.resourceSecondComboBox.Text = resourceSecond;
+
+            if (!String.IsNullOrEmpty(apiVersion))
+            {
+                this.apiVersionComboBox.Text = apiVersion;
+            }
+
+            this.UpdateRequestUrl();
 
             this.bodyTextBox.Text = body;
             this.tabControl.SelectedTab = this.requestBodyTabPage;
@@ -398,10 +409,10 @@ namespace AadGraphApiHelper
                     using (StreamWriter writer = new StreamWriter(dialog.FileName))
                     {
                         writer.WriteLine(@"Method==={0}", this.methodComboBox.Text ?? String.Empty);
-                        writer.WriteLine(@"ResourceFirst==={0}", this.resourceFirstComboBox.SelectedItem ?? String.Empty);
+                        writer.WriteLine(@"ResourceFirst==={0}", this.resourceFirstComboBox.Text ?? String.Empty);
                         writer.WriteLine(@"ID==={0}", this.idTextBox.Text ?? String.Empty);
-                        writer.WriteLine(@"ResourceSecond==={0}", this.resourceSecondComboBox.SelectedItem ?? String.Empty);
-                        writer.WriteLine(@"RequestUrl==={0}", this.requestUrlTextBox.Text ?? String.Empty);
+                        writer.WriteLine(@"ResourceSecond==={0}", this.resourceSecondComboBox.Text ?? String.Empty);
+                        writer.WriteLine(@"ApiVersion==={0}", this.apiVersionComboBox.Text ?? String.Empty);
                         writer.WriteLine(@"===BODY===");
                         writer.WriteLine(this.bodyTextBox.Text);
                     }

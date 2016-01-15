@@ -51,8 +51,6 @@ namespace AadGraphApiHelper
             this.label1 = new System.Windows.Forms.Label();
             this.methodComboBox = new System.Windows.Forms.ComboBox();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.requestHeadersTabPage = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.requestBodyTabPage = new System.Windows.Forms.TabPage();
             this.bodyTextBox = new System.Windows.Forms.TextBox();
             this.responseBodyTabPage = new System.Windows.Forms.TabPage();
@@ -75,8 +73,6 @@ namespace AadGraphApiHelper
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.mainStatusStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl.SuspendLayout();
-            this.requestHeadersTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.requestBodyTabPage.SuspendLayout();
             this.responseBodyTabPage.SuspendLayout();
             this.responseTableTabPage.SuspendLayout();
@@ -91,7 +87,7 @@ namespace AadGraphApiHelper
             this.tenantLabel.AutoSize = true;
             this.tenantLabel.Location = new System.Drawing.Point(404, 31);
             this.tenantLabel.Name = "tenantLabel";
-            this.tenantLabel.Size = new System.Drawing.Size(121, 19);
+            this.tenantLabel.Size = new System.Drawing.Size(120, 19);
             this.tenantLabel.TabIndex = 4;
             this.tenantLabel.Text = "&Tenant/Credential:";
             // 
@@ -124,7 +120,7 @@ namespace AadGraphApiHelper
             this.tokenLabel.AutoSize = true;
             this.tokenLabel.Location = new System.Drawing.Point(13, 67);
             this.tokenLabel.Name = "tokenLabel";
-            this.tokenLabel.Size = new System.Drawing.Size(49, 19);
+            this.tokenLabel.Size = new System.Drawing.Size(48, 19);
             this.tokenLabel.TabIndex = 8;
             this.tokenLabel.Text = "To&ken:";
             // 
@@ -166,7 +162,7 @@ namespace AadGraphApiHelper
             this.responseTextBox.Multiline = true;
             this.responseTextBox.Name = "responseTextBox";
             this.responseTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.responseTextBox.Size = new System.Drawing.Size(1162, 624);
+            this.responseTextBox.Size = new System.Drawing.Size(1162, 620);
             this.responseTextBox.TabIndex = 95;
             // 
             // requestUrlLabel
@@ -211,7 +207,7 @@ namespace AadGraphApiHelper
             this.apiVersionLabel.AutoSize = true;
             this.apiVersionLabel.Location = new System.Drawing.Point(945, 103);
             this.apiVersionLabel.Name = "apiVersionLabel";
-            this.apiVersionLabel.Size = new System.Drawing.Size(82, 19);
+            this.apiVersionLabel.Size = new System.Drawing.Size(81, 19);
             this.apiVersionLabel.TabIndex = 51;
             this.apiVersionLabel.Text = "Api Version:";
             // 
@@ -282,7 +278,6 @@ namespace AadGraphApiHelper
             // 
             // tabControl
             // 
-            this.tabControl.Controls.Add(this.requestHeadersTabPage);
             this.tabControl.Controls.Add(this.requestBodyTabPage);
             this.tabControl.Controls.Add(this.responseBodyTabPage);
             this.tabControl.Controls.Add(this.responseTableTabPage);
@@ -292,26 +287,6 @@ namespace AadGraphApiHelper
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(1170, 650);
             this.tabControl.TabIndex = 90;
-            // 
-            // requestHeadersTabPage
-            // 
-            this.requestHeadersTabPage.Controls.Add(this.dataGridView1);
-            this.requestHeadersTabPage.Location = new System.Drawing.Point(4, 26);
-            this.requestHeadersTabPage.Name = "requestHeadersTabPage";
-            this.requestHeadersTabPage.Size = new System.Drawing.Size(1162, 620);
-            this.requestHeadersTabPage.TabIndex = 3;
-            this.requestHeadersTabPage.Text = "Request Headers";
-            this.requestHeadersTabPage.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1162, 624);
-            this.dataGridView1.TabIndex = 0;
             // 
             // requestBodyTabPage
             // 
@@ -334,7 +309,7 @@ namespace AadGraphApiHelper
             this.bodyTextBox.Multiline = true;
             this.bodyTextBox.Name = "bodyTextBox";
             this.bodyTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.bodyTextBox.Size = new System.Drawing.Size(1162, 624);
+            this.bodyTextBox.Size = new System.Drawing.Size(1162, 620);
             this.bodyTextBox.TabIndex = 91;
             // 
             // responseBodyTabPage
@@ -372,7 +347,7 @@ namespace AadGraphApiHelper
             this.responseDataGridView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.responseDataGridView.Name = "responseDataGridView";
             this.responseDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.responseDataGridView.Size = new System.Drawing.Size(1162, 624);
+            this.responseDataGridView.Size = new System.Drawing.Size(1162, 620);
             this.responseDataGridView.TabIndex = 99;
             // 
             // responseGridContextMenuStrip
@@ -545,8 +520,6 @@ namespace AadGraphApiHelper
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl.ResumeLayout(false);
-            this.requestHeadersTabPage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.requestBodyTabPage.ResumeLayout(false);
             this.requestBodyTabPage.PerformLayout();
             this.responseBodyTabPage.ResumeLayout(false);
@@ -606,8 +579,6 @@ namespace AadGraphApiHelper
         private ToolStripMenuItem clearExistingfilterQueryToolStripMenuItem;
         private ToolStripMenuItem copyObjectIdToRequestToolStripMenuItem;
         private ToolStripMenuItem copyUserPrincipalNameToRequestToolStripMenuItem;
-        private TabPage requestHeadersTabPage;
-        private DataGridView dataGridView1;
     }
 }
 
