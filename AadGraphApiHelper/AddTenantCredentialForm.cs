@@ -131,24 +131,11 @@ namespace AadGraphApiHelper
         {
             if (this.webAppRadioButton.Checked)
             {
-                return this.IsClientKeyValid();
+                return true;
             }
             else
             {
                 return this.IsReplyUrlValid();
-            }
-        }
-
-        private bool IsClientKeyValid()
-        {
-            try
-            {
-                Convert.FromBase64String(this.keyOrReplyUrlTextBox.Text);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
             }
         }
 
