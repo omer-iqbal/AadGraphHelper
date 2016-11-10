@@ -71,6 +71,9 @@ namespace AadGraphApiHelper
                 }
             },
             {
+                Names.OAuth2PermissionGrants, new HashSet<string>()
+            },
+            {
                 Names.ServicePrincipals, new HashSet<string>
                 {
                     Names.AppRoleAssignedTo,

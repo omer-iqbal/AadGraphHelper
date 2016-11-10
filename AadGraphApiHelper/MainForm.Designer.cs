@@ -72,6 +72,10 @@ namespace AadGraphApiHelper
             this.clearExistingfilterQueryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.mainStatusStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl.SuspendLayout();
             this.requestBodyTabPage.SuspendLayout();
             this.responseBodyTabPage.SuspendLayout();
@@ -80,36 +84,44 @@ namespace AadGraphApiHelper
             this.responseGridContextMenuStrip.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tenantLabel
             // 
             this.tenantLabel.AutoSize = true;
-            this.tenantLabel.Location = new System.Drawing.Point(404, 31);
+            this.tenantLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tenantLabel.Location = new System.Drawing.Point(274, 0);
             this.tenantLabel.Name = "tenantLabel";
-            this.tenantLabel.Size = new System.Drawing.Size(120, 19);
+            this.tenantLabel.Size = new System.Drawing.Size(167, 33);
             this.tenantLabel.TabIndex = 4;
             this.tenantLabel.Text = "&Tenant/Credential:";
+            this.tenantLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // TenantCredentialComboBox
             // 
+            this.TenantCredentialComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TenantCredentialComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TenantCredentialComboBox.FormattingEnabled = true;
-            this.TenantCredentialComboBox.Location = new System.Drawing.Point(531, 28);
+            this.TenantCredentialComboBox.Location = new System.Drawing.Point(447, 4);
             this.TenantCredentialComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TenantCredentialComboBox.MaxDropDownItems = 20;
             this.TenantCredentialComboBox.Name = "TenantCredentialComboBox";
-            this.TenantCredentialComboBox.Size = new System.Drawing.Size(435, 25);
+            this.TenantCredentialComboBox.Size = new System.Drawing.Size(350, 25);
             this.TenantCredentialComboBox.TabIndex = 5;
             this.TenantCredentialComboBox.SelectedIndexChanged += new System.EventHandler(this.TenantCredentialComboBox_SelectedIndexChanged);
             // 
             // getAppTokenButton
             // 
+            this.getAppTokenButton.Dock = System.Windows.Forms.DockStyle.Right;
             this.getAppTokenButton.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.getAppTokenButton.Location = new System.Drawing.Point(1031, 27);
+            this.getAppTokenButton.Location = new System.Drawing.Point(839, 4);
             this.getAppTokenButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.getAppTokenButton.Name = "getAppTokenButton";
-            this.getAppTokenButton.Size = new System.Drawing.Size(125, 27);
+            this.getAppTokenButton.Size = new System.Drawing.Size(142, 25);
             this.getAppTokenButton.TabIndex = 7;
             this.getAppTokenButton.Text = "Get &app. token";
             this.getAppTokenButton.UseVisualStyleBackColor = true;
@@ -118,38 +130,44 @@ namespace AadGraphApiHelper
             // tokenLabel
             // 
             this.tokenLabel.AutoSize = true;
-            this.tokenLabel.Location = new System.Drawing.Point(13, 67);
+            this.tokenLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tokenLabel.Location = new System.Drawing.Point(3, 0);
             this.tokenLabel.Name = "tokenLabel";
-            this.tokenLabel.Size = new System.Drawing.Size(48, 19);
+            this.tokenLabel.Size = new System.Drawing.Size(94, 33);
             this.tokenLabel.TabIndex = 8;
             this.tokenLabel.Text = "To&ken:";
+            this.tokenLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tokenTextBox
             // 
+            this.tokenTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tokenTextBox.Font = new System.Drawing.Font("Consolas", 11F);
-            this.tokenTextBox.Location = new System.Drawing.Point(68, 64);
+            this.tokenTextBox.Location = new System.Drawing.Point(103, 4);
             this.tokenTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tokenTextBox.Name = "tokenTextBox";
-            this.tokenTextBox.Size = new System.Drawing.Size(1089, 25);
+            this.tokenTextBox.Size = new System.Drawing.Size(878, 25);
             this.tokenTextBox.TabIndex = 9;
             // 
             // environmentLabel
             // 
             this.environmentLabel.AutoSize = true;
-            this.environmentLabel.Location = new System.Drawing.Point(14, 31);
+            this.environmentLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.environmentLabel.Location = new System.Drawing.Point(3, 0);
             this.environmentLabel.Name = "environmentLabel";
-            this.environmentLabel.Size = new System.Drawing.Size(90, 19);
+            this.environmentLabel.Size = new System.Drawing.Size(129, 33);
             this.environmentLabel.TabIndex = 1;
             this.environmentLabel.Text = "&Environment:";
+            this.environmentLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // EnvironmentComboBox
             // 
+            this.EnvironmentComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.EnvironmentComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.EnvironmentComboBox.FormattingEnabled = true;
-            this.EnvironmentComboBox.Location = new System.Drawing.Point(109, 28);
+            this.EnvironmentComboBox.Location = new System.Drawing.Point(138, 4);
             this.EnvironmentComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.EnvironmentComboBox.Name = "EnvironmentComboBox";
-            this.EnvironmentComboBox.Size = new System.Drawing.Size(256, 25);
+            this.EnvironmentComboBox.Size = new System.Drawing.Size(130, 25);
             this.EnvironmentComboBox.TabIndex = 2;
             this.EnvironmentComboBox.SelectedIndexChanged += new System.EventHandler(this.environmentComboBox_SelectedIndexChanged);
             // 
@@ -168,66 +186,76 @@ namespace AadGraphApiHelper
             // requestUrlLabel
             // 
             this.requestUrlLabel.AutoSize = true;
-            this.requestUrlLabel.Location = new System.Drawing.Point(14, 139);
+            this.requestUrlLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.requestUrlLabel.Location = new System.Drawing.Point(3, 0);
             this.requestUrlLabel.Name = "requestUrlLabel";
-            this.requestUrlLabel.Size = new System.Drawing.Size(90, 19);
+            this.requestUrlLabel.Size = new System.Drawing.Size(92, 33);
             this.requestUrlLabel.TabIndex = 61;
             this.requestUrlLabel.Text = "Request &URL:";
+            this.requestUrlLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // requestUrlTextBox
             // 
+            this.requestUrlTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.requestUrlTextBox.Font = new System.Drawing.Font("Consolas", 11F);
-            this.requestUrlTextBox.Location = new System.Drawing.Point(120, 136);
+            this.requestUrlTextBox.Location = new System.Drawing.Point(101, 4);
             this.requestUrlTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.requestUrlTextBox.Name = "requestUrlTextBox";
-            this.requestUrlTextBox.Size = new System.Drawing.Size(933, 25);
+            this.requestUrlTextBox.Size = new System.Drawing.Size(781, 25);
             this.requestUrlTextBox.TabIndex = 62;
             // 
             // resourceFirstComboBox
             // 
+            this.resourceFirstComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.resourceFirstComboBox.FormattingEnabled = true;
-            this.resourceFirstComboBox.Location = new System.Drawing.Point(303, 100);
+            this.resourceFirstComboBox.Location = new System.Drawing.Point(297, 4);
             this.resourceFirstComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.resourceFirstComboBox.Name = "resourceFirstComboBox";
-            this.resourceFirstComboBox.Size = new System.Drawing.Size(144, 25);
+            this.resourceFirstComboBox.Size = new System.Drawing.Size(141, 25);
             this.resourceFirstComboBox.TabIndex = 32;
             this.resourceFirstComboBox.TextChanged += new System.EventHandler(this.resourceFirstComboBox_TextChanged);
             // 
             // entitySetLabel
             // 
             this.entitySetLabel.AutoSize = true;
-            this.entitySetLabel.Location = new System.Drawing.Point(207, 103);
+            this.entitySetLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.entitySetLabel.Location = new System.Drawing.Point(199, 0);
             this.entitySetLabel.Name = "entitySetLabel";
-            this.entitySetLabel.Size = new System.Drawing.Size(81, 19);
+            this.entitySetLabel.Size = new System.Drawing.Size(92, 33);
             this.entitySetLabel.TabIndex = 31;
             this.entitySetLabel.Text = "&Entity/Func:";
+            this.entitySetLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // apiVersionLabel
             // 
             this.apiVersionLabel.AutoSize = true;
-            this.apiVersionLabel.Location = new System.Drawing.Point(945, 103);
+            this.apiVersionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.apiVersionLabel.Location = new System.Drawing.Point(788, 0);
             this.apiVersionLabel.Name = "apiVersionLabel";
-            this.apiVersionLabel.Size = new System.Drawing.Size(81, 19);
+            this.apiVersionLabel.Size = new System.Drawing.Size(92, 33);
             this.apiVersionLabel.TabIndex = 51;
             this.apiVersionLabel.Text = "Api Version:";
+            this.apiVersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // apiVersionComboBox
             // 
+            this.apiVersionComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.apiVersionComboBox.FormattingEnabled = true;
-            this.apiVersionComboBox.Location = new System.Drawing.Point(1042, 100);
+            this.apiVersionComboBox.Location = new System.Drawing.Point(886, 4);
             this.apiVersionComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.apiVersionComboBox.Name = "apiVersionComboBox";
-            this.apiVersionComboBox.Size = new System.Drawing.Size(114, 25);
+            this.apiVersionComboBox.Size = new System.Drawing.Size(95, 25);
             this.apiVersionComboBox.Sorted = true;
             this.apiVersionComboBox.TabIndex = 52;
             this.apiVersionComboBox.TextChanged += new System.EventHandler(this.apiVersionComboBox_TextChanged);
             // 
             // executeButton
             // 
-            this.executeButton.Location = new System.Drawing.Point(1069, 135);
+            this.executeButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.executeButton.Location = new System.Drawing.Point(888, 4);
             this.executeButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.executeButton.Name = "executeButton";
-            this.executeButton.Size = new System.Drawing.Size(87, 27);
+            this.executeButton.Size = new System.Drawing.Size(93, 25);
             this.executeButton.TabIndex = 81;
             this.executeButton.Text = "E&xecute";
             this.executeButton.UseVisualStyleBackColor = true;
@@ -236,42 +264,48 @@ namespace AadGraphApiHelper
             // idLabel
             // 
             this.idLabel.AutoSize = true;
-            this.idLabel.Location = new System.Drawing.Point(464, 103);
+            this.idLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.idLabel.Location = new System.Drawing.Point(444, 0);
             this.idLabel.Name = "idLabel";
-            this.idLabel.Size = new System.Drawing.Size(26, 19);
+            this.idLabel.Size = new System.Drawing.Size(53, 33);
             this.idLabel.TabIndex = 41;
             this.idLabel.Text = "&ID:";
+            this.idLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // idTextBox
             // 
-            this.idTextBox.Location = new System.Drawing.Point(505, 100);
+            this.idTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.idTextBox.Location = new System.Drawing.Point(503, 4);
             this.idTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.idTextBox.Name = "idTextBox";
-            this.idTextBox.Size = new System.Drawing.Size(238, 25);
+            this.idTextBox.Size = new System.Drawing.Size(161, 25);
             this.idTextBox.TabIndex = 42;
             this.idTextBox.TextChanged += new System.EventHandler(this.idTextBox_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 103);
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 19);
+            this.label1.Size = new System.Drawing.Size(92, 33);
             this.label1.TabIndex = 21;
             this.label1.Text = "&Method:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // methodComboBox
             // 
+            this.methodComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.methodComboBox.FormattingEnabled = true;
             this.methodComboBox.Items.AddRange(new object[] {
             "DELETE",
             "GET",
             "PATCH",
             "POST"});
-            this.methodComboBox.Location = new System.Drawing.Point(89, 100);
+            this.methodComboBox.Location = new System.Drawing.Point(101, 4);
             this.methodComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.methodComboBox.Name = "methodComboBox";
-            this.methodComboBox.Size = new System.Drawing.Size(99, 25);
+            this.methodComboBox.Size = new System.Drawing.Size(92, 25);
             this.methodComboBox.Sorted = true;
             this.methodComboBox.TabIndex = 22;
             this.methodComboBox.SelectedIndexChanged += new System.EventHandler(this.methodComboBox_SelectedIndexChanged);
@@ -281,11 +315,12 @@ namespace AadGraphApiHelper
             this.tabControl.Controls.Add(this.requestBodyTabPage);
             this.tabControl.Controls.Add(this.responseBodyTabPage);
             this.tabControl.Controls.Add(this.responseTableTabPage);
-            this.tabControl.Location = new System.Drawing.Point(2, 179);
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.Location = new System.Drawing.Point(0, 156);
             this.tabControl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1170, 650);
+            this.tabControl.Size = new System.Drawing.Size(984, 433);
             this.tabControl.TabIndex = 90;
             // 
             // requestBodyTabPage
@@ -295,7 +330,7 @@ namespace AadGraphApiHelper
             this.requestBodyTabPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.requestBodyTabPage.Name = "requestBodyTabPage";
             this.requestBodyTabPage.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.requestBodyTabPage.Size = new System.Drawing.Size(1162, 620);
+            this.requestBodyTabPage.Size = new System.Drawing.Size(976, 403);
             this.requestBodyTabPage.TabIndex = 0;
             this.requestBodyTabPage.Text = "Request Body";
             this.requestBodyTabPage.UseVisualStyleBackColor = true;
@@ -303,13 +338,14 @@ namespace AadGraphApiHelper
             // bodyTextBox
             // 
             this.bodyTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.bodyTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bodyTextBox.Font = new System.Drawing.Font("Consolas", 11F);
-            this.bodyTextBox.Location = new System.Drawing.Point(0, 0);
+            this.bodyTextBox.Location = new System.Drawing.Point(3, 4);
             this.bodyTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bodyTextBox.Multiline = true;
             this.bodyTextBox.Name = "bodyTextBox";
             this.bodyTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.bodyTextBox.Size = new System.Drawing.Size(1162, 620);
+            this.bodyTextBox.Size = new System.Drawing.Size(970, 395);
             this.bodyTextBox.TabIndex = 91;
             // 
             // responseBodyTabPage
@@ -319,7 +355,7 @@ namespace AadGraphApiHelper
             this.responseBodyTabPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.responseBodyTabPage.Name = "responseBodyTabPage";
             this.responseBodyTabPage.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.responseBodyTabPage.Size = new System.Drawing.Size(1162, 620);
+            this.responseBodyTabPage.Size = new System.Drawing.Size(976, 403);
             this.responseBodyTabPage.TabIndex = 1;
             this.responseBodyTabPage.Text = "Response Body";
             this.responseBodyTabPage.UseVisualStyleBackColor = true;
@@ -330,7 +366,7 @@ namespace AadGraphApiHelper
             this.responseTableTabPage.Location = new System.Drawing.Point(4, 26);
             this.responseTableTabPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.responseTableTabPage.Name = "responseTableTabPage";
-            this.responseTableTabPage.Size = new System.Drawing.Size(1162, 620);
+            this.responseTableTabPage.Size = new System.Drawing.Size(976, 403);
             this.responseTableTabPage.TabIndex = 2;
             this.responseTableTabPage.Text = "Response Table";
             this.responseTableTabPage.UseVisualStyleBackColor = true;
@@ -383,10 +419,11 @@ namespace AadGraphApiHelper
             // 
             // resourceSecondComboBox
             // 
+            this.resourceSecondComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.resourceSecondComboBox.FormattingEnabled = true;
-            this.resourceSecondComboBox.Location = new System.Drawing.Point(760, 100);
+            this.resourceSecondComboBox.Location = new System.Drawing.Point(670, 3);
             this.resourceSecondComboBox.Name = "resourceSecondComboBox";
-            this.resourceSecondComboBox.Size = new System.Drawing.Size(166, 25);
+            this.resourceSecondComboBox.Size = new System.Drawing.Size(112, 25);
             this.resourceSecondComboBox.Sorted = true;
             this.resourceSecondComboBox.TabIndex = 45;
             this.resourceSecondComboBox.TextChanged += new System.EventHandler(this.resourceSecondComboBox_TextChanged);
@@ -399,7 +436,7 @@ namespace AadGraphApiHelper
             this.mainMenuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
-            this.mainMenuStrip.Size = new System.Drawing.Size(1174, 24);
+            this.mainMenuStrip.Size = new System.Drawing.Size(984, 24);
             this.mainMenuStrip.TabIndex = 0;
             // 
             // fileToolStripMenuItem
@@ -470,9 +507,9 @@ namespace AadGraphApiHelper
             // 
             this.mainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mainStatusStripStatusLabel});
-            this.mainStatusStrip.Location = new System.Drawing.Point(0, 831);
+            this.mainStatusStrip.Location = new System.Drawing.Point(0, 589);
             this.mainStatusStrip.Name = "mainStatusStrip";
-            this.mainStatusStrip.Size = new System.Drawing.Size(1174, 22);
+            this.mainStatusStrip.Size = new System.Drawing.Size(984, 22);
             this.mainStatusStrip.TabIndex = 93;
             // 
             // mainStatusStripStatusLabel
@@ -481,41 +518,106 @@ namespace AadGraphApiHelper
             this.mainStatusStripStatusLabel.Size = new System.Drawing.Size(60, 17);
             this.mainStatusStripStatusLabel.Text = "Welcome!";
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.7931F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.82114F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.5813F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.17886F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.49594F));
+            this.tableLayoutPanel1.Controls.Add(this.environmentLabel, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.EnvironmentComboBox, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tenantLabel, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.TenantCredentialComboBox, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.getAppTokenButton, 4, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(984, 33);
+            this.tableLayoutPanel1.TabIndex = 92;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.22147F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 89.77853F));
+            this.tableLayoutPanel2.Controls.Add(this.tokenLabel, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tokenTextBox, 1, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 57);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(984, 33);
+            this.tableLayoutPanel2.TabIndex = 92;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 9;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.methodComboBox, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.entitySetLabel, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.resourceFirstComboBox, 3, 0);
+            this.tableLayoutPanel3.Controls.Add(this.apiVersionComboBox, 8, 0);
+            this.tableLayoutPanel3.Controls.Add(this.idLabel, 4, 0);
+            this.tableLayoutPanel3.Controls.Add(this.resourceSecondComboBox, 6, 0);
+            this.tableLayoutPanel3.Controls.Add(this.idTextBox, 5, 0);
+            this.tableLayoutPanel3.Controls.Add(this.apiVersionLabel, 7, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 90);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(984, 33);
+            this.tableLayoutPanel3.TabIndex = 92;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 3;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel4.Controls.Add(this.requestUrlLabel, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.requestUrlTextBox, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.executeButton, 2, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 123);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(984, 33);
+            this.tableLayoutPanel4.TabIndex = 92;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1174, 853);
-            this.Controls.Add(this.requestUrlTextBox);
-            this.Controls.Add(this.apiVersionComboBox);
-            this.Controls.Add(this.resourceSecondComboBox);
-            this.Controls.Add(this.idTextBox);
-            this.Controls.Add(this.resourceFirstComboBox);
-            this.Controls.Add(this.methodComboBox);
-            this.Controls.Add(this.mainStatusStrip);
-            this.Controls.Add(this.executeButton);
+            this.ClientSize = new System.Drawing.Size(984, 611);
             this.Controls.Add(this.tabControl);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.idLabel);
-            this.Controls.Add(this.apiVersionLabel);
-            this.Controls.Add(this.entitySetLabel);
-            this.Controls.Add(this.requestUrlLabel);
-            this.Controls.Add(this.EnvironmentComboBox);
-            this.Controls.Add(this.environmentLabel);
-            this.Controls.Add(this.tokenTextBox);
-            this.Controls.Add(this.tokenLabel);
-            this.Controls.Add(this.getAppTokenButton);
-            this.Controls.Add(this.TenantCredentialComboBox);
-            this.Controls.Add(this.tenantLabel);
+            this.Controls.Add(this.tableLayoutPanel4);
+            this.Controls.Add(this.tableLayoutPanel3);
+            this.Controls.Add(this.tableLayoutPanel2);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.mainStatusStrip);
             this.Controls.Add(this.mainMenuStrip);
             this.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.mainMenuStrip;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "MainForm";
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Aad Graph API Buddy";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -531,6 +633,14 @@ namespace AadGraphApiHelper
             this.mainMenuStrip.PerformLayout();
             this.mainStatusStrip.ResumeLayout(false);
             this.mainStatusStrip.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -579,6 +689,10 @@ namespace AadGraphApiHelper
         private ToolStripMenuItem clearExistingfilterQueryToolStripMenuItem;
         private ToolStripMenuItem copyObjectIdToRequestToolStripMenuItem;
         private ToolStripMenuItem copyUserPrincipalNameToRequestToolStripMenuItem;
+        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tableLayoutPanel2;
+        private TableLayoutPanel tableLayoutPanel3;
+        private TableLayoutPanel tableLayoutPanel4;
     }
 }
 
