@@ -76,6 +76,7 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.copyIdToRequestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.requestBodyTabPage.SuspendLayout();
             this.responseBodyTabPage.SuspendLayout();
@@ -94,9 +95,9 @@ namespace AadGraphApiHelper
             // 
             this.tenantLabel.AutoSize = true;
             this.tenantLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tenantLabel.Location = new System.Drawing.Point(273, 0);
+            this.tenantLabel.Location = new System.Drawing.Point(275, 0);
             this.tenantLabel.Name = "tenantLabel";
-            this.tenantLabel.Size = new System.Drawing.Size(164, 33);
+            this.tenantLabel.Size = new System.Drawing.Size(156, 33);
             this.tenantLabel.TabIndex = 4;
             this.tenantLabel.Text = "&Tenant/Credential:";
             this.tenantLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -106,11 +107,11 @@ namespace AadGraphApiHelper
             this.TenantCredentialComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TenantCredentialComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TenantCredentialComboBox.FormattingEnabled = true;
-            this.TenantCredentialComboBox.Location = new System.Drawing.Point(443, 4);
+            this.TenantCredentialComboBox.Location = new System.Drawing.Point(437, 4);
             this.TenantCredentialComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TenantCredentialComboBox.MaxDropDownItems = 20;
             this.TenantCredentialComboBox.Name = "TenantCredentialComboBox";
-            this.TenantCredentialComboBox.Size = new System.Drawing.Size(387, 25);
+            this.TenantCredentialComboBox.Size = new System.Drawing.Size(392, 25);
             this.TenantCredentialComboBox.TabIndex = 5;
             this.TenantCredentialComboBox.SelectedIndexChanged += new System.EventHandler(this.TenantCredentialComboBox_SelectedIndexChanged);
             // 
@@ -167,20 +168,21 @@ namespace AadGraphApiHelper
             this.EnvironmentComboBox.Location = new System.Drawing.Point(123, 4);
             this.EnvironmentComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.EnvironmentComboBox.Name = "EnvironmentComboBox";
-            this.EnvironmentComboBox.Size = new System.Drawing.Size(144, 25);
+            this.EnvironmentComboBox.Size = new System.Drawing.Size(146, 25);
             this.EnvironmentComboBox.TabIndex = 3;
             this.EnvironmentComboBox.SelectedIndexChanged += new System.EventHandler(this.environmentComboBox_SelectedIndexChanged);
             // 
             // responseTextBox
             // 
             this.responseTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.responseTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.responseTextBox.Font = new System.Drawing.Font("Consolas", 11F);
-            this.responseTextBox.Location = new System.Drawing.Point(0, 0);
+            this.responseTextBox.Location = new System.Drawing.Point(3, 4);
             this.responseTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.responseTextBox.Multiline = true;
             this.responseTextBox.Name = "responseTextBox";
             this.responseTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.responseTextBox.Size = new System.Drawing.Size(1162, 620);
+            this.responseTextBox.Size = new System.Drawing.Size(970, 395);
             this.responseTextBox.TabIndex = 95;
             // 
             // requestUrlLabel
@@ -208,10 +210,10 @@ namespace AadGraphApiHelper
             // 
             this.resourceFirstComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.resourceFirstComboBox.FormattingEnabled = true;
-            this.resourceFirstComboBox.Location = new System.Drawing.Point(328, 4);
+            this.resourceFirstComboBox.Location = new System.Drawing.Point(324, 4);
             this.resourceFirstComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.resourceFirstComboBox.Name = "resourceFirstComboBox";
-            this.resourceFirstComboBox.Size = new System.Drawing.Size(121, 25);
+            this.resourceFirstComboBox.Size = new System.Drawing.Size(130, 25);
             this.resourceFirstComboBox.TabIndex = 14;
             this.resourceFirstComboBox.TextChanged += new System.EventHandler(this.resourceFirstComboBox_TextChanged);
             // 
@@ -219,9 +221,9 @@ namespace AadGraphApiHelper
             // 
             this.entitySetLabel.AutoSize = true;
             this.entitySetLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.entitySetLabel.Location = new System.Drawing.Point(208, 0);
+            this.entitySetLabel.Location = new System.Drawing.Point(214, 0);
             this.entitySetLabel.Name = "entitySetLabel";
-            this.entitySetLabel.Size = new System.Drawing.Size(114, 33);
+            this.entitySetLabel.Size = new System.Drawing.Size(104, 33);
             this.entitySetLabel.TabIndex = 13;
             this.entitySetLabel.Text = "&Entity/Func:";
             this.entitySetLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -230,9 +232,9 @@ namespace AadGraphApiHelper
             // 
             this.apiVersionLabel.AutoSize = true;
             this.apiVersionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.apiVersionLabel.Location = new System.Drawing.Point(781, 0);
+            this.apiVersionLabel.Location = new System.Drawing.Point(784, 0);
             this.apiVersionLabel.Name = "apiVersionLabel";
-            this.apiVersionLabel.Size = new System.Drawing.Size(114, 33);
+            this.apiVersionLabel.Size = new System.Drawing.Size(104, 33);
             this.apiVersionLabel.TabIndex = 18;
             this.apiVersionLabel.Text = "Api Version:";
             this.apiVersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -241,10 +243,10 @@ namespace AadGraphApiHelper
             // 
             this.apiVersionComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.apiVersionComboBox.FormattingEnabled = true;
-            this.apiVersionComboBox.Location = new System.Drawing.Point(901, 4);
+            this.apiVersionComboBox.Location = new System.Drawing.Point(894, 4);
             this.apiVersionComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.apiVersionComboBox.Name = "apiVersionComboBox";
-            this.apiVersionComboBox.Size = new System.Drawing.Size(80, 25);
+            this.apiVersionComboBox.Size = new System.Drawing.Size(87, 25);
             this.apiVersionComboBox.Sorted = true;
             this.apiVersionComboBox.TabIndex = 19;
             this.apiVersionComboBox.TextChanged += new System.EventHandler(this.apiVersionComboBox_TextChanged);
@@ -265,9 +267,9 @@ namespace AadGraphApiHelper
             // 
             this.idLabel.AutoSize = true;
             this.idLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.idLabel.Location = new System.Drawing.Point(455, 0);
+            this.idLabel.Location = new System.Drawing.Point(460, 0);
             this.idLabel.Name = "idLabel";
-            this.idLabel.Size = new System.Drawing.Size(74, 33);
+            this.idLabel.Size = new System.Drawing.Size(54, 33);
             this.idLabel.TabIndex = 15;
             this.idLabel.Text = "&ID:";
             this.idLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -275,10 +277,10 @@ namespace AadGraphApiHelper
             // idTextBox
             // 
             this.idTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.idTextBox.Location = new System.Drawing.Point(535, 4);
+            this.idTextBox.Location = new System.Drawing.Point(520, 4);
             this.idTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.idTextBox.Name = "idTextBox";
-            this.idTextBox.Size = new System.Drawing.Size(138, 25);
+            this.idTextBox.Size = new System.Drawing.Size(149, 25);
             this.idTextBox.TabIndex = 16;
             this.idTextBox.TextChanged += new System.EventHandler(this.idTextBox_TextChanged);
             // 
@@ -305,7 +307,7 @@ namespace AadGraphApiHelper
             this.methodComboBox.Location = new System.Drawing.Point(123, 4);
             this.methodComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.methodComboBox.Name = "methodComboBox";
-            this.methodComboBox.Size = new System.Drawing.Size(79, 25);
+            this.methodComboBox.Size = new System.Drawing.Size(85, 25);
             this.methodComboBox.Sorted = true;
             this.methodComboBox.TabIndex = 12;
             this.methodComboBox.SelectedIndexChanged += new System.EventHandler(this.methodComboBox_SelectedIndexChanged);
@@ -379,21 +381,23 @@ namespace AadGraphApiHelper
             this.responseDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.responseDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.responseDataGridView.ContextMenuStrip = this.responseGridContextMenuStrip;
+            this.responseDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.responseDataGridView.Location = new System.Drawing.Point(0, 0);
             this.responseDataGridView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.responseDataGridView.Name = "responseDataGridView";
             this.responseDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.responseDataGridView.Size = new System.Drawing.Size(1162, 620);
+            this.responseDataGridView.Size = new System.Drawing.Size(976, 403);
             this.responseDataGridView.TabIndex = 99;
             // 
             // responseGridContextMenuStrip
             // 
             this.responseGridContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyCellValueToClipboardToolStripMenuItem,
+            this.copyIdToRequestToolStripMenuItem,
             this.copyObjectIdToRequestToolStripMenuItem,
             this.copyUserPrincipalNameToRequestToolStripMenuItem});
             this.responseGridContextMenuStrip.Name = "responseGridContextMenuStrip";
-            this.responseGridContextMenuStrip.Size = new System.Drawing.Size(262, 70);
+            this.responseGridContextMenuStrip.Size = new System.Drawing.Size(262, 92);
             this.responseGridContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.responseGridContextMenuStrip_Opening);
             // 
             // copyCellValueToClipboardToolStripMenuItem
@@ -421,9 +425,10 @@ namespace AadGraphApiHelper
             // 
             this.resourceSecondComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.resourceSecondComboBox.FormattingEnabled = true;
-            this.resourceSecondComboBox.Location = new System.Drawing.Point(679, 3);
+            this.resourceSecondComboBox.Location = new System.Drawing.Point(675, 4);
+            this.resourceSecondComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.resourceSecondComboBox.Name = "resourceSecondComboBox";
-            this.resourceSecondComboBox.Size = new System.Drawing.Size(96, 25);
+            this.resourceSecondComboBox.Size = new System.Drawing.Size(103, 25);
             this.resourceSecondComboBox.Sorted = true;
             this.resourceSecondComboBox.TabIndex = 17;
             this.resourceSecondComboBox.TextChanged += new System.EventHandler(this.resourceSecondComboBox_TextChanged);
@@ -523,9 +528,9 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.64228F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 162F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.35772F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 151F));
             this.tableLayoutPanel1.Controls.Add(this.environmentLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.EnvironmentComboBox, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.tenantLabel, 2, 0);
@@ -559,12 +564,12 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel3.ColumnCount = 9;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.625F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.4375F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.5625F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.75F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.625F));
             this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.methodComboBox, 1, 0);
@@ -599,6 +604,13 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(984, 33);
             this.tableLayoutPanel4.TabIndex = 20;
+            // 
+            // copyIdToRequestToolStripMenuItem
+            // 
+            this.copyIdToRequestToolStripMenuItem.Name = "copyIdToRequestToolStripMenuItem";
+            this.copyIdToRequestToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
+            this.copyIdToRequestToolStripMenuItem.Text = "Copy &Id to request";
+            this.copyIdToRequestToolStripMenuItem.Click += new System.EventHandler(this.copyIdToRequestToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -692,6 +704,7 @@ namespace AadGraphApiHelper
         private TableLayoutPanel tableLayoutPanel2;
         private TableLayoutPanel tableLayoutPanel3;
         private TableLayoutPanel tableLayoutPanel4;
+        private ToolStripMenuItem copyIdToRequestToolStripMenuItem;
     }
 }
 

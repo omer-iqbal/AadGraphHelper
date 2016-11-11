@@ -13,6 +13,12 @@ namespace AadGraphApiHelper
 
         private const string ODataErrorKey = @"odata.error";
 
+        private const string ODataContextKey = @"@odata.context";
+
+        private const string EntityKey = @"$entity";
+
+        //private const string MetadataKey = @"$metadata#";
+
         private const string ODataMetadataElementKey = @"@Element";
 
         private const string ODataTypeKey = @"odata.type";
@@ -57,14 +63,14 @@ namespace AadGraphApiHelper
                 return;
             }
 
-            if (this.deserializedObject.ContainsKey(ODataErrorKey) || 
-                !this.deserializedObject.ContainsKey(ODataMetadataKey))
+            if (this.deserializedObject.ContainsKey(ODataMetadataKey) ||
+                this.deserializedObject.ContainsKey(ODataContextKey))
             {
-                this.IsFormattable = false;
+                this.IsFormattable = true;
                 return;
             }
 
-            this.IsFormattable = true;
+            this.IsFormattable = false;
         }
 
         public void Clear()
@@ -84,14 +90,21 @@ namespace AadGraphApiHelper
                 return;
             }
 
-            string odataMetadata = this.deserializedObject[ODataMetadataKey] as string;
-
-            if (String.IsNullOrWhiteSpace(odataMetadata))
+            object contextOrMetadataObject;
+            if (!this.deserializedObject.TryGetValue(ODataContextKey, out contextOrMetadataObject) &&
+                !this.deserializedObject.TryGetValue(ODataMetadataKey, out contextOrMetadataObject))
             {
                 return;
             }
 
-            if (odataMetadata.Contains(ODataMetadataElementKey))
+            string contextOrMetadata = contextOrMetadataObject as string;
+
+            if (String.IsNullOrWhiteSpace(contextOrMetadata))
+            {
+                return;
+            }
+
+            if (contextOrMetadata.Contains(ODataMetadataElementKey) || contextOrMetadata.Contains(EntityKey))
             {
                 this.FormatAsObject();
             }

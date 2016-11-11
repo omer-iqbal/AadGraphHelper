@@ -54,8 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AadEnvironment.cs" />
+    <Compile Include="MSGraphApiUrlFormatter.cs" />
     <Compile Include="ApplicationType.cs" />
     <Compile Include="GraphApiEntityType.cs" />
+    <Compile Include="AadGraphApiUrlFormatter.cs" />
+    <Compile Include="IGraphApiUrlFormatter.cs" />
     <Compile Include="GraphApiUrlFilterComponent.cs" />
     <Compile Include="GraphApiProperty.cs" />
     <Compile Include="Names.cs" />
@@ -68,12 +71,6 @@
     <Compile Include="TenantCredentialSet.cs" />
     <Compile Include="AadEnvironmentSet.cs">
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="AddEnvironmentForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddEnvironmentForm.Designer.cs">
-      <DependentUpon>AddEnvironmentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AddTenantCredentialForm.cs">
       <SubType>Form</SubType>
@@ -104,9 +101,6 @@
     </Compile>
     <Compile Include="Token.cs" />
     <Compile Include="TenantCredential.cs" />
-    <EmbeddedResource Include="AddEnvironmentForm.resx">
-      <DependentUpon>AddEnvironmentForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AddTenantCredentialForm.resx">
       <DependentUpon>AddTenantCredentialForm.cs</DependentUpon>
     </EmbeddedResource>

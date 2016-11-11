@@ -42,46 +42,47 @@ namespace AadGraphApiHelper
 
         public AadEnvironmentSet GetAadEnvironments()
         {
-            AadEnvironmentSet environments = new AadEnvironmentSet();
+            return new AadEnvironmentSet();
 
-            using (RegistryKey environmentsRootKey = Registry.CurrentUser.CreateSubKey(EnvironmentsRoot))
-            {
-                if (environmentsRootKey == null)
-                {
-                    return environments;
-                }
+            //using (RegistryKey environmentsRootKey = Registry.CurrentUser.CreateSubKey(EnvironmentsRoot))
+            //{
+            //    if (environmentsRootKey == null)
+            //    {
+            //        return environments;
+            //    }
 
-                foreach (string environmentName in environmentsRootKey.GetSubKeyNames())
-                {
-                    if (environmentName.Equals(AadEnvironment.Production.DisplayName, StringComparison.OrdinalIgnoreCase) ||
-                        environmentName.Equals(AadEnvironment.PreProduction.DisplayName, StringComparison.OrdinalIgnoreCase))
-                    {
-                        // These keys are created to store tenants/credentials, but we do not add them since they have
-                        // been added already. Their endpoints are not read from the registry.
-                        continue;
-                    }
+            //    foreach (string environmentName in environmentsRootKey.GetSubKeyNames())
+            //    {
+            //        if (environmentName.Equals(AadEnvironment.MSGraphProduction.RegistryName, StringComparison.OrdinalIgnoreCase) ||
+            //            environmentName.Equals(AadEnvironment.AadGraphProduction.RegistryName, StringComparison.OrdinalIgnoreCase) ||
+            //            environmentName.Equals(AadEnvironment.AadGraphPreProduction.RegistryName, StringComparison.OrdinalIgnoreCase))
+            //        {
+            //            // These keys are created to store tenants/credentials, but we do not add them since they have
+            //            // been added already. Their endpoints are not read from the registry.
+            //            continue;
+            //        }
 
-                    using (RegistryKey environmentKey = environmentsRootKey.OpenSubKey(environmentName))
-                    {
-                        if (environmentKey == null)
-                        {
-                            continue;
-                        }
+            //        using (RegistryKey environmentKey = environmentsRootKey.OpenSubKey(environmentName))
+            //        {
+            //            if (environmentKey == null)
+            //            {
+            //                continue;
+            //            }
 
-                        string loginEndpoint = environmentKey.GetValue(LoginEndpointKey) as string;
-                        string graphApiEndpoint = environmentKey.GetValue(GraphApiEndpointKey) as string;
+            //            string loginEndpoint = environmentKey.GetValue(LoginEndpointKey) as string;
+            //            string graphApiEndpoint = environmentKey.GetValue(GraphApiEndpointKey) as string;
 
-                        if (String.IsNullOrWhiteSpace(loginEndpoint) || String.IsNullOrWhiteSpace(graphApiEndpoint))
-                        {
-                            continue;
-                        }
+            //            if (String.IsNullOrWhiteSpace(loginEndpoint) || String.IsNullOrWhiteSpace(graphApiEndpoint))
+            //            {
+            //                continue;
+            //            }
 
-                        environments.Add(new AadEnvironment(environmentName, loginEndpoint.Trim(), graphApiEndpoint.Trim()));
-                    }
-                }
-            }
+            //            environments.Add(new AadEnvironment(environmentName, loginEndpoint.Trim(), graphApiEndpoint.Trim()));
+            //        }
+            //    }
+            //}
 
-            return environments;
+            //return environments;
         }
 
         public void Store(TenantCredential tenantCredential)
@@ -275,7 +276,7 @@ namespace AadGraphApiHelper
 
         private static string GetEnvironmentPath(AadEnvironment environment)
         {
-            return EnvironmentsRoot + '\\' + environment.DisplayName;
+            return EnvironmentsRoot + '\\' + environment.RegistryName;
         }
 
         private static string GetTenantPath(AadEnvironment environment, string tenant)

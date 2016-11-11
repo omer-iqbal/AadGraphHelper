@@ -43,11 +43,6 @@ namespace AadGraphApiHelper
             string lastSelectedEnvironmentName = this.Store.GetPreference<string>(LastSelectedEnvironmentNameKey);
             string lastSelectedTenantCredential = this.Store.GetPreference<string>(LastSelectedTenantCredentialKey);
             this.PopulateEnvironments(this.Store.GetAadEnvironments(), lastSelectedEnvironmentName, lastSelectedTenantCredential);
-            this.apiVersionComboBox.Items.Clear();
-            foreach (string apiVersion in this.Store.GetApiVersions())
-            {
-                this.apiVersionComboBox.Items.Add(apiVersion);
-            }
 
             this.resourceFirstComboBox.Items.Clear();
             foreach (string resourceFirst in GraphApiEntityType.NavigationProperties.Keys)
@@ -171,8 +166,6 @@ namespace AadGraphApiHelper
                     this.PopulateTenantCredentials(environment, lastSelectedTenantCredentialName);
                 }
             }
-
-            this.EnvironmentComboBox.Items.Add(StringResources.ManageItem);
         }
 
         private void environmentComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -182,15 +175,17 @@ namespace AadGraphApiHelper
                 return;
             }
 
-            if (this.EnvironmentComboBox.SelectedItem.Equals(StringResources.ManageItem))
+            AadEnvironment environment = this.EnvironmentComboBox.SelectedItem as AadEnvironment;
+            this.PopulateTenantCredentials(environment);
+            this.urlBuilder.Environment = environment;
+
+            this.apiVersionComboBox.Items.Clear();
+            if (environment != null)
             {
-                new AddEnvironmentForm(this).ShowDialog();
-            }
-            else
-            {
-                AadEnvironment environment = this.EnvironmentComboBox.SelectedItem as AadEnvironment;
-                this.PopulateTenantCredentials(environment);
-                this.urlBuilder.Environment = environment;
+                foreach (string apiVersion in environment.ApiVersions)
+                {
+                    this.apiVersionComboBox.Items.Add(apiVersion);
+                }
             }
         }
 
@@ -286,6 +281,7 @@ namespace AadGraphApiHelper
                                               : StringResources.GetUserTokenText;
             this.getAppTokenButton.Enabled = true;
             this.urlBuilder.TenantCredential = tenantCredential;
+            this.UpdateRequestUrl();
         }
 
         private void idTextBox_TextChanged(object sender, EventArgs e)
@@ -430,6 +426,7 @@ namespace AadGraphApiHelper
             HideAllContextMenuItems(this.responseGridContextMenuStrip);
             this.copyCellValueToClipboardToolStripMenuItem.Visible = true;
             this.MakeContextMenuCopyPropertyItemVisible(Names.ObjectId, this.copyObjectIdToRequestToolStripMenuItem);
+            this.MakeContextMenuCopyPropertyItemVisible(Names.Id, this.copyIdToRequestToolStripMenuItem);
             this.MakeContextMenuCopyPropertyItemVisible(Names.UserPrincipalName, this.copyUserPrincipalNameToRequestToolStripMenuItem);
         }
 
@@ -461,6 +458,11 @@ namespace AadGraphApiHelper
         private void copyObjectIdToRequestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.CopyCellValueToClipboard(Names.ObjectId);
+        }
+
+        private void copyIdToRequestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.CopyCellValueToClipboard(Names.Id);
         }
 
         private void copyUserPrincipalNameToRequestToolStripMenuItem_Click(object sender, EventArgs e)

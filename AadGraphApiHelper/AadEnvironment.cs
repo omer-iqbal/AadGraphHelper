@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace AadGraphApiHelper
@@ -7,34 +8,31 @@ namespace AadGraphApiHelper
     {
         private const string UrlFormat = @"https://{0}/{1}";
 
-        public AadEnvironment(string displayName, string loginEndpoint, string graphApiEndpoint)
+        private readonly IReadOnlyList<string> apiVersions;
+
+        public AadEnvironment(
+            string registryName, 
+            string loginEndpoint, 
+            string graphApiEndpoint, 
+            IList<string> apiVersions,
+            IGraphApiUrlFormatter urlFormatter)
         {
-            this.DisplayName = displayName;
+            this.RegistryName = registryName;
             this.LoginEndpoint = loginEndpoint;
             this.GraphApiEndpoint = graphApiEndpoint;
+            this.UrlFormatter = urlFormatter;
+            this.apiVersions = new List<string>(apiVersions);
         }
 
-        public static AadEnvironment Production 
-        {
-            get
-            {
-                return new AadEnvironment(@"Production", @"login.windows.net", @"graph.windows.net");
-            }
-        }
+        public string DisplayName => this.GraphApiEndpoint;
 
-        public static AadEnvironment PreProduction
-        {
-            get
-            {
-                return new AadEnvironment(@"PPE", @"login.windows-ppe.net", @"graph.ppe.windows.net");
-            }
-        }
-
-        public string DisplayName { get; private set; }
+        public string RegistryName { get; private set; }
 
         public string LoginEndpoint { get; private set; }
 
         public string GraphApiEndpoint { get; private set; }
+
+        public IGraphApiUrlFormatter UrlFormatter { get; private set; }
 
         public string GraphResourceUrl
         {
@@ -53,6 +51,8 @@ namespace AadGraphApiHelper
         {
             return String.Format(UrlFormat, this.GraphApiEndpoint, tenant);
         }
+
+        public IReadOnlyList<string> ApiVersions => this.apiVersions;
 
         /// <summary>
         /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
@@ -85,7 +85,7 @@ namespace AadGraphApiHelper
                 return false;
             }
 
-            return this.DisplayName.Equals(other.DisplayName, StringComparison.OrdinalIgnoreCase);
+            return this.GraphApiEndpoint.Equals(other.GraphApiEndpoint, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace AadGraphApiHelper
         /// </returns>
         public override int GetHashCode()
         {
-            return this.DisplayName.ToUpperInvariant().GetHashCode();
+            return this.GraphApiEndpoint.ToUpperInvariant().GetHashCode();
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace AadGraphApiHelper
                 return -1;
             }
 
-            return this.DisplayName.ToUpperInvariant().CompareTo(other.DisplayName.ToUpperInvariant());
+            return this.GraphApiEndpoint.ToUpperInvariant().CompareTo(other.GraphApiEndpoint.ToUpperInvariant());
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace AadGraphApiHelper
         /// </returns>
         public override string ToString()
         {
-            return this.DisplayName;
+            return this.GraphApiEndpoint;
         }
     }
 }
