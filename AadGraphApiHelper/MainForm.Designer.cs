@@ -58,6 +58,7 @@ namespace AadGraphApiHelper
             this.responseDataGridView = new System.Windows.Forms.DataGridView();
             this.responseGridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyCellValueToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyIdToRequestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyObjectIdToRequestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyUserPrincipalNameToRequestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resourceSecondComboBox = new System.Windows.Forms.ComboBox();
@@ -76,7 +77,7 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.copyIdToRequestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.historyButton = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.requestBodyTabPage.SuspendLayout();
             this.responseBodyTabPage.SuspendLayout();
@@ -111,7 +112,7 @@ namespace AadGraphApiHelper
             this.TenantCredentialComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TenantCredentialComboBox.MaxDropDownItems = 20;
             this.TenantCredentialComboBox.Name = "TenantCredentialComboBox";
-            this.TenantCredentialComboBox.Size = new System.Drawing.Size(392, 25);
+            this.TenantCredentialComboBox.Size = new System.Drawing.Size(391, 25);
             this.TenantCredentialComboBox.TabIndex = 5;
             this.TenantCredentialComboBox.SelectedIndexChanged += new System.EventHandler(this.TenantCredentialComboBox_SelectedIndexChanged);
             // 
@@ -189,9 +190,9 @@ namespace AadGraphApiHelper
             // 
             this.requestUrlLabel.AutoSize = true;
             this.requestUrlLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.requestUrlLabel.Location = new System.Drawing.Point(3, 0);
+            this.requestUrlLabel.Location = new System.Drawing.Point(73, 0);
             this.requestUrlLabel.Name = "requestUrlLabel";
-            this.requestUrlLabel.Size = new System.Drawing.Size(114, 33);
+            this.requestUrlLabel.Size = new System.Drawing.Size(94, 33);
             this.requestUrlLabel.TabIndex = 21;
             this.requestUrlLabel.Text = "Request &URL:";
             this.requestUrlLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -200,11 +201,12 @@ namespace AadGraphApiHelper
             // 
             this.requestUrlTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.requestUrlTextBox.Font = new System.Drawing.Font("Consolas", 11F);
-            this.requestUrlTextBox.Location = new System.Drawing.Point(123, 4);
+            this.requestUrlTextBox.Location = new System.Drawing.Point(173, 4);
             this.requestUrlTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.requestUrlTextBox.Name = "requestUrlTextBox";
-            this.requestUrlTextBox.Size = new System.Drawing.Size(738, 25);
+            this.requestUrlTextBox.Size = new System.Drawing.Size(688, 25);
             this.requestUrlTextBox.TabIndex = 22;
+            this.requestUrlTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.requestUrlTextBox_KeyDown);
             // 
             // resourceFirstComboBox
             // 
@@ -407,6 +409,13 @@ namespace AadGraphApiHelper
             this.copyCellValueToClipboardToolStripMenuItem.Text = "&Copy cell value to clipboard";
             this.copyCellValueToClipboardToolStripMenuItem.Click += new System.EventHandler(this.CopyCellValueToClipboardToolStripMenuItem_Click);
             // 
+            // copyIdToRequestToolStripMenuItem
+            // 
+            this.copyIdToRequestToolStripMenuItem.Name = "copyIdToRequestToolStripMenuItem";
+            this.copyIdToRequestToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
+            this.copyIdToRequestToolStripMenuItem.Text = "Copy &Id to request";
+            this.copyIdToRequestToolStripMenuItem.Click += new System.EventHandler(this.copyIdToRequestToolStripMenuItem_Click);
+            // 
             // copyObjectIdToRequestToolStripMenuItem
             // 
             this.copyObjectIdToRequestToolStripMenuItem.Name = "copyObjectIdToRequestToolStripMenuItem";
@@ -530,7 +539,7 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.64228F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 162F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.35772F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 151F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 152F));
             this.tableLayoutPanel1.Controls.Add(this.environmentLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.EnvironmentComboBox, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.tenantLabel, 2, 0);
@@ -590,13 +599,15 @@ namespace AadGraphApiHelper
             // 
             // tableLayoutPanel4
             // 
-            this.tableLayoutPanel4.ColumnCount = 3;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel4.ColumnCount = 4;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel4.Controls.Add(this.requestUrlLabel, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.requestUrlTextBox, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.executeButton, 2, 0);
+            this.tableLayoutPanel4.Controls.Add(this.requestUrlLabel, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.requestUrlTextBox, 2, 0);
+            this.tableLayoutPanel4.Controls.Add(this.executeButton, 3, 0);
+            this.tableLayoutPanel4.Controls.Add(this.historyButton, 0, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 123);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -605,12 +616,15 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel4.Size = new System.Drawing.Size(984, 33);
             this.tableLayoutPanel4.TabIndex = 20;
             // 
-            // copyIdToRequestToolStripMenuItem
+            // historyButton
             // 
-            this.copyIdToRequestToolStripMenuItem.Name = "copyIdToRequestToolStripMenuItem";
-            this.copyIdToRequestToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
-            this.copyIdToRequestToolStripMenuItem.Text = "Copy &Id to request";
-            this.copyIdToRequestToolStripMenuItem.Click += new System.EventHandler(this.copyIdToRequestToolStripMenuItem_Click);
+            this.historyButton.Location = new System.Drawing.Point(3, 3);
+            this.historyButton.Name = "historyButton";
+            this.historyButton.Size = new System.Drawing.Size(64, 27);
+            this.historyButton.TabIndex = 24;
+            this.historyButton.Text = "History";
+            this.historyButton.UseVisualStyleBackColor = true;
+            this.historyButton.Click += new System.EventHandler(this.historyButton_Click);
             // 
             // MainForm
             // 
@@ -705,6 +719,7 @@ namespace AadGraphApiHelper
         private TableLayoutPanel tableLayoutPanel3;
         private TableLayoutPanel tableLayoutPanel4;
         private ToolStripMenuItem copyIdToRequestToolStripMenuItem;
+        private Button historyButton;
     }
 }
 

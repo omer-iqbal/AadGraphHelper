@@ -85,6 +85,7 @@ namespace AadGraphApiHelper
         {
             try
             {
+             
                 this.Cursor = Cursors.WaitCursor;
                 this.responseTextBox.Text = String.Empty;
                 this.responseTable.Clear();
@@ -94,6 +95,7 @@ namespace AadGraphApiHelper
                 Request request = new Request(accessToken);
                 HttpStatusCode httpStatusCode;
                 string response;
+                RequestHistoryManager.Instance.AddRequest(this.methodComboBox.Text, this.requestUrlTextBox.Text, this.bodyTextBox.Text);
                 httpStatusCode = request.Send(this.methodComboBox.Text, this.requestUrlTextBox.Text, this.bodyTextBox.Text, out response);
                 this.mainStatusStripStatusLabel.Text = (int)httpStatusCode + @": " + httpStatusCode;
 
@@ -501,6 +503,28 @@ namespace AadGraphApiHelper
         {
             this.urlBuilder.FilterComponents.Clear();
             this.UpdateRequestUrl();
+        }
+
+        private void requestUrlTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.ExecuteRequest();
+            }
+        }
+
+        private void historyButton_Click(object sender, EventArgs e)
+        {
+            RequestHistoryWindow window = new RequestHistoryWindow();
+            DialogResult dr = window.ShowDialog();
+
+            if (dr == DialogResult.OK)
+            {
+                var item = RequestHistoryManager.Instance.RequestHistoryObjects[window.RowSelected];
+                this.methodComboBox.Text = item.Method;
+                this.requestUrlTextBox.Text = item.Url;
+                this.bodyTextBox.Text = item.Body;
+            }
         }
     }
 }
