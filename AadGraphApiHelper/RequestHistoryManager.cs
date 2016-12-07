@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,16 +11,22 @@ namespace AadGraphApiHelper
     class RequestHistoryManager
     {
         private static RequestHistoryManager s_RequestHistoryManager = new RequestHistoryManager();
-        private List<RequestHistoryObject> mRequestHistoryObjects;
-
         public List<RequestHistoryObject> RequestHistoryObjects
         {
-            get { return mRequestHistoryObjects; }
+            get;private set;
         }
 
         public RequestHistoryManager()
         {
-            mRequestHistoryObjects = new List<RequestHistoryObject>();
+            if (File.Exists(StorageFileName))
+            {
+                string json = File.ReadAllText(StorageFileName);
+                RequestHistoryObjects = JsonConvert.DeserializeObject<List<RequestHistoryObject>>(json);
+            }
+            else
+            {
+                RequestHistoryObjects = new List<RequestHistoryObject>();
+            }
         }
 
         public static RequestHistoryManager Instance
@@ -28,7 +36,39 @@ namespace AadGraphApiHelper
 
         public void AddRequest(string method, string url, string body)
         {
-            mRequestHistoryObjects.Add(new RequestHistoryObject(method, url, body));
+            RequestHistoryObjects.Add(new RequestHistoryObject(method, url, body));
+            SaveHistoryToDisk();
+        }
+
+        private void SaveHistoryToDisk()
+        {
+            string json = JsonConvert.SerializeObject(RequestHistoryObjects);
+
+            if (!Directory.Exists(StorageDir))
+            {
+                Directory.CreateDirectory(StorageDir);
+            }
+
+            File.WriteAllText(StorageFileName, json);
+        }
+
+        private string StorageFileName
+        {
+            get
+            {
+                string filePath = Path.Combine(StorageDir, "history.json");
+                return filePath;
+            }
+        }
+
+        private string StorageDir
+        {
+            get
+            {
+                string dirPath = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "AADGraphHelper");
+                return dirPath;
+            }
         }
     }
 
