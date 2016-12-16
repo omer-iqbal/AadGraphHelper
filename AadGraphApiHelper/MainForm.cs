@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
@@ -525,6 +526,14 @@ namespace AadGraphApiHelper
                 this.requestUrlTextBox.Text = item.Url;
                 this.bodyTextBox.Text = item.Body;
             }
+        }
+
+        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string filename = Path.GetTempPath()+ Guid.NewGuid().ToString() + ".txt"; ;
+            File.WriteAllText(filename, responseTextBox.Text);
+            Process.Start(filename);
+
         }
     }
 }

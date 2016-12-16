@@ -78,6 +78,8 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.historyButton = new System.Windows.Forms.Button();
+            this.responseContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.requestBodyTabPage.SuspendLayout();
             this.responseBodyTabPage.SuspendLayout();
@@ -90,13 +92,14 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.responseContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tenantLabel
             // 
             this.tenantLabel.AutoSize = true;
             this.tenantLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tenantLabel.Location = new System.Drawing.Point(275, 0);
+            this.tenantLabel.Location = new System.Drawing.Point(274, 0);
             this.tenantLabel.Name = "tenantLabel";
             this.tenantLabel.Size = new System.Drawing.Size(156, 33);
             this.tenantLabel.TabIndex = 4;
@@ -108,7 +111,7 @@ namespace AadGraphApiHelper
             this.TenantCredentialComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TenantCredentialComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TenantCredentialComboBox.FormattingEnabled = true;
-            this.TenantCredentialComboBox.Location = new System.Drawing.Point(437, 4);
+            this.TenantCredentialComboBox.Location = new System.Drawing.Point(436, 4);
             this.TenantCredentialComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TenantCredentialComboBox.MaxDropDownItems = 20;
             this.TenantCredentialComboBox.Name = "TenantCredentialComboBox";
@@ -169,13 +172,14 @@ namespace AadGraphApiHelper
             this.EnvironmentComboBox.Location = new System.Drawing.Point(123, 4);
             this.EnvironmentComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.EnvironmentComboBox.Name = "EnvironmentComboBox";
-            this.EnvironmentComboBox.Size = new System.Drawing.Size(146, 25);
+            this.EnvironmentComboBox.Size = new System.Drawing.Size(145, 25);
             this.EnvironmentComboBox.TabIndex = 3;
             this.EnvironmentComboBox.SelectedIndexChanged += new System.EventHandler(this.environmentComboBox_SelectedIndexChanged);
             // 
             // responseTextBox
             // 
             this.responseTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.responseTextBox.ContextMenuStrip = this.responseContextMenuStrip;
             this.responseTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.responseTextBox.Font = new System.Drawing.Font("Consolas", 11F);
             this.responseTextBox.Location = new System.Drawing.Point(3, 4);
@@ -539,7 +543,7 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.64228F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 162F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.35772F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 152F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 153F));
             this.tableLayoutPanel1.Controls.Add(this.environmentLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.EnvironmentComboBox, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.tenantLabel, 2, 0);
@@ -626,6 +630,20 @@ namespace AadGraphApiHelper
             this.historyButton.UseVisualStyleBackColor = true;
             this.historyButton.Click += new System.EventHandler(this.historyButton_Click);
             // 
+            // responseContextMenuStrip
+            // 
+            this.responseContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportToolStripMenuItem});
+            this.responseContextMenuStrip.Name = "responseContextMenuStrip";
+            this.responseContextMenuStrip.Size = new System.Drawing.Size(153, 48);
+            // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportToolStripMenuItem.Text = "Export";
+            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -666,6 +684,7 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            this.responseContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -720,6 +739,8 @@ namespace AadGraphApiHelper
         private TableLayoutPanel tableLayoutPanel4;
         private ToolStripMenuItem copyIdToRequestToolStripMenuItem;
         private Button historyButton;
+        private ContextMenuStrip responseContextMenuStrip;
+        private ToolStripMenuItem exportToolStripMenuItem;
     }
 }
 
