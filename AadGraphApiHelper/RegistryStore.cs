@@ -202,9 +202,9 @@ namespace AadGraphApiHelper
             return tenantCredentials;
         }
 
-        public bool RemoveTenantCredentials(AadEnvironment environment, TenantCredential tbdTenantCredential)
+        public bool RemoveTenantCredentials(TenantCredential tbdTenantCredential)
         {
-            string environmentPath = GetEnvironmentPath(environment);
+            string environmentPath = GetEnvironmentPath(tbdTenantCredential.Environment);
             using (RegistryKey environmentKey = Registry.CurrentUser.OpenSubKey(environmentPath))
             {
                 if (environmentKey == null)
@@ -245,7 +245,7 @@ namespace AadGraphApiHelper
                                 TenantCredential credential;
                                 try
                                 {
-                                    credential = new TenantCredential(environment, tenant, clientId, applicationType);
+                                    credential = new TenantCredential(tbdTenantCredential.Environment, tenant, clientId, applicationType);
                                 }
                                 catch (Exception)
                                 {

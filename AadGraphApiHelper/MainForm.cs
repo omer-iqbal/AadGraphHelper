@@ -535,5 +535,28 @@ namespace AadGraphApiHelper
             Process.Start(filename);
 
         }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TenantCredential tenantCredential = this.TenantCredentialComboBox.SelectedItem as TenantCredential;
+
+            if (tenantCredential == null)
+            {
+                return;
+            }
+
+            string messageFormat = "Deleting Following Tenant: \n Env: {0}\n Tenant: {1}\n Client ID: {2}: \n Application type:{3}";
+            string message = String.Format(messageFormat, tenantCredential.Environment, tenantCredential.Tenant, tenantCredential.ClientId, tenantCredential.ApplicationType);
+
+            DialogResult dr = MessageBox.Show(message, "Confirm Delete", MessageBoxButtons.OKCancel);
+
+            if (dr == DialogResult.OK)
+            {
+                bool res= Store.RemoveTenantCredentials(tenantCredential);
+
+                MessageBox.Show("Delete was " + ((res) ? "successful" : "Unsuccessful"));
+            }
+
+        }
     }
 }

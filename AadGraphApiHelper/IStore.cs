@@ -16,7 +16,7 @@
         /// <param name="environment"></param>
         /// <param name="tenantCredential"></param>
         /// <returns>true if delete successful</returns>
-        bool RemoveTenantCredentials(AadEnvironment environment, TenantCredential tenantCredential);
+        bool RemoveTenantCredentials(TenantCredential tenantCredential);
 
         void Store(string apiVersion);
 

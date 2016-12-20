@@ -39,6 +39,8 @@ namespace AadGraphApiHelper
             this.environmentLabel = new System.Windows.Forms.Label();
             this.EnvironmentComboBox = new System.Windows.Forms.ComboBox();
             this.responseTextBox = new System.Windows.Forms.TextBox();
+            this.responseContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.requestUrlLabel = new System.Windows.Forms.Label();
             this.requestUrlTextBox = new System.Windows.Forms.TextBox();
             this.resourceFirstComboBox = new System.Windows.Forms.ComboBox();
@@ -78,8 +80,9 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.historyButton = new System.Windows.Forms.Button();
-            this.responseContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageCredsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.responseContextMenuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.requestBodyTabPage.SuspendLayout();
             this.responseBodyTabPage.SuspendLayout();
@@ -92,7 +95,6 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            this.responseContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tenantLabel
@@ -115,7 +117,7 @@ namespace AadGraphApiHelper
             this.TenantCredentialComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TenantCredentialComboBox.MaxDropDownItems = 20;
             this.TenantCredentialComboBox.Name = "TenantCredentialComboBox";
-            this.TenantCredentialComboBox.Size = new System.Drawing.Size(391, 25);
+            this.TenantCredentialComboBox.Size = new System.Drawing.Size(390, 25);
             this.TenantCredentialComboBox.TabIndex = 5;
             this.TenantCredentialComboBox.SelectedIndexChanged += new System.EventHandler(this.TenantCredentialComboBox_SelectedIndexChanged);
             // 
@@ -189,6 +191,20 @@ namespace AadGraphApiHelper
             this.responseTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.responseTextBox.Size = new System.Drawing.Size(970, 395);
             this.responseTextBox.TabIndex = 95;
+            // 
+            // responseContextMenuStrip
+            // 
+            this.responseContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportToolStripMenuItem});
+            this.responseContextMenuStrip.Name = "responseContextMenuStrip";
+            this.responseContextMenuStrip.Size = new System.Drawing.Size(108, 26);
+            // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.exportToolStripMenuItem.Text = "Export";
+            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // requestUrlLabel
             // 
@@ -450,7 +466,8 @@ namespace AadGraphApiHelper
             // 
             this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.queryToolStripMenuItem});
+            this.queryToolStripMenuItem,
+            this.manageCredsToolStripMenuItem});
             this.mainMenuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
@@ -543,7 +560,7 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.64228F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 162F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.35772F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 153F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 154F));
             this.tableLayoutPanel1.Controls.Add(this.environmentLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.EnvironmentComboBox, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.tenantLabel, 2, 0);
@@ -630,19 +647,20 @@ namespace AadGraphApiHelper
             this.historyButton.UseVisualStyleBackColor = true;
             this.historyButton.Click += new System.EventHandler(this.historyButton_Click);
             // 
-            // responseContextMenuStrip
+            // manageCredsToolStripMenuItem
             // 
-            this.responseContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportToolStripMenuItem});
-            this.responseContextMenuStrip.Name = "responseContextMenuStrip";
-            this.responseContextMenuStrip.Size = new System.Drawing.Size(153, 48);
+            this.manageCredsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolStripMenuItem});
+            this.manageCredsToolStripMenuItem.Name = "manageCredsToolStripMenuItem";
+            this.manageCredsToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
+            this.manageCredsToolStripMenuItem.Text = "Manage Creds";
             // 
-            // exportToolStripMenuItem
+            // deleteToolStripMenuItem
             // 
-            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exportToolStripMenuItem.Text = "Export";
-            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -664,6 +682,7 @@ namespace AadGraphApiHelper
             this.Text = "Aad Graph API Buddy";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.responseContextMenuStrip.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
             this.requestBodyTabPage.ResumeLayout(false);
             this.requestBodyTabPage.PerformLayout();
@@ -684,7 +703,6 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
-            this.responseContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -741,6 +759,8 @@ namespace AadGraphApiHelper
         private Button historyButton;
         private ContextMenuStrip responseContextMenuStrip;
         private ToolStripMenuItem exportToolStripMenuItem;
+        private ToolStripMenuItem manageCredsToolStripMenuItem;
+        private ToolStripMenuItem deleteToolStripMenuItem;
     }
 }
 
