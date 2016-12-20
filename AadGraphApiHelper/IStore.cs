@@ -13,10 +13,9 @@
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="environment"></param>
         /// <param name="tenantCredential"></param>
         /// <returns>true if delete successful</returns>
-        bool RemoveTenantCredentials(TenantCredential tenantCredential);
+        bool Delete(TenantCredential tenantCredential);
 
         void Store(string apiVersion);
 

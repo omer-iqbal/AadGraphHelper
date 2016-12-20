@@ -552,7 +552,7 @@ namespace AadGraphApiHelper
 
             if (dr == DialogResult.OK)
             {
-                bool res= Store.RemoveTenantCredentials(tenantCredential);
+                bool res= Store.Delete(tenantCredential);
 
                 MessageBox.Show("Delete was " + ((res) ? "successful" : "Unsuccessful"));
             }
