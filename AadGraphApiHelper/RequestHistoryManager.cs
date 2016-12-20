@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +23,16 @@ namespace AadGraphApiHelper
             {
                 string json = File.ReadAllText(StorageFileName);
                 RequestHistoryObjects = JsonConvert.DeserializeObject<List<RequestHistoryObject>>(json);
+
+                // temp code to remove duplicates
+                var temp = new List<RequestHistoryObject>();
+                foreach (var requestHistoryObject in RequestHistoryObjects)
+                {
+                    if (!temp.Exists(x => x.Url == requestHistoryObject.Url))
+                        temp.Add(requestHistoryObject);
+                }
+
+                RequestHistoryObjects = temp;
             }
             else
             {
@@ -36,6 +47,8 @@ namespace AadGraphApiHelper
 
         public void AddRequest(string method, string url, string body)
         {
+            if (RequestHistoryObjects.Exists(x => x.Url.Equals(url)))
+                return;
             RequestHistoryObjects.Add(new RequestHistoryObject(method, url, body));
             SaveHistoryToDisk();
         }

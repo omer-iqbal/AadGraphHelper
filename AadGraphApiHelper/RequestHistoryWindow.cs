@@ -32,7 +32,7 @@ namespace AadGraphApiHelper
 
             dataGridView1.DataSource = mBindingSource;
             dataGridView1.AutoGenerateColumns = true;
-
+            
             for (int i = 0; i < dataGridView1.Columns.Count; i++)
             {
                 dataGridView1.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;

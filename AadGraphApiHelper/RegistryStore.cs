@@ -202,6 +202,98 @@ namespace AadGraphApiHelper
             return tenantCredentials;
         }
 
+        public bool RemoveTenantCredentials(AadEnvironment environment, TenantCredential tbdTenantCredential)
+        {
+            string environmentPath = GetEnvironmentPath(environment);
+            using (RegistryKey environmentKey = Registry.CurrentUser.OpenSubKey(environmentPath))
+            {
+                if (environmentKey == null)
+                {
+                    return false;
+                }
+
+                foreach (string tenant in environmentKey.GetSubKeyNames())
+                {
+                    using (RegistryKey tenantKey = environmentKey.OpenSubKey(tenant))
+                    {
+                        if (tenantKey == null)
+                        {
+                            continue;
+                        }
+
+                        foreach (string clientId in tenantKey.GetSubKeyNames())
+                        {
+                            using (RegistryKey clientIdKey = tenantKey.OpenSubKey(clientId))
+                            {
+                                if (String.IsNullOrWhiteSpace(clientId))
+                                {
+                                    continue;
+                                }
+
+                                if (clientIdKey == null)
+                                {
+                                    continue;
+                                }
+
+                                string applicationTypeString = clientIdKey.GetValue(ApplicationTypeKey) as string;
+                                ApplicationType applicationType;
+                                if (!Enum.TryParse(applicationTypeString, true, out applicationType))
+                                {
+                                    continue;
+                                }
+
+                                TenantCredential credential;
+                                try
+                                {
+                                    credential = new TenantCredential(environment, tenant, clientId, applicationType);
+                                }
+                                catch (Exception)
+                                {
+                                    // Bad key, can't decrypt :-(
+                                    continue;
+                                }
+
+                                switch (applicationType)
+                                {
+                                    case ApplicationType.Native:
+                                        string replyUrl = clientIdKey.GetValue(ReplyUrlKey) as string;
+                                        if (string.IsNullOrWhiteSpace(replyUrl))
+                                        {
+                                            continue;
+                                        }
+
+                                        credential.ReplyUrl = new Uri(replyUrl);
+                                        break;
+
+                                    case ApplicationType.Web:
+                                        byte[] encryptedKey = clientIdKey.GetValue(EncryptedKeyKey) as byte[];
+                                        if (encryptedKey == null || encryptedKey.Length < 16)
+                                        {
+                                            continue;
+                                        }
+
+                                        credential.EncryptedKey = encryptedKey;
+                                        break;
+                                        
+                                    default:
+                                        // unknown application type :-(
+                                        continue;
+                                }
+
+
+                                if (tbdTenantCredential.Equals(credential))
+                                {
+                                    tenantKey.DeleteSubKey(clientId);
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
         public void Store(string apiVersion)
         {
             using (RegistryKey apiVersionKey = Registry.CurrentUser.CreateSubKey(ApiVersionRoot))
