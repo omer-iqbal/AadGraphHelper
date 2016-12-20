@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Windows.Forms;
 
@@ -557,6 +558,13 @@ namespace AadGraphApiHelper
                 MessageBox.Show("Delete was " + ((res) ? "successful" : "Unsuccessful"));
             }
 
+        }
+
+        private void tokenTextBox_DoubleClick(object sender, EventArgs e)
+        {
+            string token = tokenTextBox.Text;
+            token = token.Remove(0, token.IndexOf(" "));
+            Process.Start("https://jwt.io/?value="+token);
         }
     }
 }
