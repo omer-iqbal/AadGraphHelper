@@ -30,12 +30,13 @@ namespace AadGraphApiHelper
                 mBindingSource.Add(item);
             }
 
-            dataGridView1.DataSource = mBindingSource;
+            //dataGridView1.DataSource = mBindingSource;
             dataGridView1.AutoGenerateColumns = true;
-            
+
             for (int i = 0; i < dataGridView1.Columns.Count; i++)
             {
                 dataGridView1.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
             }
 
             dataGridView1.Columns[0].MinimumWidth = 100;

@@ -24,7 +24,7 @@ namespace AadGraphApiHelper
                 string json = File.ReadAllText(StorageFileName);
                 RequestHistoryObjects = JsonConvert.DeserializeObject<List<RequestHistoryObject>>(json);
 
-                // temp code to remove duplicates
+                // temp code to remove duplicates if present during load
                 var temp = new List<RequestHistoryObject>();
                 foreach (var requestHistoryObject in RequestHistoryObjects)
                 {

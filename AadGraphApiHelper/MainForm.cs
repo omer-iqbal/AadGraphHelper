@@ -518,6 +518,11 @@ namespace AadGraphApiHelper
 
         private void historyButton_Click(object sender, EventArgs e)
         {
+            ShowHistory();
+        }
+
+        private void ShowHistory()
+        {
             RequestHistoryWindow window = new RequestHistoryWindow();
             DialogResult dr = window.ShowDialog();
 
@@ -574,6 +579,16 @@ namespace AadGraphApiHelper
         {
             string token = responseTextBox.SelectedText;
             Process.Start("https://jwt.io/?value=" + token);
+        }
+
+        private void historyMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowHistory();
+        }
+
+        private void historyButton_Click_1(object sender, EventArgs e)
+        {
+            ShowHistory();
         }
     }
 }
