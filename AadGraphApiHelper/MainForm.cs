@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Windows.Forms;
 
@@ -85,6 +87,7 @@ namespace AadGraphApiHelper
         {
             try
             {
+             
                 this.Cursor = Cursors.WaitCursor;
                 this.responseTextBox.Text = String.Empty;
                 this.responseTable.Clear();
@@ -94,6 +97,7 @@ namespace AadGraphApiHelper
                 Request request = new Request(accessToken);
                 HttpStatusCode httpStatusCode;
                 string response;
+                RequestHistoryManager.Instance.AddRequest(this.methodComboBox.Text, this.requestUrlTextBox.Text, this.bodyTextBox.Text);
                 httpStatusCode = request.Send(this.methodComboBox.Text, this.requestUrlTextBox.Text, this.bodyTextBox.Text, out response);
                 this.mainStatusStripStatusLabel.Text = (int)httpStatusCode + @": " + httpStatusCode;
 
@@ -143,7 +147,7 @@ namespace AadGraphApiHelper
                 this.Cursor = Cursors.Default;
                 this.urlBuilder.Environment = this.EnvironmentComboBox.SelectedItem as AadEnvironment;
                 this.urlBuilder.TenantCredential = this.TenantCredentialComboBox.SelectedItem as TenantCredential;
-                this.UpdateRequestUrl();
+                //this.UpdateRequestUrl();
             }
             catch (Exception exception)
             {
@@ -281,6 +285,7 @@ namespace AadGraphApiHelper
                                               : StringResources.GetUserTokenText;
             this.getAppTokenButton.Enabled = true;
             this.urlBuilder.TenantCredential = tenantCredential;
+         
             this.UpdateRequestUrl();
         }
 
@@ -501,6 +506,91 @@ namespace AadGraphApiHelper
         {
             this.urlBuilder.FilterComponents.Clear();
             this.UpdateRequestUrl();
+        }
+
+        private void requestUrlTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.ExecuteRequest();
+            }
+        }
+
+        private void historyButton_Click(object sender, EventArgs e)
+        {
+            ShowHistory();
+        }
+
+        private void ShowHistory()
+        {
+            RequestHistoryWindow window = new RequestHistoryWindow();
+            DialogResult dr = window.ShowDialog();
+
+            if (dr == DialogResult.OK && window.RowSelected >= 0)
+            {
+                var item = window.ViewRequestHistoryObjects[window.RowSelected];
+                this.methodComboBox.Text = item.Method;
+                this.requestUrlTextBox.Text = item.Url;
+                this.bodyTextBox.Text = item.Body;
+
+                RequestHistoryManager.Instance.SaveHistoryToDisk();
+            }
+        }
+
+        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string filename = Path.GetTempPath()+ Guid.NewGuid().ToString() + ".txt"; ;
+
+            string text = String.IsNullOrEmpty(responseTextBox.SelectedText) ? responseTextBox.Text : responseTextBox.SelectedText;
+            File.WriteAllText(filename, text);
+            Process.Start(filename);
+
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TenantCredential tenantCredential = this.TenantCredentialComboBox.SelectedItem as TenantCredential;
+
+            if (tenantCredential == null)
+            {
+                return;
+            }
+
+            string messageFormat = "Deleting Following Tenant: \n Env: {0}\n Tenant: {1}\n Client ID: {2}: \n Application type:{3}";
+            string message = String.Format(messageFormat, tenantCredential.Environment, tenantCredential.Tenant, tenantCredential.ClientId, tenantCredential.ApplicationType);
+
+            DialogResult dr = MessageBox.Show(message, "Confirm Delete", MessageBoxButtons.OKCancel);
+
+            if (dr == DialogResult.OK)
+            {
+                bool res= Store.Delete(tenantCredential);
+
+                MessageBox.Show("Delete was " + ((res) ? "successful" : "Unsuccessful"));
+            }
+
+        }
+
+        private void tokenTextBox_DoubleClick(object sender, EventArgs e)
+        {
+            string token = tokenTextBox.Text;
+            token = token.Remove(0, token.IndexOf(" "));
+            Process.Start("https://jwt.io/?value=" + token);
+        }
+
+        private void jwtioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string token = responseTextBox.SelectedText;
+            Process.Start("https://jwt.io/?value=" + token);
+        }
+
+        private void historyMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowHistory();
+        }
+
+        private void historyButton_Click_1(object sender, EventArgs e)
+        {
+            ShowHistory();
         }
     }
 }

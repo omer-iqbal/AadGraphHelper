@@ -39,6 +39,10 @@
     <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms">
       <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.16.204221202\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Security" />
@@ -67,6 +71,14 @@
     </Compile>
     <Compile Include="QueryBuilderForm.Designer.cs">
       <DependentUpon>QueryBuilderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RequestHistoryManager.cs" />
+    <Compile Include="RequestHistoryObject.cs" />
+    <Compile Include="RequestHistoryWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RequestHistoryWindow.Designer.cs">
+      <DependentUpon>RequestHistoryWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="TenantCredentialSet.cs" />
     <Compile Include="AadEnvironmentSet.cs">
@@ -119,6 +131,9 @@
     <EmbeddedResource Include="QueryBuilderForm.resx">
       <DependentUpon>QueryBuilderForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RequestHistoryWindow.resx">
+      <DependentUpon>RequestHistoryWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StringResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>StringResources.Designer.cs</LastGenOutput>
@@ -139,6 +154,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
