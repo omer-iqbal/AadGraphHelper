@@ -526,7 +526,7 @@ namespace AadGraphApiHelper
             RequestHistoryWindow window = new RequestHistoryWindow();
             DialogResult dr = window.ShowDialog();
 
-            if (dr == DialogResult.OK)
+            if (dr == DialogResult.OK && window.RowSelected >= 0)
             {
                 var item = RequestHistoryManager.Instance.RequestHistoryObjects[window.RowSelected];
                 this.methodComboBox.Text = item.Method;
