@@ -21,7 +21,7 @@ namespace AadGraphApiHelper
                 tenantCredential.Environment.GraphResourceUrl,
                 tenantCredential.ClientId,
                 tenantCredential.ReplyUrl,
-                PromptBehavior.Always);
+                PromptBehavior.Auto);
             return authenticationResult.CreateAuthorizationHeader();
         }
     }

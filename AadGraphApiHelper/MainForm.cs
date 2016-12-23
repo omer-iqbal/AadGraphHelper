@@ -147,7 +147,7 @@ namespace AadGraphApiHelper
                 this.Cursor = Cursors.Default;
                 this.urlBuilder.Environment = this.EnvironmentComboBox.SelectedItem as AadEnvironment;
                 this.urlBuilder.TenantCredential = this.TenantCredentialComboBox.SelectedItem as TenantCredential;
-                this.UpdateRequestUrl();
+                //this.UpdateRequestUrl();
             }
             catch (Exception exception)
             {
