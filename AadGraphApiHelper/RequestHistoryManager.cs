@@ -14,7 +14,7 @@ namespace AadGraphApiHelper
         private static RequestHistoryManager s_RequestHistoryManager = new RequestHistoryManager();
         public List<RequestHistoryObject> RequestHistoryObjects
         {
-            get;private set;
+            get;set;
         }
 
         public RequestHistoryManager()
@@ -53,7 +53,7 @@ namespace AadGraphApiHelper
             SaveHistoryToDisk();
         }
 
-        private void SaveHistoryToDisk()
+        public void SaveHistoryToDisk()
         {
             string json = JsonConvert.SerializeObject(RequestHistoryObjects);
 

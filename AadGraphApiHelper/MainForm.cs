@@ -528,10 +528,12 @@ namespace AadGraphApiHelper
 
             if (dr == DialogResult.OK && window.RowSelected >= 0)
             {
-                var item = RequestHistoryManager.Instance.RequestHistoryObjects[window.RowSelected];
+                var item = window.ViewRequestHistoryObjects[window.RowSelected];
                 this.methodComboBox.Text = item.Method;
                 this.requestUrlTextBox.Text = item.Url;
                 this.bodyTextBox.Text = item.Body;
+
+                RequestHistoryManager.Instance.SaveHistoryToDisk();
             }
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -21,14 +22,15 @@ namespace AadGraphApiHelper
             InitializeComponent();
         }
 
+        // A copy of RequestHistoryObjects to allow modification and cancellation
+        internal List<RequestHistoryObject> ViewRequestHistoryObjects { get; private set; }
+
         private void RequestHistoryWindow_Load(object sender, EventArgs e)
         {
             mBindingSource.DataSource = typeof(RequestHistoryObject);
 
-            foreach (var item in RequestHistoryManager.Instance.RequestHistoryObjects)
-            {
-                mBindingSource.Add(item);
-            }
+            ViewRequestHistoryObjects = RequestHistoryManager.Instance.RequestHistoryObjects.ToList();
+            mBindingSource.DataSource = ViewRequestHistoryObjects;
 
             dataGridView1.DataSource = mBindingSource;
             dataGridView1.AutoGenerateColumns = true;
@@ -49,11 +51,54 @@ namespace AadGraphApiHelper
             dataGridView1.Columns[2].FillWeight = 4;
         }
 
+        //private void FillDataFromSource()
+        //{
+        //    foreach (var item in RequestHistoryManager.Instance.RequestHistoryObjects)
+        //    {
+        //        mBindingSource.Add(item);
+        //    }
+        //}
+
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             this.RowSelected = e.RowIndex;
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void RequestHistoryWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //if (!ViewRequestHistoryObjects.Equals(RequestHistoryManager.Instance.RequestHistoryObjects))
+            if (!AreListEqual(ViewRequestHistoryObjects, RequestHistoryManager.Instance.RequestHistoryObjects))
+            {
+                DialogResult dr = MessageBox.Show(
+                    "You made some changes to history, do you want to save them?", 
+                    "Confirm",
+                    MessageBoxButtons.YesNoCancel);
+                switch (dr)
+                {
+                     case DialogResult.Yes:
+                        RequestHistoryManager.Instance.RequestHistoryObjects = ViewRequestHistoryObjects.ToList();
+                        break;
+
+                    case DialogResult.No:
+                        break;
+
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        break;
+                }
+            }
+        }
+
+        internal bool AreListEqual<T>(List<T> list1, List<T> list2)
+        {
+            return list1.Count == list2.Count // assumes unique values in each list
+                && new HashSet<T>(list1).SetEquals(list2);
+
+            //return Ids.Count == XmlIds.Count &&
+            //    Ids.All(XmlIds.Contains) &&
+            //    XmlIds.All(Ids.Contains);
         }
     }
 }
