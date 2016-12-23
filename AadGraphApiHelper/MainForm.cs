@@ -285,6 +285,7 @@ namespace AadGraphApiHelper
                                               : StringResources.GetUserTokenText;
             this.getAppTokenButton.Enabled = true;
             this.urlBuilder.TenantCredential = tenantCredential;
+         
             this.UpdateRequestUrl();
         }
 
@@ -532,7 +533,9 @@ namespace AadGraphApiHelper
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string filename = Path.GetTempPath()+ Guid.NewGuid().ToString() + ".txt"; ;
-            File.WriteAllText(filename, responseTextBox.Text);
+
+            string text = String.IsNullOrEmpty(responseTextBox.SelectedText) ? responseTextBox.Text : responseTextBox.SelectedText;
+            File.WriteAllText(filename, text);
             Process.Start(filename);
 
         }
@@ -564,7 +567,13 @@ namespace AadGraphApiHelper
         {
             string token = tokenTextBox.Text;
             token = token.Remove(0, token.IndexOf(" "));
-            Process.Start("https://jwt.io/?value="+token);
+            Process.Start("https://jwt.io/?value=" + token);
+        }
+
+        private void jwtioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string token = responseTextBox.SelectedText;
+            Process.Start("https://jwt.io/?value=" + token);
         }
     }
 }

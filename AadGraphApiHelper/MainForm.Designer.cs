@@ -82,6 +82,8 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.historyButton = new System.Windows.Forms.Button();
+            this.sendToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.jwtioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.responseContextMenuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.requestBodyTabPage.SuspendLayout();
@@ -196,9 +198,10 @@ namespace AadGraphApiHelper
             // responseContextMenuStrip
             // 
             this.responseContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportToolStripMenuItem});
+            this.exportToolStripMenuItem,
+            this.sendToToolStripMenuItem});
             this.responseContextMenuStrip.Name = "responseContextMenuStrip";
-            this.responseContextMenuStrip.Size = new System.Drawing.Size(108, 26);
+            this.responseContextMenuStrip.Size = new System.Drawing.Size(153, 70);
             // 
             // exportToolStripMenuItem
             // 
@@ -663,6 +666,21 @@ namespace AadGraphApiHelper
             this.historyButton.UseVisualStyleBackColor = true;
             this.historyButton.Click += new System.EventHandler(this.historyButton_Click);
             // 
+            // sendToToolStripMenuItem
+            // 
+            this.sendToToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.jwtioToolStripMenuItem});
+            this.sendToToolStripMenuItem.Name = "sendToToolStripMenuItem";
+            this.sendToToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sendToToolStripMenuItem.Text = "Send to ";
+            // 
+            // jwtioToolStripMenuItem
+            // 
+            this.jwtioToolStripMenuItem.Name = "jwtioToolStripMenuItem";
+            this.jwtioToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.jwtioToolStripMenuItem.Text = "Jwt.io";
+            this.jwtioToolStripMenuItem.Click += new System.EventHandler(this.jwtioToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -762,6 +780,8 @@ namespace AadGraphApiHelper
         private ToolStripMenuItem exportToolStripMenuItem;
         private ToolStripMenuItem manageCredsToolStripMenuItem;
         private ToolStripMenuItem deleteToolStripMenuItem;
+        private ToolStripMenuItem sendToToolStripMenuItem;
+        private ToolStripMenuItem jwtioToolStripMenuItem;
     }
 }
 
