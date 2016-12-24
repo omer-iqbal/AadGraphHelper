@@ -573,14 +573,25 @@ namespace AadGraphApiHelper
         private void tokenTextBox_DoubleClick(object sender, EventArgs e)
         {
             string token = tokenTextBox.Text;
-            token = token.Remove(0, token.IndexOf(" "));
-            Process.Start("https://jwt.io/?value=" + token);
+            token = token.Remove(0, token.IndexOf(" ") + 1);
+            ShowJwtInBrowser(token);
+        }
+
+        private void ShowJwtInBrowser(string token)
+        {
+            var url = "https://jwt.io/?value=" + token;
+            //var info = new ProcessStartInfo(url);
+            //Process.Start(info);
+
+            // using default browser method of Process.Start(url) considers the url as exe and trims it to certain
+            // max limit. 
+            Process.Start("chrome.exe", url);
         }
 
         private void jwtioToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string token = responseTextBox.SelectedText;
-            Process.Start("https://jwt.io/?value=" + token);
+            ShowJwtInBrowser(token);
         }
 
         private void historyMenuItem_Click(object sender, EventArgs e)
