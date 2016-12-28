@@ -603,5 +603,23 @@ namespace AadGraphApiHelper
         {
             ShowHistory();
         }
+
+        private void pFATToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string msauth = "MSAuth";
+            string pfat = "PFAT";
+            int msAuthStart = responseTextBox.Text.IndexOf(msauth, StringComparison.OrdinalIgnoreCase);
+            int pfatEnd = responseTextBox.Text.IndexOf(pfat, StringComparison.OrdinalIgnoreCase) + pfat.Length + 2;
+
+            string token = responseTextBox.Text.Substring(msAuthStart, pfatEnd - msAuthStart);
+            token = token.Replace("\\\"","\"");
+            Clipboard.SetText(token);
+            SetStatusMessage("PFAT Token copied to clipboard!");
+        }
+
+        private void SetStatusMessage(string msg)
+        {
+            mainStatusStripStatusLabel.Text = msg;
+        }
     }
 }
