@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Windows.Forms;
-using FindReplace;
 
 namespace AadGraphApiHelper
 {   
@@ -32,8 +31,6 @@ namespace AadGraphApiHelper
         private AadEnvironmentSet aadEnvironments;
 
         private GraphApiUrlBuilder urlBuilder = new GraphApiUrlBuilder();
-
-        private FindReplaceMgr findReplaceControl = new FindReplaceMgr();
 
         public MainForm()
         {
@@ -67,16 +64,6 @@ namespace AadGraphApiHelper
             this.requestUrlTextBox.Text = this.Store.GetPreference<string>(LastSelectedRequestUrlKey);
 
             this.responseTable = new ResponseTable(this.responseDataGridView);
-
-            InitFindReplaceMgr();
-        }
-
-        private void InitFindReplaceMgr()
-        {
-            //FRM.CurrentEditor = new FindReplace.TextEditorAdapter(MyTextEditor);
-            //FRM.ShowSearchIn = false;
-            //FRM.OwnerWindow = this;
-
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
