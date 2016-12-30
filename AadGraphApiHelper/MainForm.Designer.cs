@@ -43,6 +43,8 @@ namespace AadGraphApiHelper
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sendToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.jwtioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.extractTokenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pFATToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.requestUrlLabel = new System.Windows.Forms.Label();
             this.requestUrlTextBox = new System.Windows.Forms.TextBox();
             this.resourceFirstComboBox = new System.Windows.Forms.ComboBox();
@@ -85,9 +87,6 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.executeButton = new System.Windows.Forms.Button();
             this.historyButton = new System.Windows.Forms.Button();
-            this.extractTokenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pFATToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bearereToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.responseContextMenuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.requestBodyTabPage.SuspendLayout();
@@ -123,7 +122,7 @@ namespace AadGraphApiHelper
             this.TenantCredentialComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TenantCredentialComboBox.MaxDropDownItems = 20;
             this.TenantCredentialComboBox.Name = "TenantCredentialComboBox";
-            this.TenantCredentialComboBox.Size = new System.Drawing.Size(388, 25);
+            this.TenantCredentialComboBox.Size = new System.Drawing.Size(387, 25);
             this.TenantCredentialComboBox.TabIndex = 5;
             this.TenantCredentialComboBox.SelectedIndexChanged += new System.EventHandler(this.TenantCredentialComboBox_SelectedIndexChanged);
             // 
@@ -229,6 +228,22 @@ namespace AadGraphApiHelper
             this.jwtioToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
             this.jwtioToolStripMenuItem.Text = "Jwt.io";
             this.jwtioToolStripMenuItem.Click += new System.EventHandler(this.jwtioToolStripMenuItem_Click);
+            // 
+            // extractTokenToolStripMenuItem
+            // 
+            this.extractTokenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pFATToolStripMenuItem});
+            this.extractTokenToolStripMenuItem.Name = "extractTokenToolStripMenuItem";
+            this.extractTokenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.extractTokenToolStripMenuItem.Text = "Extract Token";
+            // 
+            // pFATToolStripMenuItem
+            // 
+            this.pFATToolStripMenuItem.Name = "pFATToolStripMenuItem";
+            this.pFATToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pFATToolStripMenuItem.Text = "PFAT";
+            this.pFATToolStripMenuItem.ToolTipText = "Copies the first PFAT token to clipboard";
+            this.pFATToolStripMenuItem.Click += new System.EventHandler(this.pFATToolStripMenuItem_Click);
             // 
             // requestUrlLabel
             // 
@@ -597,7 +612,7 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.64228F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 162F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.35772F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 157F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 158F));
             this.tableLayoutPanel1.Controls.Add(this.environmentLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.EnvironmentComboBox, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.tenantLabel, 2, 0);
@@ -697,29 +712,6 @@ namespace AadGraphApiHelper
             this.historyButton.Text = "History";
             this.historyButton.UseVisualStyleBackColor = true;
             this.historyButton.Click += new System.EventHandler(this.historyButton_Click_1);
-            // 
-            // extractTokenToolStripMenuItem
-            // 
-            this.extractTokenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pFATToolStripMenuItem,
-            this.bearereToolStripMenuItem});
-            this.extractTokenToolStripMenuItem.Name = "extractTokenToolStripMenuItem";
-            this.extractTokenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.extractTokenToolStripMenuItem.Text = "Extract Token";
-            // 
-            // pFATToolStripMenuItem
-            // 
-            this.pFATToolStripMenuItem.Name = "pFATToolStripMenuItem";
-            this.pFATToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.pFATToolStripMenuItem.Text = "PFAT";
-            this.pFATToolStripMenuItem.ToolTipText = "Copies the first PFAT token to clipboard";
-            this.pFATToolStripMenuItem.Click += new System.EventHandler(this.pFATToolStripMenuItem_Click);
-            // 
-            // bearereToolStripMenuItem
-            // 
-            this.bearereToolStripMenuItem.Name = "bearereToolStripMenuItem";
-            this.bearereToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.bearereToolStripMenuItem.Text = "Bearer";
             // 
             // MainForm
             // 
@@ -825,7 +817,6 @@ namespace AadGraphApiHelper
         private Button historyButton;
         private ToolStripMenuItem extractTokenToolStripMenuItem;
         private ToolStripMenuItem pFATToolStripMenuItem;
-        private ToolStripMenuItem bearereToolStripMenuItem;
     }
 }
 
