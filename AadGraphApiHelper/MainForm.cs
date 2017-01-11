@@ -621,5 +621,14 @@ namespace AadGraphApiHelper
         {
             mainStatusStripStatusLabel.Text = msg;
         }
+
+        private void whatIfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string whatif = "?$whatif";
+            if (!requestUrlTextBox.Text.EndsWith(whatif))
+            {
+                requestUrlTextBox.Text += whatif;
+            }
+        }
     }
 }
