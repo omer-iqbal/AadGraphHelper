@@ -566,6 +566,11 @@ namespace AadGraphApiHelper
                 bool res= Store.Delete(tenantCredential);
 
                 MessageBox.Show("Delete was " + ((res) ? "successful" : "Unsuccessful"));
+
+                if (res)
+                {
+                    TenantCredentialComboBox.Items.Remove(tenantCredential);
+                }
             }
 
         }

@@ -121,7 +121,7 @@ namespace AadGraphApiHelper
 
                 foreach (string tenant in environmentKey.GetSubKeyNames())
                 {
-                    using (RegistryKey tenantKey = environmentKey.OpenSubKey(tenant))
+                    using (RegistryKey tenantKey = environmentKey.OpenSubKey(tenant, true))
                     {
                         bool found = false;
                         if (tenantKey == null)
