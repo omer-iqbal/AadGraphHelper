@@ -630,5 +630,22 @@ namespace AadGraphApiHelper
                 requestUrlTextBox.Text += whatif;
             }
         }
+
+        private void getAppTokenButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            MouseEventArgs me = (MouseEventArgs)e;
+
+            if (me.Button == MouseButtons.Right)
+            {
+                if (getAppTokenButton.Text.Equals(StringResources.GetAppTokenText))
+                {
+                    getAppTokenButton.Text = StringResources.GetUserTokenText;
+                }
+                else if (getAppTokenButton.Text.Equals(StringResources.GetUserTokenText))
+                {
+                    getAppTokenButton.Text = StringResources.GetAppTokenText;
+                }
+            }
+        }
     }
 }

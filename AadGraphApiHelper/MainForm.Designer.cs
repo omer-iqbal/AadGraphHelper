@@ -77,6 +77,8 @@ namespace AadGraphApiHelper
             this.queryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createSearchfilterQueryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearExistingfilterQueryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.whatIfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageCredsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
@@ -87,8 +89,7 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.executeButton = new System.Windows.Forms.Button();
             this.historyButton = new System.Windows.Forms.Button();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.whatIfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.responseContextMenuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.requestBodyTabPage.SuspendLayout();
@@ -108,7 +109,7 @@ namespace AadGraphApiHelper
             // 
             this.tenantLabel.AutoSize = true;
             this.tenantLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tenantLabel.Location = new System.Drawing.Point(273, 0);
+            this.tenantLabel.Location = new System.Drawing.Point(272, 0);
             this.tenantLabel.Name = "tenantLabel";
             this.tenantLabel.Size = new System.Drawing.Size(156, 33);
             this.tenantLabel.TabIndex = 4;
@@ -120,11 +121,11 @@ namespace AadGraphApiHelper
             this.TenantCredentialComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TenantCredentialComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TenantCredentialComboBox.FormattingEnabled = true;
-            this.TenantCredentialComboBox.Location = new System.Drawing.Point(435, 4);
+            this.TenantCredentialComboBox.Location = new System.Drawing.Point(434, 4);
             this.TenantCredentialComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TenantCredentialComboBox.MaxDropDownItems = 20;
             this.TenantCredentialComboBox.Name = "TenantCredentialComboBox";
-            this.TenantCredentialComboBox.Size = new System.Drawing.Size(386, 25);
+            this.TenantCredentialComboBox.Size = new System.Drawing.Size(385, 25);
             this.TenantCredentialComboBox.TabIndex = 5;
             this.TenantCredentialComboBox.SelectedIndexChanged += new System.EventHandler(this.TenantCredentialComboBox_SelectedIndexChanged);
             // 
@@ -138,8 +139,10 @@ namespace AadGraphApiHelper
             this.getAppTokenButton.Size = new System.Drawing.Size(142, 25);
             this.getAppTokenButton.TabIndex = 6;
             this.getAppTokenButton.Text = "Get &app. token";
+            this.toolTip1.SetToolTip(this.getAppTokenButton, "Right click on the button to toggle between App Token and User Token");
             this.getAppTokenButton.UseVisualStyleBackColor = true;
             this.getAppTokenButton.Click += new System.EventHandler(this.getAppTokenButton_Click);
+            this.getAppTokenButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.getAppTokenButton_MouseClick);
             // 
             // tokenLabel
             // 
@@ -182,7 +185,7 @@ namespace AadGraphApiHelper
             this.EnvironmentComboBox.Location = new System.Drawing.Point(123, 4);
             this.EnvironmentComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.EnvironmentComboBox.Name = "EnvironmentComboBox";
-            this.EnvironmentComboBox.Size = new System.Drawing.Size(144, 25);
+            this.EnvironmentComboBox.Size = new System.Drawing.Size(143, 25);
             this.EnvironmentComboBox.TabIndex = 3;
             this.EnvironmentComboBox.SelectedIndexChanged += new System.EventHandler(this.environmentComboBox_SelectedIndexChanged);
             // 
@@ -579,6 +582,19 @@ namespace AadGraphApiHelper
             this.clearExistingfilterQueryToolStripMenuItem.Text = "Clear existing (filter) query";
             this.clearExistingfilterQueryToolStripMenuItem.Click += new System.EventHandler(this.clearExistingfilterQueryToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(238, 6);
+            // 
+            // whatIfToolStripMenuItem
+            // 
+            this.whatIfToolStripMenuItem.Name = "whatIfToolStripMenuItem";
+            this.whatIfToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.whatIfToolStripMenuItem.Text = "WhatIf";
+            this.whatIfToolStripMenuItem.ToolTipText = "Appends ?$whatif to the request. ";
+            this.whatIfToolStripMenuItem.Click += new System.EventHandler(this.whatIfToolStripMenuItem_Click);
+            // 
             // manageCredsToolStripMenuItem
             // 
             this.manageCredsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -590,7 +606,7 @@ namespace AadGraphApiHelper
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -616,7 +632,7 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.64228F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 162F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.35772F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 159F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 161F));
             this.tableLayoutPanel1.Controls.Add(this.environmentLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.EnvironmentComboBox, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.tenantLabel, 2, 0);
@@ -671,7 +687,7 @@ namespace AadGraphApiHelper
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(984, 33);
             this.tableLayoutPanel3.TabIndex = 10;
             // 
@@ -717,19 +733,6 @@ namespace AadGraphApiHelper
             this.historyButton.Text = "History";
             this.historyButton.UseVisualStyleBackColor = true;
             this.historyButton.Click += new System.EventHandler(this.historyButton_Click_1);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(238, 6);
-            // 
-            // whatIfToolStripMenuItem
-            // 
-            this.whatIfToolStripMenuItem.Name = "whatIfToolStripMenuItem";
-            this.whatIfToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
-            this.whatIfToolStripMenuItem.Text = "WhatIf";
-            this.whatIfToolStripMenuItem.ToolTipText = "Appends ?$whatif to the request. ";
-            this.whatIfToolStripMenuItem.Click += new System.EventHandler(this.whatIfToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -837,6 +840,7 @@ namespace AadGraphApiHelper
         private ToolStripMenuItem pFATToolStripMenuItem;
         private ToolStripSeparator toolStripMenuItem1;
         private ToolStripMenuItem whatIfToolStripMenuItem;
+        private ToolTip toolTip1;
     }
 }
 
