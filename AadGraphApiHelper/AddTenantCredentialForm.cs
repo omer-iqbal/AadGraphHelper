@@ -31,7 +31,8 @@ namespace AadGraphApiHelper
                 (AadEnvironment)this.mainForm.EnvironmentComboBox.SelectedItem,
                 this.tenantTextBox.Text.Trim().ToLowerInvariant(),
                 this.clientIdTextBox.Text.Trim().ToLowerInvariant(),
-                applicationType);
+                applicationType, 
+                aliasTextBox.Text);
 
             if (applicationType == ApplicationType.Native)
             {

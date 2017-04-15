@@ -19,6 +19,8 @@ namespace AadGraphApiHelper
 
         private const string ApplicationTypeKey = @"ApplicationType";
 
+        private const string AliasKey = @"Alias";
+
         private const string ReplyUrlKey = @"ReplyUrl";
 
         public void Store(AadEnvironment environment)
@@ -97,6 +99,7 @@ namespace AadGraphApiHelper
                 }
 
                 credentialKey.SetValue(ApplicationTypeKey, tenantCredential.ApplicationType.ToString());
+                credentialKey.SetValue(AliasKey, tenantCredential.Alias);
 
                 if (tenantCredential.ApplicationType == ApplicationType.Native)
                 {
@@ -150,10 +153,12 @@ namespace AadGraphApiHelper
                                     continue;
                                 }
 
+                                string alias = clientIdKey.GetValue(AliasKey) as string;
+
                                 TenantCredential credential;
                                 try
                                 {
-                                    credential = new TenantCredential(tbdTenantCredential.Environment, tenant, clientId, applicationType);
+                                    credential = new TenantCredential(tbdTenantCredential.Environment, tenant, clientId, applicationType, alias);
                                 }
                                 catch (Exception)
                                 {
@@ -253,10 +258,12 @@ namespace AadGraphApiHelper
                                     continue;
                                 }
 
+                                string alias = clientIdKey.GetValue(AliasKey) as string;
+                                
                                 TenantCredential credential;
                                 try
                                 {
-                                    credential = new TenantCredential(environment, tenant, clientId, applicationType);
+                                    credential = new TenantCredential(environment, tenant, clientId, applicationType, alias);
                                 }
                                 catch (Exception)
                                 {
