@@ -9,7 +9,7 @@ namespace AadGraphApiHelper
     {
         private Uri replyUrl;
 
-        public TenantCredential(AadEnvironment environment, string tenant, string clientId, ApplicationType applicationType)
+        public TenantCredential(AadEnvironment environment, string tenant, string clientId, ApplicationType applicationType, string alias)
         {
             if (environment == null)
             {
@@ -36,6 +36,7 @@ namespace AadGraphApiHelper
             this.Tenant = tenant;
             this.ClientId = clientId;
             this.ApplicationType = applicationType;
+            this.Alias = alias;
         }
 
         public AadEnvironment Environment { get; private set; }
@@ -71,6 +72,8 @@ namespace AadGraphApiHelper
                 this.replyUrl = value;
             }
         }
+
+        public string Alias { get; set; }
 
         public string GetDecryptedKey()
         {
@@ -128,7 +131,8 @@ namespace AadGraphApiHelper
 
             bool areEqual = this.Tenant.Equals(other.Tenant, StringComparison.OrdinalIgnoreCase) &&
                             this.ClientId.Equals(other.ClientId, StringComparison.OrdinalIgnoreCase) &&
-                            this.ApplicationType == other.ApplicationType;
+                            this.ApplicationType == other.ApplicationType &&
+                            String.Equals(this.Alias, other.Alias, StringComparison.OrdinalIgnoreCase);
 
             if (!areEqual)
             {
@@ -203,7 +207,8 @@ namespace AadGraphApiHelper
         /// </returns>
         public override string ToString()
         {
-            return this.Tenant + @" (" + this.ClientId + @")";
+            string alias = string.IsNullOrEmpty(this.Alias) ? "" : this.Alias + ": ";
+            return alias + this.Tenant + @" (" + this.ClientId + @")";
         }
     }
 }
