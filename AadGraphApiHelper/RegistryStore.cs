@@ -115,7 +115,7 @@ namespace AadGraphApiHelper
         public bool Delete(TenantCredential tbdTenantCredential)
         {
             string environmentPath = GetEnvironmentPath(tbdTenantCredential.Environment);
-            using (RegistryKey environmentKey = Registry.CurrentUser.OpenSubKey(environmentPath))
+            using (RegistryKey environmentKey = Registry.CurrentUser.OpenSubKey(environmentPath, true))
             {
                 if (environmentKey == null)
                 {
@@ -134,7 +134,7 @@ namespace AadGraphApiHelper
 
                         foreach (string clientId in tenantKey.GetSubKeyNames())
                         {
-                            using (RegistryKey clientIdKey = tenantKey.OpenSubKey(clientId))
+                            using (RegistryKey clientIdKey = tenantKey.OpenSubKey(clientId, true))
                             {
                                 if (String.IsNullOrWhiteSpace(clientId))
                                 {
