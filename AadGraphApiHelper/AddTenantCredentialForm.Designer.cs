@@ -40,6 +40,8 @@
             this.webAppRadioButton = new System.Windows.Forms.RadioButton();
             this.nativeAppRadioButton = new System.Windows.Forms.RadioButton();
             this.authenticationTypeGroupBox = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.aliasTextBox = new System.Windows.Forms.TextBox();
             this.authenticationTypeGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,10 +56,10 @@
             // 
             // clientIdTextBox
             // 
-            this.clientIdTextBox.Location = new System.Drawing.Point(79, 54);
+            this.clientIdTextBox.Location = new System.Drawing.Point(119, 54);
             this.clientIdTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.clientIdTextBox.Name = "clientIdTextBox";
-            this.clientIdTextBox.Size = new System.Drawing.Size(557, 25);
+            this.clientIdTextBox.Size = new System.Drawing.Size(517, 25);
             this.clientIdTextBox.TabIndex = 11;
             this.clientIdTextBox.TextChanged += new System.EventHandler(this.clientIdTextBox_TextChanged);
             // 
@@ -65,7 +67,7 @@
             // 
             this.keyOrReplyUrlLabel.AutoSize = true;
             this.keyOrReplyUrlLabel.Enabled = false;
-            this.keyOrReplyUrlLabel.Location = new System.Drawing.Point(14, 218);
+            this.keyOrReplyUrlLabel.Location = new System.Drawing.Point(14, 264);
             this.keyOrReplyUrlLabel.Name = "keyOrReplyUrlLabel";
             this.keyOrReplyUrlLabel.Size = new System.Drawing.Size(34, 19);
             this.keyOrReplyUrlLabel.TabIndex = 20;
@@ -74,10 +76,10 @@
             // keyOrReplyUrlTextBox
             // 
             this.keyOrReplyUrlTextBox.Enabled = false;
-            this.keyOrReplyUrlTextBox.Location = new System.Drawing.Point(90, 214);
+            this.keyOrReplyUrlTextBox.Location = new System.Drawing.Point(119, 258);
             this.keyOrReplyUrlTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.keyOrReplyUrlTextBox.Name = "keyOrReplyUrlTextBox";
-            this.keyOrReplyUrlTextBox.Size = new System.Drawing.Size(546, 25);
+            this.keyOrReplyUrlTextBox.Size = new System.Drawing.Size(506, 25);
             this.keyOrReplyUrlTextBox.TabIndex = 21;
             this.keyOrReplyUrlTextBox.TextChanged += new System.EventHandler(this.clientKeyTextBox_TextChanged);
             // 
@@ -86,14 +88,14 @@
             this.tenantLabel.AutoSize = true;
             this.tenantLabel.Location = new System.Drawing.Point(14, 21);
             this.tenantLabel.Name = "tenantLabel";
-            this.tenantLabel.Size = new System.Drawing.Size(54, 19);
+            this.tenantLabel.Size = new System.Drawing.Size(53, 19);
             this.tenantLabel.TabIndex = 0;
             this.tenantLabel.Text = "&Tenant:";
             // 
             // addButton
             // 
             this.addButton.Enabled = false;
-            this.addButton.Location = new System.Drawing.Point(456, 248);
+            this.addButton.Location = new System.Drawing.Point(445, 292);
             this.addButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(87, 30);
@@ -105,7 +107,7 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(549, 248);
+            this.cancelButton.Location = new System.Drawing.Point(538, 292);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(87, 30);
@@ -116,11 +118,12 @@
             // 
             // tenantTextBox
             // 
-            this.tenantTextBox.Location = new System.Drawing.Point(79, 17);
+            this.tenantTextBox.Location = new System.Drawing.Point(119, 17);
             this.tenantTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tenantTextBox.Name = "tenantTextBox";
-            this.tenantTextBox.Size = new System.Drawing.Size(557, 25);
+            this.tenantTextBox.Size = new System.Drawing.Size(517, 25);
             this.tenantTextBox.TabIndex = 1;
+            this.tenantTextBox.Text = ".onmicrosoft.com";
             this.tenantTextBox.TextChanged += new System.EventHandler(this.tenantTextBox_TextChanged);
             // 
             // saveCredentialCheckBox
@@ -129,7 +132,7 @@
             this.saveCredentialCheckBox.Checked = true;
             this.saveCredentialCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.saveCredentialCheckBox.Enabled = false;
-            this.saveCredentialCheckBox.Location = new System.Drawing.Point(90, 253);
+            this.saveCredentialCheckBox.Location = new System.Drawing.Point(79, 297);
             this.saveCredentialCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.saveCredentialCheckBox.Name = "saveCredentialCheckBox";
             this.saveCredentialCheckBox.Size = new System.Drawing.Size(342, 23);
@@ -143,10 +146,10 @@
             this.webAppRadioButton.Location = new System.Drawing.Point(7, 25);
             this.webAppRadioButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.webAppRadioButton.Name = "webAppRadioButton";
-            this.webAppRadioButton.Size = new System.Drawing.Size(372, 23);
+            this.webAppRadioButton.Size = new System.Drawing.Size(83, 23);
             this.webAppRadioButton.TabIndex = 32;
             this.webAppRadioButton.TabStop = true;
-            this.webAppRadioButton.Text = "Application authentication (uses web application in AAD)";
+            this.webAppRadioButton.Text = "Web App";
             this.webAppRadioButton.UseVisualStyleBackColor = true;
             this.webAppRadioButton.CheckedChanged += new System.EventHandler(this.webAppRadioButton_CheckedChanged);
             // 
@@ -156,10 +159,10 @@
             this.nativeAppRadioButton.Location = new System.Drawing.Point(7, 55);
             this.nativeAppRadioButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.nativeAppRadioButton.Name = "nativeAppRadioButton";
-            this.nativeAppRadioButton.Size = new System.Drawing.Size(380, 23);
+            this.nativeAppRadioButton.Size = new System.Drawing.Size(95, 23);
             this.nativeAppRadioButton.TabIndex = 33;
             this.nativeAppRadioButton.TabStop = true;
-            this.nativeAppRadioButton.Text = "User authentication (uses native client application in AAD)";
+            this.nativeAppRadioButton.Text = "Native App";
             this.nativeAppRadioButton.UseVisualStyleBackColor = true;
             this.nativeAppRadioButton.CheckedChanged += new System.EventHandler(this.nativeAppRadioButton_CheckedChanged);
             // 
@@ -167,14 +170,31 @@
             // 
             this.authenticationTypeGroupBox.Controls.Add(this.nativeAppRadioButton);
             this.authenticationTypeGroupBox.Controls.Add(this.webAppRadioButton);
-            this.authenticationTypeGroupBox.Location = new System.Drawing.Point(17, 101);
+            this.authenticationTypeGroupBox.Location = new System.Drawing.Point(18, 145);
             this.authenticationTypeGroupBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.authenticationTypeGroupBox.Name = "authenticationTypeGroupBox";
             this.authenticationTypeGroupBox.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.authenticationTypeGroupBox.Size = new System.Drawing.Size(619, 92);
+            this.authenticationTypeGroupBox.Size = new System.Drawing.Size(607, 92);
             this.authenticationTypeGroupBox.TabIndex = 34;
             this.authenticationTypeGroupBox.TabStop = false;
-            this.authenticationTypeGroupBox.Text = "Type of authentication";
+            this.authenticationTypeGroupBox.Text = "Type of App";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(14, 103);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(99, 19);
+            this.label1.TabIndex = 35;
+            this.label1.Text = "Alias (optional)";
+            // 
+            // aliasTextBox
+            // 
+            this.aliasTextBox.Location = new System.Drawing.Point(119, 97);
+            this.aliasTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.aliasTextBox.Name = "aliasTextBox";
+            this.aliasTextBox.Size = new System.Drawing.Size(517, 25);
+            this.aliasTextBox.TabIndex = 36;
             // 
             // AddTenantCredentialForm
             // 
@@ -182,8 +202,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(648, 294);
+            this.ClientSize = new System.Drawing.Size(648, 353);
             this.ControlBox = false;
+            this.Controls.Add(this.aliasTextBox);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.authenticationTypeGroupBox);
             this.Controls.Add(this.saveCredentialCheckBox);
             this.Controls.Add(this.tenantTextBox);
@@ -224,5 +246,7 @@
         private System.Windows.Forms.RadioButton webAppRadioButton;
         private System.Windows.Forms.RadioButton nativeAppRadioButton;
         private System.Windows.Forms.GroupBox authenticationTypeGroupBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox aliasTextBox;
     }
 }

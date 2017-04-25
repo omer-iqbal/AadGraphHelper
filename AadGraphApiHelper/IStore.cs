@@ -10,6 +10,13 @@
 
         TenantCredentialSet GetTenantCredentials(AadEnvironment environment);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tenantCredential"></param>
+        /// <returns>true if delete successful</returns>
+        bool Delete(TenantCredential tenantCredential);
+
         void Store(string apiVersion);
 
         ApiVersionSet GetApiVersions(); 
